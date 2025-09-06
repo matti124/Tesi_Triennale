@@ -1,5 +1,5 @@
 #
-# OMNeT++/OMNEST Makefile for ProvaBMAC
+# OMNeT++/OMNEST Makefile for Tesi
 #
 # This file was generated with the command:
 #  opp_makemake -f --deep -O out -KINET_PROJ=/home/opp_env/default_workspace/inet-4.5.4 -DINET_IMPORT -I. -I$$\(INET_PROJ\)/src -L$$\(INET_PROJ\)/src -lINET$$\(D\)
@@ -7,7 +7,7 @@
 
 # Name of target to be created (-o option)
 TARGET_DIR = .
-TARGET_NAME = ProvaBMAC$(D)
+TARGET_NAME = Tesi$(D)
 TARGET = $(TARGET_NAME)$(EXE_SUFFIX)
 TARGET_FILES = $(TARGET_DIR)/$(TARGET)
 

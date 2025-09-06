@@ -1,0 +1,17 @@
+# Build output
+ProvaBMAC/out/
+ProvaBMAC/ProvaBMAC
+
+# Simulation results
+ProvaBMAC/results/
+
+# IDE / Eclipse
+ProvaBMAC/.metadata/
+ProvaBMAC/.settings/
+
+# Vim / editor temp
+*.swp
+
+# Java crash logs
+hs_err_pid*.log
+
