@@ -1,6 +1,0 @@
-18:31:44 **** Incremental Build of configuration release for project ProvaBMAC ****
-make MODE=release all 
-make: Nothing to be done for 'all'.
-
-18:31:44 Build Finished. 0 errors, 0 warnings. (took 172ms)
-
