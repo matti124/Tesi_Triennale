@@ -1,0 +1,10 @@
+import inet.node.inet.WirelessHost;
+
+network NetworkA{
+
+submodules:
+HostA: WirelessHost;
+HostB: WirelessHost;
+Hub: WirelessHost;
+
+}

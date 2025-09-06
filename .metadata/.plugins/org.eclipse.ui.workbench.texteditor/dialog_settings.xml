@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="receivesign"/>
+			<item value="handle"/>
+			<item value="NodeIsDown"/>
+			<item value="handleM"/>
+			<item value="handle "/>
+			<item value="receivesig"/>
+			<item value="data_timeout"/>
+			<item value="BMAC_DATA_TIMEOUT"/>
+			<item value="sendPreamble"/>
+		</list>
+	</section>
+</section>

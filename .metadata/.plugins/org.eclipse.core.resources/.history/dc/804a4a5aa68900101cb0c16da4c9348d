@@ -1,0 +1,98 @@
+[General]
+network = NetworkA
+sim-time-limit = 100s
+
+# ---------------------------------------------------
+# Debug B-MAC e radio
+# ---------------------------------------------------
+**.wlan*.mac.debug = true
+**.wlan*.radio.debug = true
+
+
+#Setto protocollo BMAC per datalink
+**.wlan*.mac.typename="BMac"
+**.wlan*.mac.headerLength = 1B
+**.wlan*.mac.slotDuration=0.025s
+**.wlan*.queue.typename="DropTailQueue"
+**.wlan*.queue.packetCapacity = 20
+
+
+#Setto i nodi per avere interfaccia wlan wireless e radio compatibile
+**.wlan[*].typename = "WirelessInterface"
+**.wlan[*].radio.typename="ApskScalarRadio"
+
+
+**.arp.typename="GlobalArp"
+**.maxTransmissionDuration = 100ms
+
+#il gateway deve mandare pacchetti al server 
+*.gateway.forwarding = true
+#Ipv4configurator gestisce autonomamente l'assegnamento degli indirizzi Ip
+*.configurator.addStaticRoutes = false
+*.configurator.config = xmldoc("Routes.xml")
+
+
+#Roba della radio incomprensibile
+**.radio.centerFrequency = 2.45GHz
+**.radio.bandwidth = 2.8MHz
+**.radio.transmitter.bitrate = 19200 bps
+**.radio.transmitter.headerLength = 8b
+**.radio.transmitter.preambleDuration = 0.0001s
+**.radio.transmitter.power = 2.24mW
+**.radio.receiver.energyDetection = -90dBm
+**.radio.receiver.sensitivity = -100dBm
+**.radio.receiver.snirThreshold = -8dB
+*.radioMedium.backgroundNoise.power = -110dBm
+**.wlan[*].mac.headerLength = 8b
+
+
+
+# app
+*.sensor*.numApps = 2
+*.sensor*.app[0].typename = "UdpBasicApp"
+*.sensor*.app[0].destAddresses = "server"
+*.sensor*.app[0].destPort = 1000
+*.sensor*.app[0].sendInterval = 1s
+*.sensor*.app[0].startTime = exponential(1s)
+*.sensor*.app[0].messageLength = 10Byte
+
+*.sensor*.app[1].typename = "UdpSink"
+*.sensor*.app[1].localPort = 4000
+
+
+*.server.numApps = 1
+*.server.app[0].typename = "UdpSink"
+*.server.app[0].localPort = 1000
+
+*.maliciousNode.numApps = 1
+*.maliciousNode.app[0].typename = "UdpBasicApp"
+*.maliciousNode.app[0].destAddresses = "255.255.255.255"   # broadcast a tutti
+*.maliciousNode.app[0].destPort = 4000                     # porta scelta libera
+*.maliciousNode.app[0].messageLength = 40B                 # pacchetto piccolo
+*.maliciousNode.app[0].sendInterval = 0.01s                # ogni 10ms (flood)
+*.maliciousNode.app[0].startTime = 0s                      # parte subito
+
+
+# visualizer
+*.visualizer.*.routingTableVisualizer.lineShift = 0
+*.visualizer.*.routingTableVisualizer.displayLabels = true
+*.visualizer.*.infoVisualizer.modules = "*.server.app[0]"
+*.visualizer.*.infoVisualizer.format = "%t"
+*.visualizer.*.networkRouteVisualizer.displayRoutes = true
+*.visualizer.*.physicalLinkVisualizer.displayLinks = true
+*.visualizer.energyStorageVisualizer.displayEnergyStorages = true
+
+*.sensor*.nominalCapacity = 0.05J
+
+#PARTE RELATIVA AL POWER CONSUMPTION
+*.sensor*.energyStorage.nominalCapacity = 0.05J
+*.gateway.energyStorage.nominalCapacity = 0.05J
+
+*.sensor*.energyManagement.typename = "SimpleEpEnergyManagement"
+*.gateway.energyManagement.typename = "SimpleEpEnergyManagement"
+
+*.gateway.energyManagement.nodeShutdownCapacity = 0.005J
+
+*.sensor*.energyManagement.nodeShutdownCapacity = 0.005J
+
+

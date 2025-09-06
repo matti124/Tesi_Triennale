@@ -1,0 +1,14 @@
+18:31:42 **** Incremental Build of configuration release for project inet ****
+make MODE=release -j7 all 
+make[1]: Entering directory '/Users/matti/Omnet/omnetpp-6.2.0/workspace/inet4.5/src'
+*** CCACHE not detected - using precompiled headers
+*** COMPILING with:
+clang++ -c -std=c++17 -O3 -DNDEBUG=1 -g1 -ffp-contract=off   -MMD -MP -MF .d -isystem /usr/local/include   -DGL_SILENCE_DEPRECATION -Wno-deprecated-register -Wno-unused-function -fno-omit-frame-pointer   -Wno-overloaded-virtual -include inet/common/precompiled_release.h -DOMNETPPLIBS_IMPORT -DINET_EXPORT -I. -I/Users/matti/Omnet/omnetpp-6.2.0/include
+*** LINKING with:
+clang++ -shared  -o ../out/clang-release/src/libINET.dylib  -Wl,-all_load   -loppenvir -loppsim -lc++  -L/usr/local/lib   -L/usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/lib  -Wl,-headerpad_max_install_names -Wl,-no_warn_duplicate_libraries -L/Users/matti/Omnet/omnetpp-6.2.0/lib 
+Building...
+make[1]: Nothing to be done for 'all-pch'.
+make[1]: Leaving directory '/Users/matti/Omnet/omnetpp-6.2.0/workspace/inet4.5/src'
+
+18:31:43 Build Finished. 0 errors, 0 warnings. (took 1s.178ms)
+

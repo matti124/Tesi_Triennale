@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="TemplateBasedWizard">
+		<item key="project.template" value="bundleentry://395.fwk1947069525/template/emptyproject/"/>
+		<item key="nedfile.template" value="bundleentry://410.fwk1947069525/templates/emptynedfile/"/>
+		<item key="inifile.template" value="bundleentry://404.fwk1947069525/templates/inifile/"/>
+		<section name="NedFileWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="501"/>
+			<item key="DIALOG_Y_ORIGIN" value="154"/>
+			<item key="DIALOG_WIDTH" value="679"/>
+			<item key="DIALOG_HEIGHT" value="557"/>
+			<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|13.0|0|COCOA|1|.AppleSystemUIFont"/>
+		</section>
+		<section name="NewInifileWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="501"/>
+			<item key="DIALOG_Y_ORIGIN" value="152"/>
+			<item key="DIALOG_WIDTH" value="679"/>
+			<item key="DIALOG_HEIGHT" value="560"/>
+			<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|13.0|0|COCOA|1|.AppleSystemUIFont"/>
+		</section>
+	</section>
+</section>

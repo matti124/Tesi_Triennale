@@ -1,0 +1,98 @@
+[General]
+network = NetworkA
+sim-time-limit = 100s
+
+# ---------------------------------------------------
+# Debug B-MAC e radio
+# ---------------------------------------------------
+**.wlan*.mac.debug = true
+**.wlan*.radio.debug = true
+
+# ---------------------------------------------------
+# Protocollo B-MAC
+# ---------------------------------------------------
+**.wlan*.mac.typename = "BMac"
+**.wlan*.mac.headerLength = 1B
+**.wlan*.mac.slotDuration = 0.03s           # leggermente più lungo per ridurre collisioni
+**.wlan*.queue.typename = "DropTailQueue"
+**.wlan*.queue.packetCapacity = 50          # aumentata capacità della coda
+
+**.wlan[*].typename = "WirelessInterface"
+**.wlan[*].radio.typename = "ApskScalarRadio"
+
+**.arp.typename = "GlobalArp"
+**.maxTransmissionDuration = 100ms
+*.gateway.forwarding = true
+# ---------------------------------------------------
+# Parametri radio
+# ---------------------------------------------------
+**.radio.centerFrequency = 2.45GHz
+**.radio.bandwidth = 2.8MHz
+**.radio.transmitter.bitrate = 19200 bps
+**.radio.transmitter.headerLength = 8b
+**.radio.transmitter.preambleDuration = 0.0001s
+**.radio.transmitter.power = 2.24mW
+**.radio.receiver.energyDetection = -90dBm
+**.radio.receiver.sensitivity = -100dBm
+**.radio.receiver.snirThreshold = -8dB
+*.radioMedium.backgroundNoise.power = -110dBm
+
+# ---------------------------------------------------
+# App sensori
+# ---------------------------------------------------
+*.sensor*.numApps = 2
+
+# sensori → inviano pacchetti al server
+*.sensor*.app[0].typename = "UdpBasicApp"
+*.sensor*.app[0].destAddresses = "server"
+*.sensor*.app[0].destPort = 1000
+*.sensor*.app[0].sendInterval = 1s
+*.sensor*.app[0].startTime = exponential(1s)
+*.sensor*.app[0].messageLength = 10B
+
+# sensori → ricevono pacchetti broadcast malicious
+*.sensor*.app[1].typename = "UdpSink"
+*.sensor*.app[1].localPort = 4000
+*.sensor*.app[1].recordStats = true          # traccia pacchetti ricevuti
+
+# ---------------------------------------------------
+# Server
+# ---------------------------------------------------
+*.server.numApps = 1
+*.server.app[0].typename = "UdpSink"
+*.server.app[0].localPort = 1000
+*.server.app[0].recordStats = true
+
+# ---------------------------------------------------
+# Malicious Node → DoS Denial-of-Sleep
+# ---------------------------------------------------
+#*.maliciousNode.numApps = 1
+#*.maliciousNode.app[0].typename = "UdpBasicApp"
+#*.maliciousNode.app[0].destAddresses = "255.255.255.255"
+#*.maliciousNode.app[0].destPort = 4000
+#*.maliciousNode.app[0].messageLength = 40B
+#*.maliciousNode.app[0].sendInterval = 0.02s      # leggermente meno aggressivo per ridurre drop
+#*.maliciousNode.app[0].startTime = 0s
+
+# ---------------------------------------------------
+# Visualizer
+# ---------------------------------------------------
+*.visualizer.*.routingTableVisualizer.lineShift = 0
+*.visualizer.*.routingTableVisualizer.displayLabels = true
+*.visualizer.*.infoVisualizer.modules = "*.server.app[0]"
+*.visualizer.*.infoVisualizer.format = "%t"
+*.visualizer.*.networkRouteVisualizer.displayRoutes = true
+*.visualizer.*.physicalLinkVisualizer.displayLinks = true
+*.visualizer.energyStorageVisualizer.displayEnergyStorages = true
+
+# ---------------------------------------------------
+# Energy Storage e Consumption
+# ---------------------------------------------------
+*.sensor*.nominalCapacity = 0.05J
+*.sensor*.energyStorage.nominalCapacity = 0.05J
+*.sensor*.energyManagement.typename = "SimpleEpEnergyManagement"
+*.sensor*.energyManagement.nodeShutdownCapacity = 0.005J
+
+*.gateway.energyStorage.nominalCapacity = 0.05J
+*.gateway.energyManagement.typename = "SimpleEpEnergyManagement"
+*.gateway.energyManagement.nodeShutdownCapacity = 0.005J

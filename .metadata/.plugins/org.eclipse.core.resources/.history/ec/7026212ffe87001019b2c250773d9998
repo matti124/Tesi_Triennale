@@ -1,0 +1,10 @@
+import inet.node.inet.*;
+
+network NetworkA{
+
+submodules:
+HostA: SensorNode;
+HostB: SensorNode;
+Hub: WirelessHost;
+
+}
