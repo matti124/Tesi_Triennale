@@ -4,7 +4,7 @@ import inet.node.ethernet.Eth100M;
 import inet.node.inet.SensorNode;
 import inet.node.inet.*;
 import inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadioMedium;
-import inet.visualizer.common.IntegratedVisualizer;
+import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
 
 module MySensorNode extends SensorNode
 {
@@ -22,7 +22,7 @@ network NetworkA
         configurator: Ipv4NetworkConfigurator {
             @display("p=3.4662657,4.033473");
         }
-        visualizer: IntegratedVisualizer {
+        visualizer: IntegratedCanvasVisualizer {
             @display("p=3.4662657,9.264383");
         }
         radioMedium: ApskScalarRadioMedium {
