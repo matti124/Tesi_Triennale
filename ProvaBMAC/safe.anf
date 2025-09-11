@@ -3,6 +3,8 @@
     <inputs>
         <input pattern="results/safe-*.vec"/>
         <input pattern="results/safe-*.sca"/>
+        <input pattern="results/safe.vec"/>
+        <input pattern="results/safe.sca"/>
     </inputs>
     <charts>
         <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/linechart.png" id="1870009611" name="Residual energy capacity safe" resultTypes="vector" template="linechart_native" type="LINE">

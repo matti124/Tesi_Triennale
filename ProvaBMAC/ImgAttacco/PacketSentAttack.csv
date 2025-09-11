@@ -1,5 +1,0 @@
-,runID,module,name,value,configname,datetime,datetimef,experiment,inifile,iterationvars,iterationvarsd,iterationvarsf,measurement,network,processid,repetition,replication,resultdir,runnumber,seedset,unit
-0,attack-0-20250909-12:46:03-3927,NetworkA.sensor4.app[0],packets sent,37.0,attack,20250909-12:46:03,20250909-124603,attack,omnetpp.ini,,,,,NetworkA,3927,0,#0,results,0,0,
-1,attack-0-20250909-12:46:03-3927,NetworkA.sensor1.app[0],packets sent,37.0,attack,20250909-12:46:03,20250909-124603,attack,omnetpp.ini,,,,,NetworkA,3927,0,#0,results,0,0,
-2,attack-0-20250909-12:46:03-3927,NetworkA.sensor2.app[0],packets sent,38.0,attack,20250909-12:46:03,20250909-124603,attack,omnetpp.ini,,,,,NetworkA,3927,0,#0,results,0,0,
-3,attack-0-20250909-12:46:03-3927,NetworkA.sensor3.app[0],packets sent,39.0,attack,20250909-12:46:03,20250909-124603,attack,omnetpp.ini,,,,,NetworkA,3927,0,#0,results,0,0,
