@@ -5,16 +5,7 @@ import inet.node.inet.SensorNode;
 import inet.node.inet.*;
 import inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadioMedium;
 import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
-
-module MySensorNode extends SensorNode
-{
-    parameters:
-        energyStorage.typename = "SimpleEpEnergyStorage";
-        hasStatus = true;
-
-
-}
-
+import MY_EnergyConsumer.*;
 network NetworkA
 {
     @display("bgb=191.2,43.2");
@@ -28,19 +19,19 @@ network NetworkA
         radioMedium: ApskScalarRadioMedium {
             @display("p=3.4032426,14.0541315");
         }
-        sensor4: MySensorNode {
+        sensor4: MY_SensorNode {
             @display("p=22,6.5;i=misc/sensor2");
         }
-        sensor1: MySensorNode {
+        sensor1: MY_SensorNode {
             @display("p=16.482326,20.196255;i=misc/sensor2");
         }
-        sensor2: MySensorNode {
+        sensor2: MY_SensorNode {
             @display("p=33.772572,16.275303;i=misc/sensor2");
         }
-        sensor3: MySensorNode {
+        sensor3: MY_SensorNode {
             @display("p=35,6.5;i=misc/sensor2");
         }
-        gateway: MySensorNode {
+        gateway: MY_SensorNode {
             @display("p=28.5,13;i=misc/sensorgateway");
         }
         server: StandardHost {
