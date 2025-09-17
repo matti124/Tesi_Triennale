@@ -25,6 +25,13 @@ class INET_API MY_StateBasedEpEnergyConsumer : public StateBasedEpEnergyConsumer
     simsignal_t rxPowerConsumptionSignal;
     simsignal_t txPowerConsumptionSignal;
 
+    simsignal_t sleepStateChangedSignal;
+    simsignal_t sleepTimeSignal;
+    simtime_t sleepStartTime;
+    simtime_t sleepTotalTime;
+
+    IRadio::RadioMode previousRadioMode;
+
   protected:
     /** Inizializza i nuovi segnali e watchers */
     virtual void initialize(int stage) override;

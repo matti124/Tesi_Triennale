@@ -34,7 +34,9 @@ void MY_StateBasedEpEnergyConsumer::initialize(int stage) {
     if (stage == INITSTAGE_LOCAL) {
         rxPowerConsumptionSignal = registerSignal("rxPowerConsumption");
         txPowerConsumptionSignal = registerSignal("txPowerConsumption");
-
+        sleepTimeSignal = registerSignal("sleepTime");
+        sleepStateChangedSignal= registerSignal("sleepStateChanged");
+        previousRadioMode = radio->getRadioMode(); //mi serve per capire lo stato della radio precedente al nuovo stato
         WATCH(powerConsumptionRx);
         WATCH(powerConsumptionTx);
     }
@@ -53,16 +55,34 @@ void MY_StateBasedEpEnergyConsumer::receiveSignal(cComponent *source,
          || signal == IRadio::receivedSignalPartChangedSignal
          || signal == IRadio::transmittedSignalPartChangedSignal) {
 
+        auto newMode = (IRadio::RadioMode)value;
+                 if (newMode == IRadio::RADIO_MODE_SLEEP && previousRadioMode != IRadio::RADIO_MODE_SLEEP) {
+                     sleepStartTime = simTime();
+                     emit(sleepStateChangedSignal, true);
+                 }
+                 else if (previousRadioMode == IRadio::RADIO_MODE_SLEEP && newMode != IRadio::RADIO_MODE_SLEEP) {
+                     simtime_t sleepDuration = simTime() - sleepStartTime;
+                     sleepTotalTime += sleepDuration;
+                     recordScalar("totalSleepTime", sleepDuration.dbl());
+                     emit(sleepTimeSignal, sleepTotalTime.dbl()); // sleepTimeSignal registrato in initialize()
+                     emit(sleepStateChangedSignal, false);
+                 }
+                 previousRadioMode = newMode;
+
         auto arr = computePowerConsumptionDetailed();
         // arr[0] è totale, arr[1] RX, arr[2] TX
         powerConsumption = arr[0]; // eredita la variabile protected del base
         powerConsumptionRx = arr[1];
         powerConsumptionTx = arr[2];
 
+
         // emetti i segnali aggiuntivi
         emit(rxPowerConsumptionSignal, powerConsumptionRx.get());
         emit(txPowerConsumptionSignal, powerConsumptionTx.get());
     }
+
+
+
 }
 
 

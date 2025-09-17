@@ -9,4 +9,7 @@ simple MY_StateBasedEpEnergyConsumer extends StateBasedEpEnergyConsumer
         @signal[txPowerConsumption](type=double);
         @statistic[txPowerConsumption](title="TX Power consumption"; source=txPowerConsumption; record=vector; interpolationmode=sample-hold; unit=W);
 
+        @signal[sleepTime](type=double);
+        @statistic[sleepTime](title="Total sleep time"; source=sleepTime; record=vector; interpolationmode=sample-hold; unit=s);
+
 }
