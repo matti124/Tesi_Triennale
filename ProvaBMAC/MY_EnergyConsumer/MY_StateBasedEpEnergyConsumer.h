@@ -20,6 +20,7 @@ class INET_API MY_StateBasedEpEnergyConsumer : public StateBasedEpEnergyConsumer
     // Variabili aggiuntive per il tracciamento dettagliato
     W powerConsumptionRx = W(0);
     W powerConsumptionTx = W(0);
+    int sonnellini=0;
 
     // Segnali aggiuntivi
     simsignal_t rxPowerConsumptionSignal;
@@ -41,6 +42,8 @@ class INET_API MY_StateBasedEpEnergyConsumer : public StateBasedEpEnergyConsumer
 
     /** Nuovo metodo per il calcolo dettagliato (totale, RX, TX) */
     virtual std::array<W, 3> computePowerConsumptionDetailed() const;
+
+    virtual void finish() override;
 };
 
 } // namespace physicallayer

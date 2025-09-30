@@ -37,6 +37,7 @@ void MY_StateBasedEpEnergyConsumer::initialize(int stage) {
         sleepTimeSignal = registerSignal("sleepTime");
         sleepStateChangedSignal= registerSignal("sleepStateChanged");
         previousRadioMode = radio->getRadioMode(); //mi serve per capire lo stato della radio precedente al nuovo stato
+        sonnellini=0;
         WATCH(powerConsumptionRx);
         WATCH(powerConsumptionTx);
     }
@@ -57,13 +58,14 @@ void MY_StateBasedEpEnergyConsumer::receiveSignal(cComponent *source,
 
         auto newMode = (IRadio::RadioMode)value;
                  if (newMode == IRadio::RADIO_MODE_SLEEP && previousRadioMode != IRadio::RADIO_MODE_SLEEP) {
-                     sleepStartTime = simTime();
-                     emit(sleepStateChangedSignal, true);
+                     sleepStartTime = simTime(); //inizio a contare i secondi di sleep
+                     emit(sleepStateChangedSignal, true); //emetto segnale che mi dice che nodo ha iniziato a dormire
                  }
                  else if (previousRadioMode == IRadio::RADIO_MODE_SLEEP && newMode != IRadio::RADIO_MODE_SLEEP) {
-                     simtime_t sleepDuration = simTime() - sleepStartTime;
-                     sleepTotalTime += sleepDuration;
-                     recordScalar("totalSleepTime", sleepDuration.dbl());
+                     simtime_t sleepDuration = simTime() - sleepStartTime; //vuol dire che ho appena finito di dormire quindi calcolo totale
+                     sleepTotalTime += sleepDuration; //mi salvo in una variabile la somma di tutti gli sleep fatti
+                     sonnellini++;
+                     //recordScalar("totalSleepTime", sleepTotalTime); SPOSTATO NELLA FUNZIONE FINISH
                      emit(sleepTimeSignal, sleepTotalTime.dbl()); // sleepTimeSignal registrato in initialize()
                      emit(sleepStateChangedSignal, false);
                  }
@@ -79,6 +81,15 @@ void MY_StateBasedEpEnergyConsumer::receiveSignal(cComponent *source,
         // emetti i segnali aggiuntivi
         emit(rxPowerConsumptionSignal, powerConsumptionRx.get());
         emit(txPowerConsumptionSignal, powerConsumptionTx.get());
+
+
+        EV << "t=" << simTime()
+                << "s | Node=" << getParentModule()->getFullName()
+                << " | TotalPower=" << powerConsumption
+                << " | RX=" << powerConsumptionRx
+                << " | TX=" << powerConsumptionTx
+                << " | RadioMode=" << newMode
+                << endl;
     }
 
 
@@ -197,6 +208,17 @@ std::array<W, 3> MY_StateBasedEpEnergyConsumer::computePowerConsumptionDetailed(
     return {powerConsumption+powerConsumptionRx+powerConsumptionTx, powerConsumptionRx, powerConsumptionTx};
 }
 
+/*Funzione standard dei moduli cModule che prevede l'esecuzione di procedure/funzioni definite all'interno di essa al momento
+ *del termine della simulazione, in questo caso andiamo a registrare anche lo scalare del tempo di sleep totale per ottenere non solo
+ *del vettoriale ma anche scalare.*/
+void MY_StateBasedEpEnergyConsumer::finish()
+{
+    // Registra lo scalare solo una volta alla fine
+    recordScalar("totalSleepTime", sleepTotalTime);
+    recordScalar("Sonnellini", sonnellini);
+    // Se vuoi, emetti anche i segnali finali
+    emit(sleepTimeSignal, sleepTotalTime.dbl());
+}
 
 } // namespace physicallayer
 
