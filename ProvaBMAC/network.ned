@@ -3,7 +3,7 @@ import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
 import inet.node.ethernet.Eth100M;
 import inet.node.inet.SensorNode;
 import inet.node.inet.*;
-import inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadioMedium;
+import inet.physicallayer.wireless.ieee802154.packetlevel.*;
 import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
 import MY_EnergyConsumer.*;
 network NetworkA
@@ -16,7 +16,7 @@ network NetworkA
         visualizer: IntegratedCanvasVisualizer {
             @display("p=3.4662657,9.264383");
         }
-        radioMedium: ApskScalarRadioMedium {
+        radioMedium: Ieee802154NarrowbandScalarRadioMedium {
             @display("p=3.4032426,14.0541315");
         }
         sensor4: MY_SensorNode {
