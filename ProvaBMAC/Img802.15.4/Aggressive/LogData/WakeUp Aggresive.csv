@@ -1,0 +1,5 @@
+,runID,module,name,value,configname,datetime,datetimef,experiment,inifile,iterationvars,iterationvarsd,iterationvarsf,measurement,network,processid,repetition,replication,resultdir,runnumber,seedset,unit
+0,Attacco_Aggressivo-0-20251005-13:12:03-8341,NetworkA.sensor4.wlan[0].radio.energyConsumer,Sonnellini,1427.0,Attacco_Aggressivo,20251005-13:12:03,20251005-131203,Attacco_Aggressivo,omnetpp802.15.4.ini,,,,,NetworkA,8341,0,#0,results,0,0,
+1,Attacco_Aggressivo-0-20251005-13:12:03-8341,NetworkA.sensor1.wlan[0].radio.energyConsumer,Sonnellini,1427.0,Attacco_Aggressivo,20251005-13:12:03,20251005-131203,Attacco_Aggressivo,omnetpp802.15.4.ini,,,,,NetworkA,8341,0,#0,results,0,0,
+2,Attacco_Aggressivo-0-20251005-13:12:03-8341,NetworkA.sensor2.wlan[0].radio.energyConsumer,Sonnellini,1429.0,Attacco_Aggressivo,20251005-13:12:03,20251005-131203,Attacco_Aggressivo,omnetpp802.15.4.ini,,,,,NetworkA,8341,0,#0,results,0,0,
+3,Attacco_Aggressivo-0-20251005-13:12:03-8341,NetworkA.sensor3.wlan[0].radio.energyConsumer,Sonnellini,1431.0,Attacco_Aggressivo,20251005-13:12:03,20251005-131203,Attacco_Aggressivo,omnetpp802.15.4.ini,,,,,NetworkA,8341,0,#0,results,0,0,

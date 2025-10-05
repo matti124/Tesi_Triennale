@@ -1,0 +1,5 @@
+,runID,module,name,value,configname,datetime,datetimef,experiment,inifile,iterationvars,iterationvarsd,iterationvarsf,measurement,network,processid,repetition,replication,resultdir,runnumber,seedset,unit
+0,Attacco_Silenzioso-0-20251005-13:20:56-8795,NetworkA.sensor4.wlan[0].radio.energyConsumer,Sonnellini,975.0,Attacco_Silenzioso,20251005-13:20:56,20251005-132056,Attacco_Silenzioso,omnetpp802.15.4.ini,,,,,NetworkA,8795,0,#0,results,0,0,
+1,Attacco_Silenzioso-0-20251005-13:20:56-8795,NetworkA.sensor1.wlan[0].radio.energyConsumer,Sonnellini,975.0,Attacco_Silenzioso,20251005-13:20:56,20251005-132056,Attacco_Silenzioso,omnetpp802.15.4.ini,,,,,NetworkA,8795,0,#0,results,0,0,
+2,Attacco_Silenzioso-0-20251005-13:20:56-8795,NetworkA.sensor2.wlan[0].radio.energyConsumer,Sonnellini,977.0,Attacco_Silenzioso,20251005-13:20:56,20251005-132056,Attacco_Silenzioso,omnetpp802.15.4.ini,,,,,NetworkA,8795,0,#0,results,0,0,
+3,Attacco_Silenzioso-0-20251005-13:20:56-8795,NetworkA.sensor3.wlan[0].radio.energyConsumer,Sonnellini,977.0,Attacco_Silenzioso,20251005-13:20:56,20251005-132056,Attacco_Silenzioso,omnetpp802.15.4.ini,,,,,NetworkA,8795,0,#0,results,0,0,

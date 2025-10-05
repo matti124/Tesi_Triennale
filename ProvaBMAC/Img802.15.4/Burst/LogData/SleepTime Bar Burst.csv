@@ -1,0 +1,5 @@
+,runID,module,name,value,configname,datetime,datetimef,experiment,inifile,iterationvars,iterationvarsd,iterationvarsf,measurement,network,processid,repetition,replication,resultdir,runnumber,seedset,unit
+0,Attacco_Burst-0-20251005-17:47:28-779,NetworkA.sensor4.wlan[0].radio.energyConsumer,totalSleepTime,91.197349925854,Attacco_Burst,20251005-17:47:28,20251005-174728,Attacco_Burst,omnetpp802.15.4.ini,,,,,NetworkA,779,0,#0,results,0,0,
+1,Attacco_Burst-0-20251005-17:47:28-779,NetworkA.sensor1.wlan[0].radio.energyConsumer,totalSleepTime,79.802817466966,Attacco_Burst,20251005-17:47:28,20251005-174728,Attacco_Burst,omnetpp802.15.4.ini,,,,,NetworkA,779,0,#0,results,0,0,
+2,Attacco_Burst-0-20251005-17:47:28-779,NetworkA.sensor2.wlan[0].radio.energyConsumer,totalSleepTime,70.070089249817,Attacco_Burst,20251005-17:47:28,20251005-174728,Attacco_Burst,omnetpp802.15.4.ini,,,,,NetworkA,779,0,#0,results,0,0,
+3,Attacco_Burst-0-20251005-17:47:28-779,NetworkA.sensor3.wlan[0].radio.energyConsumer,totalSleepTime,71.346919992642,Attacco_Burst,20251005-17:47:28,20251005-174728,Attacco_Burst,omnetpp802.15.4.ini,,,,,NetworkA,779,0,#0,results,0,0,

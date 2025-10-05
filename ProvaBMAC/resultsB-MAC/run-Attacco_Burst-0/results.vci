@@ -1,0 +1,2223 @@
+file 18904522 1759658473                                        
+version 3
+run Attacco_Burst-0-20251005-12:01:08-4774
+attr configname Attacco_Burst
+attr datetime 20251005-12:01:08
+attr datetimef 20251005-120108
+attr experiment Attacco_Burst
+attr inifile omnetppB-MAC.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network NetworkA
+attr processid 4774
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../inet-4.5.4/images
+config extends safe
+config *.maliciousNode.numApps 1
+config *.maliciousNode.app[0].typename UdpBasicBurst
+config *.maliciousNode.app[0].chooseDestAddrMode "\"once\""
+config *.maliciousNode.app[0].destAddresses "\"10.0.0.5\""
+config *.maliciousNode.app[0].destPort 1000
+config *.maliciousNode.app[0].messageLength intuniform(40B,120B)
+config *.maliciousNode.app[0].sendInterval 0.05s
+config *.maliciousNode.app[0].burstDuration 0.5s
+config *.maliciousNode.app[0].sleepDuration 1s
+config *.maliciousNode.app[0].startTime uniform(0s,0.5s)
+config *.maliciousNode.wlan[*].mac.ctrlFrameLength 30B
+config *.maliciousNode.wlan[*].radio.transmitter.bitrate "125000 bps"
+config network NetworkA
+config sim-time-limit 100s
+config output-vector-file resultsB-MAC/run-Attacco_Burst-0/results.vec
+config output-scalar-file resultsB-MAC/run-Attacco_Burst-0/results.sca
+config **.wlan*.radio.initialRadioMode "\"sleep\""
+config **.wlan*.mac.typename BMac
+config **.wlan*.mac.headerLength 1B
+config **.wlan*.mac.slotDuration 0.05s
+config **.wlan*.queue.typename DropTailQueue
+config **.wlan*.queue.packetCapacity 50
+config **.wlan*.mac.checkInterval 0.02s
+config **.wlan[*].typename WirelessInterface
+config **.wlan[*].radio.typename ApskScalarRadio
+config **.wlan*.mac.animation true
+config **.arp.typename GlobalArp
+config **.maxTransmissionDuration 100ms
+config *.gateway.forwarding true
+config **.radio.centerFrequency 2.45GHz
+config **.radio.bandwidth 2MHz
+config **.radio.transmitter.bitrate "250000 bps"
+config **.radio.transmitter.headerLength 32b
+config **.radio.transmitter.preambleDuration 0.000128s
+config **.radio.transmitter.power 2.5mW
+config **.radio.receiver.energyDetection -95dBm
+config **.radio.receiver.sensitivity -100dBm
+config **.radio.receiver.snirThreshold -8dB
+config *.sensor*.numApps 1
+config *.sensor*.app[0].typename UdpBasicApp
+config *.sensor*.app[0].destAddresses "\"server\""
+config *.sensor*.app[0].destPort 1000
+config *.sensor*.app[0].sendInterval 1s
+config *.sensor*.app[0].startTime exponential(1s)
+config *.sensor*.app[0].messageLength 10B
+config *.gateway.numApps 1
+config *.gateway.app[0].typename UdpSink
+config *.gateway.app[0].localPort 4000
+config *.server.numApps 1
+config *.server.app[0].typename UdpSink
+config *.server.app[0].localPort 1000
+config *.visualizer.routingTableVisualizer.lineShift 0
+config *.visualizer.infoVisualizer.modules "\"*.server.app[0]\""
+config *.visualizer.networkRouteVisualizer.displayRoutes true
+config *.visualizer.physicalLinkVisualizer.displayLinks true
+config *.visualizer.energyStorageVisualizer.displayEnergyStorages true
+config *.sensor*.energyStorage.nominalCapacity 0.5J
+config *.sensor*.energyManagement.nodeShutdownCapacity 0.005J
+config *.gateway.energyStorage.nominalCapacity 5J
+config *.gateway.energyManagement.nodeShutdownCapacity 0.005J
+
+vector 0 NetworkA.sensor4.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 1 NetworkA.sensor4.energyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+attr unit W
+vector 2 NetworkA.sensor4.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+attr unit J
+vector 3 NetworkA.sensor4.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 4 NetworkA.sensor4.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 5 NetworkA.sensor4.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 6 NetworkA.sensor4.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 7 NetworkA.sensor4.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 8 NetworkA.sensor4.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 9 NetworkA.sensor4.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 10 NetworkA.sensor4.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 11 NetworkA.sensor4.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 12 NetworkA.sensor4.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 13 NetworkA.sensor4.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 14 NetworkA.sensor4.wlan[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 15 NetworkA.sensor4.wlan[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 16 NetworkA.sensor4.wlan[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 17 NetworkA.sensor4.wlan[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 18 NetworkA.sensor4.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 19 NetworkA.sensor4.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 20 NetworkA.sensor4.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 21 NetworkA.sensor4.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 22 NetworkA.sensor4.wlan[0].radio.energyConsumer rxPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source rxPowerConsumption
+attr title "RX Power consumption over time"
+attr unit W
+vector 23 NetworkA.sensor4.wlan[0].radio.energyConsumer txPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source txPowerConsumption
+attr title "TX Power consumption over time"
+attr unit W
+vector 24 NetworkA.sensor4.wlan[0].radio.energyConsumer sleepTimeVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source sleepTime
+attr title "Total sleep time over time"
+attr unit s
+vector 25 NetworkA.sensor4.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 26 NetworkA.sensor4.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 27 NetworkA.sensor4.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 28 NetworkA.sensor4.wlan[0].radio packetDropped:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets dropped, packetBytes"
+vector 29 NetworkA.sensor4.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 30 NetworkA.sensor4.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 31 NetworkA.sensor4.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 32 NetworkA.sensor4.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 33 NetworkA.sensor4.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 34 NetworkA.sensor4.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 35 NetworkA.sensor4.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 36 NetworkA.sensor4.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 37 NetworkA.sensor4.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 38 NetworkA.sensor4.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 39 NetworkA.sensor4.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 40 NetworkA.sensor4.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 41 NetworkA.sensor4.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 42 NetworkA.sensor4.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 43 NetworkA.sensor4.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 44 NetworkA.sensor4.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 45 NetworkA.sensor4.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 46 NetworkA.sensor4.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 47 NetworkA.sensor1.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 48 NetworkA.sensor1.energyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+attr unit W
+vector 49 NetworkA.sensor1.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+attr unit J
+vector 50 NetworkA.sensor1.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 51 NetworkA.sensor1.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 52 NetworkA.sensor1.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 53 NetworkA.sensor1.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 54 NetworkA.sensor1.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 55 NetworkA.sensor1.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 56 NetworkA.sensor1.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 57 NetworkA.sensor1.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 58 NetworkA.sensor1.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 59 NetworkA.sensor1.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 60 NetworkA.sensor1.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 61 NetworkA.sensor1.wlan[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 62 NetworkA.sensor1.wlan[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 63 NetworkA.sensor1.wlan[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 64 NetworkA.sensor1.wlan[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 65 NetworkA.sensor1.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 66 NetworkA.sensor1.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 67 NetworkA.sensor1.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 68 NetworkA.sensor1.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 69 NetworkA.sensor1.wlan[0].radio.energyConsumer rxPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source rxPowerConsumption
+attr title "RX Power consumption over time"
+attr unit W
+vector 70 NetworkA.sensor1.wlan[0].radio.energyConsumer txPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source txPowerConsumption
+attr title "TX Power consumption over time"
+attr unit W
+vector 71 NetworkA.sensor1.wlan[0].radio.energyConsumer sleepTimeVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source sleepTime
+attr title "Total sleep time over time"
+attr unit s
+vector 72 NetworkA.sensor1.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 73 NetworkA.sensor1.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 74 NetworkA.sensor1.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 75 NetworkA.sensor1.wlan[0].radio packetDropped:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets dropped, packetBytes"
+vector 76 NetworkA.sensor1.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 77 NetworkA.sensor1.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 78 NetworkA.sensor1.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 79 NetworkA.sensor1.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 80 NetworkA.sensor1.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 81 NetworkA.sensor1.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 82 NetworkA.sensor1.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 83 NetworkA.sensor1.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 84 NetworkA.sensor1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 85 NetworkA.sensor1.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 86 NetworkA.sensor1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 87 NetworkA.sensor1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 88 NetworkA.sensor1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 89 NetworkA.sensor1.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 90 NetworkA.sensor1.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 91 NetworkA.sensor1.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 92 NetworkA.sensor1.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 93 NetworkA.sensor1.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 94 NetworkA.sensor2.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 95 NetworkA.sensor2.energyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+attr unit W
+vector 96 NetworkA.sensor2.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+attr unit J
+vector 97 NetworkA.sensor2.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 98 NetworkA.sensor2.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 99 NetworkA.sensor2.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 100 NetworkA.sensor2.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 101 NetworkA.sensor2.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 102 NetworkA.sensor2.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 103 NetworkA.sensor2.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 104 NetworkA.sensor2.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 105 NetworkA.sensor2.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 106 NetworkA.sensor2.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 107 NetworkA.sensor2.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 108 NetworkA.sensor2.wlan[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 109 NetworkA.sensor2.wlan[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 110 NetworkA.sensor2.wlan[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 111 NetworkA.sensor2.wlan[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 112 NetworkA.sensor2.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 113 NetworkA.sensor2.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 114 NetworkA.sensor2.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 115 NetworkA.sensor2.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 116 NetworkA.sensor2.wlan[0].radio.energyConsumer rxPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source rxPowerConsumption
+attr title "RX Power consumption over time"
+attr unit W
+vector 117 NetworkA.sensor2.wlan[0].radio.energyConsumer txPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source txPowerConsumption
+attr title "TX Power consumption over time"
+attr unit W
+vector 118 NetworkA.sensor2.wlan[0].radio.energyConsumer sleepTimeVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source sleepTime
+attr title "Total sleep time over time"
+attr unit s
+vector 119 NetworkA.sensor2.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 120 NetworkA.sensor2.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 121 NetworkA.sensor2.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 122 NetworkA.sensor2.wlan[0].radio packetDropped:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets dropped, packetBytes"
+vector 123 NetworkA.sensor2.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 124 NetworkA.sensor2.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 125 NetworkA.sensor2.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 126 NetworkA.sensor2.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 127 NetworkA.sensor2.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 128 NetworkA.sensor2.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 129 NetworkA.sensor2.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 130 NetworkA.sensor2.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 131 NetworkA.sensor2.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 132 NetworkA.sensor2.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 133 NetworkA.sensor2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 134 NetworkA.sensor2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 135 NetworkA.sensor2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 136 NetworkA.sensor2.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 137 NetworkA.sensor2.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 138 NetworkA.sensor2.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 139 NetworkA.sensor2.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 140 NetworkA.sensor2.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 141 NetworkA.sensor3.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 142 NetworkA.sensor3.energyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+attr unit W
+vector 143 NetworkA.sensor3.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+attr unit J
+vector 144 NetworkA.sensor3.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 145 NetworkA.sensor3.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 146 NetworkA.sensor3.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 147 NetworkA.sensor3.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 148 NetworkA.sensor3.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 149 NetworkA.sensor3.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 150 NetworkA.sensor3.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 151 NetworkA.sensor3.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 152 NetworkA.sensor3.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 153 NetworkA.sensor3.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 154 NetworkA.sensor3.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 155 NetworkA.sensor3.wlan[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 156 NetworkA.sensor3.wlan[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 157 NetworkA.sensor3.wlan[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 158 NetworkA.sensor3.wlan[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 159 NetworkA.sensor3.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 160 NetworkA.sensor3.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 161 NetworkA.sensor3.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 162 NetworkA.sensor3.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 163 NetworkA.sensor3.wlan[0].radio.energyConsumer rxPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source rxPowerConsumption
+attr title "RX Power consumption over time"
+attr unit W
+vector 164 NetworkA.sensor3.wlan[0].radio.energyConsumer txPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source txPowerConsumption
+attr title "TX Power consumption over time"
+attr unit W
+vector 165 NetworkA.sensor3.wlan[0].radio.energyConsumer sleepTimeVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source sleepTime
+attr title "Total sleep time over time"
+attr unit s
+vector 166 NetworkA.sensor3.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 167 NetworkA.sensor3.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 168 NetworkA.sensor3.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 169 NetworkA.sensor3.wlan[0].radio packetDropped:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets dropped, packetBytes"
+vector 170 NetworkA.sensor3.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 171 NetworkA.sensor3.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 172 NetworkA.sensor3.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 173 NetworkA.sensor3.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 174 NetworkA.sensor3.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 175 NetworkA.sensor3.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 176 NetworkA.sensor3.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 177 NetworkA.sensor3.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 178 NetworkA.sensor3.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 179 NetworkA.sensor3.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 180 NetworkA.sensor3.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 181 NetworkA.sensor3.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 182 NetworkA.sensor3.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 183 NetworkA.sensor3.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 184 NetworkA.sensor3.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 185 NetworkA.sensor3.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 186 NetworkA.sensor3.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 187 NetworkA.sensor3.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 188 NetworkA.gateway.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 189 NetworkA.gateway.energyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+attr unit W
+vector 190 NetworkA.gateway.energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+attr unit J
+vector 191 NetworkA.gateway.ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 192 NetworkA.gateway.ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 193 NetworkA.gateway.ethernet pauseSent:vector ETV
+attr recordingmode vector
+attr title "pause sent"
+vector 194 NetworkA.gateway.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 195 NetworkA.gateway.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 196 NetworkA.gateway.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 197 NetworkA.gateway.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 198 NetworkA.gateway.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 199 NetworkA.gateway.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 200 NetworkA.gateway.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 201 NetworkA.gateway.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 202 NetworkA.gateway.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 203 NetworkA.gateway.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 204 NetworkA.gateway.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 205 NetworkA.gateway.wlan[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 206 NetworkA.gateway.wlan[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 207 NetworkA.gateway.wlan[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 208 NetworkA.gateway.wlan[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 209 NetworkA.gateway.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 210 NetworkA.gateway.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 211 NetworkA.gateway.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 212 NetworkA.gateway.wlan[0].radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+attr unit W
+vector 213 NetworkA.gateway.wlan[0].radio.energyConsumer rxPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source rxPowerConsumption
+attr title "RX Power consumption over time"
+attr unit W
+vector 214 NetworkA.gateway.wlan[0].radio.energyConsumer txPowerConsumptionVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source txPowerConsumption
+attr title "TX Power consumption over time"
+attr unit W
+vector 215 NetworkA.gateway.wlan[0].radio.energyConsumer sleepTimeVector:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source sleepTime
+attr title "Total sleep time over time"
+attr unit s
+vector 216 NetworkA.gateway.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 217 NetworkA.gateway.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 218 NetworkA.gateway.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 219 NetworkA.gateway.wlan[0].radio packetDropped:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets dropped, packetBytes"
+vector 220 NetworkA.gateway.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 221 NetworkA.gateway.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 222 NetworkA.gateway.eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 223 NetworkA.gateway.eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 224 NetworkA.gateway.eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 225 NetworkA.gateway.eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 226 NetworkA.gateway.eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 227 NetworkA.gateway.eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 228 NetworkA.gateway.eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 229 NetworkA.gateway.eth[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 230 NetworkA.gateway.eth[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 231 NetworkA.gateway.eth[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 232 NetworkA.gateway.eth[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 233 NetworkA.gateway.eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 234 NetworkA.gateway.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 235 NetworkA.gateway.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 236 NetworkA.gateway.eth[0].mac txPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units sent"
+vector 237 NetworkA.gateway.eth[0].mac rxPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units received"
+vector 238 NetworkA.gateway.eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 239 NetworkA.gateway.eth[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 240 NetworkA.gateway.eth[0].mac packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 241 NetworkA.gateway.eth[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 242 NetworkA.gateway.eth[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 243 NetworkA.gateway.eth[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 244 NetworkA.gateway.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 245 NetworkA.gateway.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 246 NetworkA.gateway.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 247 NetworkA.gateway.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 248 NetworkA.gateway.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 249 NetworkA.gateway.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 250 NetworkA.gateway.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 251 NetworkA.gateway.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 252 NetworkA.gateway.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 253 NetworkA.gateway.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 254 NetworkA.gateway.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 255 NetworkA.gateway.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 256 NetworkA.gateway.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 257 NetworkA.gateway.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 258 NetworkA.gateway.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 259 NetworkA.server.ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 260 NetworkA.server.ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 261 NetworkA.server.ethernet pauseSent:vector ETV
+attr recordingmode vector
+attr title "pause sent"
+vector 262 NetworkA.server.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 263 NetworkA.server.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 264 NetworkA.server.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 265 NetworkA.server.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 266 NetworkA.server.eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 267 NetworkA.server.eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 268 NetworkA.server.eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 269 NetworkA.server.eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 270 NetworkA.server.eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 271 NetworkA.server.eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 272 NetworkA.server.eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 273 NetworkA.server.eth[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 274 NetworkA.server.eth[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 275 NetworkA.server.eth[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 276 NetworkA.server.eth[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 277 NetworkA.server.eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 278 NetworkA.server.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 279 NetworkA.server.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 280 NetworkA.server.eth[0].mac txPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units sent"
+vector 281 NetworkA.server.eth[0].mac rxPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units received"
+vector 282 NetworkA.server.eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 283 NetworkA.server.eth[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 284 NetworkA.server.eth[0].mac packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 285 NetworkA.server.eth[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 286 NetworkA.server.eth[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 287 NetworkA.server.eth[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 288 NetworkA.server.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 289 NetworkA.server.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 290 NetworkA.server.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 291 NetworkA.server.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 292 NetworkA.server.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 293 NetworkA.server.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 294 NetworkA.server.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 295 NetworkA.server.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 296 NetworkA.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 297 NetworkA.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 298 NetworkA.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 299 NetworkA.server.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 300 NetworkA.server.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 301 NetworkA.server.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 302 NetworkA.server.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 303 NetworkA.maliciousNode.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 304 NetworkA.maliciousNode.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 305 NetworkA.maliciousNode.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 306 NetworkA.maliciousNode.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 307 NetworkA.maliciousNode.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 308 NetworkA.maliciousNode.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 309 NetworkA.maliciousNode.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 310 NetworkA.maliciousNode.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 311 NetworkA.maliciousNode.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 312 NetworkA.maliciousNode.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 313 NetworkA.maliciousNode.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 314 NetworkA.maliciousNode.wlan[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 315 NetworkA.maliciousNode.wlan[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 316 NetworkA.maliciousNode.wlan[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 317 NetworkA.maliciousNode.wlan[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 318 NetworkA.maliciousNode.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 319 NetworkA.maliciousNode.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 320 NetworkA.maliciousNode.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 321 NetworkA.maliciousNode.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 322 NetworkA.maliciousNode.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 323 NetworkA.maliciousNode.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 324 NetworkA.maliciousNode.wlan[0].radio packetDropped:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets dropped, packetBytes"
+vector 325 NetworkA.maliciousNode.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 326 NetworkA.maliciousNode.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 327 NetworkA.maliciousNode.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 328 NetworkA.maliciousNode.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 329 NetworkA.maliciousNode.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 330 NetworkA.maliciousNode.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 331 NetworkA.maliciousNode.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 332 NetworkA.maliciousNode.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 333 NetworkA.maliciousNode.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 334 NetworkA.maliciousNode.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 335 NetworkA.maliciousNode.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 336 NetworkA.maliciousNode.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 337 NetworkA.maliciousNode.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 338 NetworkA.maliciousNode.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 339 NetworkA.maliciousNode.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 340 NetworkA.maliciousNode.app[0] dropPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packets dropped, packetBytes"
+vector 341 NetworkA.maliciousNode.app[0] outOfOrderPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source outOfOrderPk
+attr title "packets received out of order, packetBytes"
+vector 342 NetworkA.maliciousNode.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title delay
+attr unit s
+0	84768 453514 0 138041 0 86.151869081735 15618 0 0.075 217.18748799998 11.563952286888
+2	538282 378164 0 138039 0 86.151869081735 9283 0.10597623914983 0.5 2829.2619885002 981.42249550434
+7	916446 4464 0 137902 0 86.067758588214 175 0 1 85 85
+8	920910 4634 0 137902 0 86.067758588214 175 0 304 25840 7855360
+9	925544 3305 2604 137902 2.15640134578 86.067758588214 85 0.072638933311 0.996948188293 18.828204019857 6.2662617563013
+10	928849 2473 2122 137547 1.859604212075 85.859604212075 85 304 304 25840 7855360
+11	931322 13873 2122 137547 0.1 85.8 858 0 3040 255360 776294400
+12	945195 2461 2604 137902 2.15640134578 86.067758588214 85 304 304 25840 7855360
+13	947656 13923 2604 137902 0.1 86 860 0 3040 255360 776294400
+18	961579 2957 5765 134593 4.183584626323 83.816015055954 105 1 149 4869 347255
+19	964536 25418 128 138041 0.117783875024 86.151869081735 901 39 149 68464 6246210
+21	989954 469123 0 138041 0 86.151869081735 15617 0 0.075 217.18748799998 11.563952286888
+22	1459077 431294 0 138041 0 86.151869081735 15617 0 0.05 173.35000000001 8.6675000000004
+23	1890371 422933 0 138041 0 86.151869081735 15617 0 0.075 38.25 2.86875
+24	2313304 210050 16 138041 0.02399885857 86.151869081735 5185 0.02399885857 28.09218089175 73105.082475301 1361995.759124
+25	2523354 58452 0 138041 0 86.151869081735 2173 1 3 3386 5982
+26	2581806 247658 16 138041 0.02399885857 86.151869081735 9186 0 3 15277 36479
+27	2829464 32074 2508 137910 2.10640134578 86.069262588214 1190 0 2 1615 2635
+37	2861538 2388 2120 137545 1.859604212075 85.859604212075 85 18 18 1530 27540
+39	2863926 9 0 0 0 0 1 0 0 0 0
+40	2863935 9 0 0 0 0 1 0 0 0 0
+41	2863944 9 0 0 0 0 1 0 0 0 0
+44	2863953 2388 2118 137544 1.859604212075 85.859604212075 85 10 10 850 8500
+47	2866341 470162 0 138051 0 86.151869097796 15650 0 0.075 217.37415499998 11.573877447255
+49	3336503 387365 0 138050 0 86.151869097796 9284 0.098325214309318 0.5 2805.6450213847 972.31014516534
+54	3723868 4644 0 137773 0 85.98912947537 175 0 1 85 85
+55	3728512 4814 0 137773 0 85.98912947537 175 0 304 25840 7855360
+56	3733326 3390 2473 137773 2.082689793743 85.98912947537 85 0.074488699219 0.880289898096 19.897018897398 6.4183989150347
+57	3736716 2473 2134 137595 1.878964054203 85.878964054203 85 304 304 25840 7855360
+58	3739189 13873 2134 137595 0.1 85.8 858 0 3040 255360 776294400
+59	3753062 2466 2473 137773 2.082689793743 85.98912947537 85 304 304 25840 7855360
+60	3755528 13903 2473 137773 0.1 85.9 859 0 3040 255360 776294400
+65	3769431 800 16522 122555 11.074242090694 76.616268463603 29 1 57 611 30365
+66	3770231 25895 132 138051 0.117783908489 86.151869097796 917 39 149 72092 6753418
+68	3796126 470153 0 138051 0 86.151869097796 15649 0 0.075 217.37415499998 11.573877447255
+69	4266279 432228 0 138051 0 86.151869097796 15649 0 0.05 173.55000000001 8.6775000000004
+70	4698507 423855 0 138051 0 86.151869097796 15649 0 0.075 38.25 2.86875
+71	5122362 209289 17 138051 0.028402228188 86.151869097796 5170 0.028402228188 27.654087339626 71488.576175318 1320393.4247007
+72	5331651 58207 0 138051 0 86.151869097796 2163 1 3 3371 5957
+73	5389858 248033 17 138051 0.028402228188 86.151869097796 9202 0 3 15321 36577
+74	5637891 32132 2375 137781 2.032689793743 85.99063347537 1190 0 2 1615 2635
+84	5670023 2388 2132 137593 1.878964054203 85.878964054203 85 18 18 1530 27540
+86	5672411 9 0 0 0 0 1 0 0 0 0
+87	5672420 9 0 0 0 0 1 0 0 0 0
+88	5672429 9 0 0 0 0 1 0 0 0 0
+91	5672438 2388 2130 137592 1.878964054203 85.878964054203 85 10 10 850 8500
+94	5674826 459284 0 138038 0 86.151869071777 15283 0 0.075 209.20710399998 11.173052332564
+96	6134110 373384 0 138037 0 86.151869071777 8940 0.11159954411423 0.5 2746.0803936348 955.02452317141
+101	6507494 4870 0 137266 0 85.643454800929 177 0 1 86 86
+102	6512364 5042 0 137266 0 85.643454800929 177 0 304 26144 7947776
+103	6517406 3510 454 137266 0.708336926232 85.643454800929 86 0.058016676323 0.84867828611 16.595308891199 4.5550683124952
+104	6520916 2585 225 137055 0.485128163722 85.485128163722 86 304 304 26144 7947776
+105	6523501 14666 225 137055 0.1 85.4 854 0 3040 258400 785536000
+106	6538167 2579 454 137266 0.708336926232 85.643454800929 86 304 304 26144 7947776
+107	6540746 14706 454 137266 0.1 85.6 856 0 3040 258400 785536000
+112	6555452 2531 6408 132644 4.630801292762 82.72987416316 87 1 149 3205 208465
+113	6557983 26109 126 138038 0.117783864524 86.151869071777 893 39 149 68153 6220013
+115	6584092 474557 0 138038 0 86.151869071777 15282 0 0.075 209.20710399998 11.173052332564
+116	7058649 437407 0 138038 0 86.151869071777 15282 0 0.05 164.85 8.2425000000005
+117	7496056 429580 0 138038 0 86.151869071777 15282 0 0.075 38.7 2.9025
+118	7925636 207951 14 138038 0.019639239658 86.151869071777 5009 0.019639239658 26.092988847369 65351.617618322 1132433.1780106
+119	8133587 60293 0 138038 0 86.151869071777 2158 1 3 3365 5951
+120	8193880 247018 14 138038 0.019639239658 86.151869071777 8828 0 3 14587 34769
+121	8440898 33688 365 137274 0.658336926232 85.644958800929 1204 0 2 1634 2666
+131	8474586 2499 223 137053 0.485128163722 85.485128163722 86 18 18 1548 27864
+133	8477085 10 0 0 0 0 1 0 0 0 0
+134	8477095 10 0 0 0 0 1 0 0 0 0
+135	8477105 10 0 0 0 0 1 0 0 0 0
+138	8477115 2499 221 137052 0.485128163722 85.485128163722 86 10 10 860 8600
+141	8479614 481894 0 138079 0 86.182162398259 15525 0 0.075 216.17170799998 11.520627235568
+143	8961508 393832 0 138079 0 86.182162398259 9215 0.10383018868532 0.5 2781.4695763548 959.46468755526
+148	9355340 4894 0 137895 0 86.058384669093 178 0 1 87 87
+149	9360234 5068 0 137895 0 86.058384669093 178 0 304 26448 8040192
+150	9365302 3513 110 136907 0.116279831661 85.389326631173 86 0.057895162568 0.882235666652 21.124795838883 7.0195104593126
+151	9368815 2614 27 137895 0.058384669093 86.058384669093 87 304 304 26448 8040192
+152	9371429 14777 942 137895 0.1 86 860 0 3040 261440 794777600
+153	9386206 2576 110 136907 0.116279831661 85.389326631173 86 304 304 26144 7947776
+154	9388782 14665 110 136907 0.1 85.3 853 0 3040 258400 785536000
+159	9403447 3502 6497 134595 4.650801322725 83.816015061104 120 1 143 4571 262069
+160	9406949 26068 362 138042 0.63597146772 86.151869081735 892 39 149 68052 6219026
+162	9433017 481884 0 138079 0 86.182162398259 15524 0 0.075 216.17170799998 11.520627235568
+163	9914901 444276 0 138079 0 86.182162398259 15524 0 0.05 171.8 8.5900000000004
+164	10359177 436032 0 138079 0 86.182162398259 15524 0 0.075 38.7 2.9025
+165	10795209 213778 21 138079 0.046279831661 86.182162398259 5154 0.046279831661 27.966159265014 71859.863644509 1330192.7621027
+166	11008987 60403 0 138053 0 86.155271603727 2163 1 3 3373 5965
+167	11069390 254438 21 138079 0.046279831661 86.182162398259 9100 0 3 15128 36130
+168	11323828 33636 29 136915 0.066279831661 85.390830631173 1204 0 2 1634 2666
+178	11357464 2527 25 137893 0.058384669093 86.058384669093 87 18 18 1566 28188
+180	11359991 10 0 0 0 0 1 0 0 0 0
+181	11360001 10 0 0 0 0 1 0 0 0 0
+182	11360011 10 0 0 0 0 1 0 0 0 0
+185	11360021 2527 23 137892 0.058384669093 86.058384669093 87 10 10 870 8700
+188	11362548 656767 0 138082 0 86.182450367596 21199 0 0.075 334.56622699996 19.624602415169
+190	12019315 481526 0 138082 0 86.182450367596 11504 4.479716485157 5 54543.503895939 258862.66789398
+191	12500841 7208 123 137914 0.117783862324 86.069262618877 249 38 38 9462 359556
+198	12508049 20400 0 138028 0 86.149789051072 725 0 29 5526 85604
+199	12528449 22095 0 138028 0 86.149789051072 725 0 12992 2475648 17181065216
+200	12550544 14215 1029 138028 1.120134974727 86.149789051072 348 0.071217116387 5.594412982209 585.79079646304 1911.50009257
+201	12564759 11161 358 137531 0.635971440191 85.810147661555 372 448 448 166656 74661888
+202	12575920 15529 358 137531 0.1 85.8 858 0 8960 1662080 8168652800
+203	12591449 10427 1029 138028 1.120134974727 86.149789051072 348 448 448 155904 69844992
+204	12601876 15478 1029 138028 0.1 86.1 861 0 8960 1554560 8248934400
+209	12617354 1084 10750 134353 7.366465249242 83.759679033575 37 30 144 1701 112827
+212	12618438 656790 0 138082 0 86.182450367596 21199 0 0.075 334.57122699996 19.624627415169
+213	13275228 602230 0 138082 0 86.182450367596 21198 0 0.05 155.1 7.7550000000005
+214	13877458 601284 0 138082 0 86.182450367596 21198 0 0.075 156.75 11.75625
+215	14478742 284076 19 138068 0.041803938441 86.172450367596 6840 0.041803938441 32.526366599164 111002.50447837 2393117.5806965
+216	14762818 65285 0 138060 0 86.172162367596 2338 1 3 4030 8112
+217	14828103 232985 19 138060 0.041803938441 86.172162367596 8324 0 3 13721 32707
+218	15061088 136370 943 138082 1.070134974727 86.182450367596 4877 0 2 6619 10799
+222	15197458 7009 0 137915 0 86.069262618877 254 0 0 0 0
+223	15204467 7009 0 137915 0 86.069262618877 254 0 0 0 0
+224	15211476 6959 124 137915 0.117783862324 86.069262618877 249 0 0 0 0
+225	15218435 7457 124 137915 0.117783862324 86.069262618877 249 448 448 111552 49975296
+226	15225892 15222 124 137915 0.1 86 860 0 8960 1111040 5459148800
+227	15241114 7457 124 137915 0.117783862324 86.069262618877 249 448 448 111552 49975296
+228	15248571 15222 124 137915 0.1 86 860 0 8960 1111040 5459148800
+233	15263793 7208 133 137923 0.117789622324 86.069268378877 249 64 64 15936 1019904
+238	15271001 7208 124 137915 0.117783862324 86.069262618877 249 56 56 13944 780864
+251	15278209 10916 356 137529 0.635971440191 85.810147661555 372 48 128 32914 3103524
+252	15289125 10 0 0 0 0 1 0 0 0 0
+253	15289135 11063 0 137529 0 85.810147661555 373 0 372 69378 17228870
+254	15300198 10 0 0 0 0 1 0 0 0 0
+260	15300208 7208 135 137925 0.117789672324 86.069268428877 249 46 46 11454 526884
+266	15307416 50 0 0 0 0 5 0 0 0 0
+267	15307466 50 0 0 0 0 5 0 0 0 0
+278	15307516 7208 134 137924 0.117789672324 86.069268428877 249 64 64 15936 1019904
+279	15314724 7208 134 137924 0.117789672324 86.069268428877 249 64 64 15936 1019904
+295	15321932 7208 137 137927 0.117789672324 86.069268428877 249 18 18 4482 80676
+296	15329140 7359 0 137927 0 86.069268428877 250 0 249 31125 5177125
+297	15336499 10 0 0 0 0 1 0 0 0 0
+298	15336509 10 0 0 0 0 1 0 0 0 0
+299	15336519 7208 138 137928 0.117789672324 86.069268428877 249 10 10 2490 24900
+300	15343727 14998 138 137928 0.1 86 860 0 1600 198400 174080000
+301	15358725 10162 138 137928 0.117789672324 86.069268428877 249 0.059405003231 0.88179975482 54.556161191545 16.574512066411
+302	15368887 7179 138 137928 0.117789672324 86.069268428877 249 0 85 10351 581395
+307	15376066 31173 0 138058 0 86.164447460766 1079 0 50 39836 1661976
+308	15407239 34372 0 138058 0 86.164447460766 1079 0 44392 34287880 1229079249344
+309	15441611 20236 340 137512 0.630595397734 85.802723619098 495 0.366147936968 9.159081113591 2988.6832805558 20657.423669742
+310	15461847 17565 174 138058 0.264447460766 86.164447460766 579 544 1184 499200 450384256
+311	15479412 15834 174 137967 0.1 86.1 861 0 23120 4976080 79449836800
+312	15495246 14992 340 137512 0.630595397734 85.802723619098 495 544 1184 426440 384555328
+313	15510238 16004 340 137512 0.1 85.8 858 0 21680 4255680 43479974400
+314	15526242 1043 62618 138058 39.614447460766 86.164447460766 34 552 1176 30144 27842432
+318	15527285 218 7054 80949 4.938681135215 51.232001745104 8 1 39 46 1528
+319	15527503 7359 130 137283 0.117783901647 85.644958840952 254 39 39 9906 386334
+321	15534862 72051 0 138045 0 86.151869093529 2577 1 3 4607 9657
+322	15606913 233919 13 138045 0.003551802936 86.151869093529 8363 0 3 13622 32460
+323	15840832 194023 244 137521 0.580595397734 85.810147619098 6930 0 2 9405 15345
+333	16034855 17016 172 138056 0.264447460766 86.164447460766 579 48 128 50820 4772854
+335	16051871 10 0 0 0 0 1 0 0 0 0
+336	16051881 10 0 0 0 0 1 0 0 0 0
+337	16051891 10 0 0 0 0 1 0 0 0 0
+338	16051901 16969 170 138055 0.264447460766 86.164447460766 579 40 120 46188 3996790
+0	16068870 73562 138105 160755 86.201869081735 99.991541900293 2456 0 0.075 33.452990000001 1.78122541801
+2	16142432 60894 138105 160764 86.201869081735 100 1433 0.05227697861205 0.10597618914983 115.73303621211 9.6849879167229
+7	16203326 729 139088 160538 86.859604212075 99.859604212075 27 0 1 14 14
+8	16204055 757 139088 160538 86.859604212075 99.859604212075 27 0 304 4256 1293824
+9	16204812 520 139335 159370 87.019420977634 99.046934750664 13 0.074143613522 0.364953036101 1.926964055577 0.38834874911797
+10	16205332 420 139088 160538 86.859604212075 99.859604212075 14 304 304 4256 1293824
+11	16205752 2430 139088 160764 85.9 100 142 0 3040 45600 138624000
+12	16208182 390 139335 159370 87.019420977634 99.046934750664 13 304 304 3952 1201408
+13	16208572 2395 139335 160764 86.1 100 140 0 3040 42560 129382400
+18	16210967 575 143867 159155 89.782051811964 98.993422259374 20 30 125 755 39925
+19	16211542 4185 138161 160730 86.224242398259 99.965769415016 144 39 149 10099 856323
+21	16215727 76018 138105 160755 86.201869081735 99.991541900293 2456 0 0.075 33.452990000001 1.78122541801
+22	16291745 70062 138105 160755 86.201869081735 99.991541900293 2456 0 0.05 26.65 1.3325
+23	16361807 68779 138105 160755 86.201869081735 99.991541900293 2456 0 0.075 5.925 0.444375
+24	16430586 33547 138110 160764 86.202162398259 100 803 28.092474208274 32.347113382389 24277.783393182 735217.5038009
+25	16464133 9729 138105 160747 86.201869081735 99.991253900293 349 1 3 545 965
+26	16473862 39715 138105 160747 86.201869081735 99.991253900293 1426 0 3 2358 5624
+27	16513577 5180 139244 160755 86.969420977634 99.991541900293 185 0 2 251 409
+37	16518757 406 139086 160536 86.859604212075 99.859604212075 14 18 18 252 4536
+43	16519163 16702 160764 160764 0.1 100 1000 0 0 0 0
+44	16535865 406 139085 160535 86.859604212075 99.859604212075 14 10 10 140 1400
+47	16536271 79389 138106 160721 86.201869097796 99.965769365762 2560 0 0.075 35.817254000001 1.907050319314
+49	16615660 66396 138106 160764 86.201869097796 100 1521 0.035297985070769 0.098325164309318 105.78349032369 7.8488630764181
+54	16682056 784 139120 160713 86.878964054203 99.964265365762 28 0 1 14 14
+55	16682840 812 139120 160713 86.878964054203 99.964265365762 28 0 304 4256 1293824
+56	16683652 573 139829 160713 87.327661210746 99.964265365762 14 0.085301311559 0.638653978073 3.31750081212 1.1783570698327
+57	16684225 420 139120 160578 86.878964054203 99.878964054203 14 304 304 4256 1293824
+58	16684645 2430 139120 160764 85.9 100 142 0 3040 45600 138624000
+59	16687075 420 139829 160713 87.327661210746 99.964265365762 14 304 304 4256 1293824
+60	16687495 2413 139829 160764 86 100 141 0 3040 45600 138624000
+65	16689908 170 145558 151932 90.765326473197 94.627959414313 6 1 57 118 6502
+66	16690078 4437 138165 160616 86.22424241432 99.893583167725 152 39 149 11611 1056483
+68	16694515 79389 138106 160721 86.201869097796 99.965769365762 2560 0 0.075 35.817254000001 1.907050319314
+69	16773904 73207 138106 160721 86.201869097796 99.965769365762 2560 0 0.05 28.6 1.43
+70	16847111 71827 138106 160721 86.201869097796 99.965769365762 2560 0 0.075 6.3 0.4725
+71	16918938 35576 138113 160764 86.20216241432 100 852 27.65438065615 32.223062964128 25563.536394153 768522.39209197
+72	16954514 9771 138106 160721 86.201869097796 99.965769365762 350 1 3 546 966
+73	16964285 42039 138106 160622 86.201869097796 99.914265365762 1506 0 3 2511 6001
+74	17006324 5488 139738 160721 87.277661210746 99.965769365762 196 0 2 266 434
+84	17011812 406 139118 160576 86.878964054203 99.878964054203 14 18 18 252 4536
+90	17012218 16702 160764 160764 0.1 100 1000 0 0 0 0
+91	17028920 406 139117 160575 86.878964054203 99.878964054203 14 10 10 140 1400
+94	17029326 77651 138104 160732 86.201869071777 99.9657694249 2507 0 0.075 34.817921000001 1.857050398701
+96	17106977 64461 138104 160764 86.201869071777 100 1486 0.052241781545538 0.11159949411423 124.15206406251 10.804200175857
+101	17171438 810 138537 160598 86.485128163722 99.892079108587 28 0 1 14 14
+102	17172248 838 138537 160598 86.485128163722 99.892079108587 28 0 304 4256 1293824
+103	17173086 586 138732 160598 86.61813527006 99.892079108587 14 0.080457422561 0.406950944865 2.931687341479 0.74322940024718
+104	17173672 434 138537 160009 86.485128163722 99.485128163722 14 304 304 4256 1293824
+105	17174106 2644 138537 160764 85.5 100 146 0 3040 45600 138624000
+106	17176750 432 138732 160598 86.61813527006 99.892079108587 14 304 304 4256 1293824
+107	17177182 2608 138732 160764 85.7 100 144 0 3040 45600 138624000
+112	17179790 721 143864 159389 89.782051787151 99.050014234561 24 1 133 940 55860
+113	17180511 4219 138158 160732 86.224242388301 99.9657694249 140 39 149 10222 892390
+115	17184730 80158 138104 160732 86.201869071777 99.9657694249 2507 0 0.075 34.817921000001 1.857050398701
+116	17264888 74084 138104 160732 86.201869071777 99.9657694249 2507 0 0.05 27.6 1.38
+117	17338972 72764 138104 160732 86.201869071777 99.9657694249 2507 0 0.075 6.3 0.4725
+118	17411736 35323 138109 160764 86.202162388301 100 827 26.093282163893 30.556624163406 23422.571450395 664739.19827624
+119	17447059 9882 138104 160732 86.201869071777 99.9657694249 342 1 3 534 946
+120	17456941 42218 138104 160732 86.201869071777 99.9657694249 1461 0 3 2436 5818
+121	17499159 5656 138645 160607 86.56813527006 99.893583108587 196 0 2 266 434
+131	17504815 420 138535 160007 86.485128163722 99.485128163722 14 18 18 252 4536
+137	17505235 17702 160764 160764 0.1 100 1000 0 0 0 0
+138	17522937 420 138534 160006 86.485128163722 99.485128163722 14 10 10 140 1400
+141	17523357 79903 138085 160734 86.182450398259 99.96576944259 2500 0 0.075 34.468206000001 1.839550428626
+143	17603260 66017 138085 160764 86.182450398259 100 1482 0.047510114671278 0.10381578868532 114.68125698132 9.2444577960901
+148	17669277 782 138261 159615 86.294332199096 99.212882378936 27 0 1 13 13
+149	17670059 808 138261 159615 86.294332199096 99.212882378936 27 0 304 3952 1201408
+150	17670867 584 138261 159615 86.294332199096 99.212882378936 14 0.080155868164 0.663501551138 2.93074712327 0.92340781659709
+151	17671451 403 139404 159398 87.058384669093 99.058384669093 13 304 304 3952 1201408
+152	17671854 2535 139404 160764 86.1 100 140 0 3040 42560 129382400
+153	17674389 433 138261 159615 86.294332199096 99.212882378936 14 304 304 4256 1293824
+154	17674822 2662 138261 160764 85.4 100 147 0 3040 45600 138624000
+159	17677484 1136 140860 159393 87.941476920179 99.050014264524 38 30 133 1583 99825
+160	17678620 4034 138162 160734 86.224242398259 99.96576944259 134 39 149 9638 832138
+162	17682654 79903 138085 160734 86.182450398259 99.96576944259 2500 0 0.075 34.468206000001 1.839550428626
+163	17762557 73826 138085 160734 86.182450398259 99.96576944259 2500 0 0.05 27.25 1.3625
+164	17836383 72527 138085 160734 86.182450398259 99.96576944259 2500 0 0.075 6.3 0.4725
+165	17908910 35154 138093 160764 86.192162398259 100 823 27.975871265014 32.40897121922 24871.133432733 752987.46638209
+166	17944064 9902 138162 160734 86.224242398259 99.96576944259 343 1 3 535 947
+167	17953966 41910 138085 160734 86.182450398259 99.96576944259 1452 0 3 2415 5761
+168	17995876 5670 138171 159623 86.244332199096 99.214386378936 196 0 2 266 434
+178	18001546 390 139402 159396 87.058384669093 99.058384669093 13 18 18 234 4212
+184	18001936 17702 160764 160764 0.1 100 1000 0 0 0 0
+185	18019638 390 139401 159395 87.058384669093 99.058384669093 13 10 10 130 1300
+188	18020028 118688 138082 160756 86.182450367596 99.991541930956 3721 0 0.075 59.442484000001 3.551425406244
+190	18138716 83619 138090 160764 86.192162367596 100 1955 4.3968911266317 4.479667925157 8678.4762524965 38525.867872611
+191	18222335 1249 138273 160727 86.295836229759 99.965769412486 42 38 38 1596 60648
+198	18223584 3486 138148 160493 86.222162367596 99.808603059519 119 0 27 1010 15444
+199	18227070 3772 138148 160493 86.222162367596 99.808603059519 119 0 12096 452480 3099672576
+200	18230842 2930 138148 160235 86.222162367596 99.641644193597 70 0.150839105544 5.545277833499 180.85979267395 716.52199072423
+201	18233772 1515 138401 160493 86.376304396925 99.808603059519 49 448 448 21952 9834496
+202	18235287 2668 138401 160764 85.9 100 142 0 8960 224000 1123942400
+203	18237955 2167 138148 160235 86.222162367596 99.641644193597 70 448 448 31360 14049280
+204	18240122 2652 138148 160764 86.2 100 139 0 8960 318080 1906688000
+209	18242774 91 140993 146893 87.97730089265 91.623729787301 3 30 129 280 32182
+212	18242865 118655 138090 160756 86.192162367596 99.991541930956 3720 0 0.075 59.437484000001 3.551400406244
+213	18361520 108985 138082 160756 86.182450367596 99.991541930956 3721 0 0.05 23.55 1.1775
+214	18470505 109244 138082 160756 86.182450367596 99.991541930956 3721 0 0.075 31.35 2.35125
+215	18579749 50600 138082 160764 86.182450367596 100 1182 32.526366599164 37.81420631377 41587.978398221 1465992.5517594
+216	18630349 11421 138156 160744 86.224242367596 99.979059433482 395 1 3 696 1436
+217	18641770 37078 138168 160756 86.230542859231 99.991541930956 1285 0 3 2094 4978
+218	18678848 28233 138090 160244 86.192162367596 99.643724193597 975 0 2 1323 2159
+222	18707081 1207 138274 160728 86.295836229759 99.965769412486 42 0 0 0 0
+223	18708288 1207 138274 160728 86.295836229759 99.965769412486 42 0 0 0 0
+224	18709495 1207 138274 160728 86.295836229759 99.965769412486 42 0 0 0 0
+225	18710702 1291 138274 160728 86.295836229759 99.965769412486 42 448 448 18816 8429568
+226	18711993 2619 138274 160764 86.1 100 140 0 8960 192640 903168000
+227	18714612 1291 138274 160728 86.295836229759 99.965769412486 42 448 448 18816 8429568
+228	18715903 2619 138274 160764 86.1 100 140 0 8960 192640 903168000
+233	18718522 1249 138283 160735 86.295841989759 99.965775172486 42 64 64 2688 172032
+238	18719771 1249 138274 160728 86.295836229759 99.965769412486 42 56 56 2352 131712
+251	18721020 1482 138399 160491 86.376304396925 99.808603059519 49 49 128 4250 395778
+253	18722502 1515 138399 160491 86.376304396925 99.808603059519 49 373 421 19453 7732641
+256	18724017 17702 160764 160764 0.1 100 1000 0 0 0 0
+260	18741719 1249 138285 160737 86.295842039759 99.965775222486 42 46 46 1932 88872
+270	18742968 17702 160764 160764 0.1 100 1000 0 0 0 0
+272	18760670 17702 160764 160764 0.1 100 1000 0 0 0 0
+278	18778372 1249 138284 160736 86.295842039759 99.965775222486 42 64 64 2688 172032
+279	18779621 1249 138284 160736 86.295842039759 99.965775222486 42 64 64 2688 172032
+295	18780870 1249 138287 160739 86.295842039759 99.965775222486 42 18 18 756 13608
+296	18782119 1291 138287 160739 86.295842039759 99.965775222486 42 250 291 11361 3079321
+299	18783410 1249 138288 160740 86.295842039759 99.965775222486 42 10 10 420 4200
+300	18784659 2578 138288 160764 86.1 100 140 0 1600 34400 28800000
+301	18787237 1748 138288 160740 86.295842039759 99.965775222486 42 0.075653454185 0.665011391801 8.980038158509 2.7671270933826
+302	18788985 1249 138288 160740 86.295842039759 99.965775222486 42 85 99 3856 354652
+307	18790234 4852 138145 160473 86.214447460766 99.800347017062 162 40 50 7627 360141
+308	18795086 5338 138145 160473 86.214447460766 99.800347017062 162 34808 43408 6572640 267345391104
+309	18800424 2980 138382 160473 86.371120354468 99.800347017062 71 7.906672893702 10.830303462134 662.678233135 6232.5388492819
+310	18803404 2853 138145 160358 86.214447460766 99.714447460766 91 544 1184 80712 74857536
+311	18806257 2687 138145 160764 86.2 100 139 0 22800 823040 13276364800
+312	18808944 2213 138382 160473 86.371120354468 99.800347017062 71 552 1184 61624 55905472
+313	18811157 2748 138382 160764 85.9 100 142 0 22320 624960 6459520000
+314	18813905 752 138145 155070 86.214447460766 96.714447460766 24 544 1176 21552 20197504
+319	18814657 1192 138280 160723 86.295836269082 99.965769402398 40 39 39 1560 60840
+321	18815849 11730 138170 160745 86.243765106908 99.981334007489 406 1 3 716 1478
+322	18827579 42702 138170 160761 86.243765106908 99.991541965129 1479 0 3 2459 5897
+323	18870281 28714 138294 160482 86.321120354468 99.808603017062 994 0 2 1349 2201
+333	18898995 2766 138143 160356 86.214447460766 99.714447460766 91 48 128 8269 802489
+338	18901761 2760 138142 160355 86.214447460766 99.714447460766 91 40 120 7541 676009
+
