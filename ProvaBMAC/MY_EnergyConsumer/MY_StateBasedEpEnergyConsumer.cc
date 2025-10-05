@@ -62,9 +62,14 @@ void MY_StateBasedEpEnergyConsumer::receiveSignal(cComponent *source,
                      emit(sleepStateChangedSignal, true); //emetto segnale che mi dice che nodo ha iniziato a dormire
                  }
                  else if (previousRadioMode == IRadio::RADIO_MODE_SLEEP && newMode != IRadio::RADIO_MODE_SLEEP) {
+
                      simtime_t sleepDuration = simTime() - sleepStartTime; //vuol dire che ho appena finito di dormire quindi calcolo totale
                      sleepTotalTime += sleepDuration; //mi salvo in una variabile la somma di tutti gli sleep fatti
                      sonnellini++;
+                     EV << "Node " << getParentModule()->getFullName()
+                                             << " woke up at " << simTime()
+                                             << " after sleeping for " << sleepDuration
+                                             << " (total so far: " << sleepTotalTime << ")\n";
                      //recordScalar("totalSleepTime", sleepTotalTime); SPOSTATO NELLA FUNZIONE FINISH
                      emit(sleepTimeSignal, sleepTotalTime.dbl()); // sleepTimeSignal registrato in initialize()
                      emit(sleepStateChangedSignal, false);

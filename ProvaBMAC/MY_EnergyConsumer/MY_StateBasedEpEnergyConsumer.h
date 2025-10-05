@@ -26,6 +26,7 @@ class INET_API MY_StateBasedEpEnergyConsumer : public StateBasedEpEnergyConsumer
     simsignal_t rxPowerConsumptionSignal;
     simsignal_t txPowerConsumptionSignal;
 
+
     simsignal_t sleepStateChangedSignal;
     simsignal_t sleepTimeSignal;
     simtime_t sleepStartTime;
@@ -41,7 +42,7 @@ class INET_API MY_StateBasedEpEnergyConsumer : public StateBasedEpEnergyConsumer
     virtual void receiveSignal(cComponent *source, simsignal_t signal, intval_t value, cObject *details) override;
 
     /** Nuovo metodo per il calcolo dettagliato (totale, RX, TX) */
-    virtual std::array<W, 3> computePowerConsumptionDetailed() const;
+    virtual std::array<W, 3> computePowerConsumptionDetailed() const ;
 
     virtual void finish() override;
 };
