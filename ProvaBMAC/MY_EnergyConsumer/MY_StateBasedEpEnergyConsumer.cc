@@ -78,23 +78,23 @@ void MY_StateBasedEpEnergyConsumer::receiveSignal(cComponent *source,
 
         auto arr = computePowerConsumptionDetailed();
         // arr[0] è totale, arr[1] RX, arr[2] TX
-        powerConsumption = arr[0]; // eredita la variabile protected del base
+        powerConsumption = arr[0];
         powerConsumptionRx = arr[1];
         powerConsumptionTx = arr[2];
 
 
-        // emetti i segnali aggiuntivi
+        // emetto i segnali aggiuntivi
         emit(rxPowerConsumptionSignal, powerConsumptionRx.get());
         emit(txPowerConsumptionSignal, powerConsumptionTx.get());
 
-
+/*
         EV << "t=" << simTime()
                 << "s | Node=" << getParentModule()->getFullName()
                 << " | TotalPower=" << powerConsumption
                 << " | RX=" << powerConsumptionRx
                 << " | TX=" << powerConsumptionTx
                 << " | RadioMode=" << newMode
-                << endl;
+                << endl;*/
     }
 
 
@@ -221,7 +221,6 @@ void MY_StateBasedEpEnergyConsumer::finish()
     // Registra lo scalare solo una volta alla fine
     recordScalar("totalSleepTime", sleepTotalTime);
     recordScalar("Sonnellini", sonnellini);
-    // Se vuoi, emetti anche i segnali finali
     emit(sleepTimeSignal, sleepTotalTime.dbl());
 }
 
