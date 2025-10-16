@@ -18,6 +18,9 @@
  * Questa modifica permette analisi dettagliate del consumo energetico
  * per fase di comunicazione, senza alterare la compatibilità con altri
  * componenti INET che leggono solo il consumo totale.
+ * 
+ * Aggiunto inoltre contatore dei passaggi da stato di sleep a qualsiasi altro stato per analizzare quante
+ * volte il nodo si sveglia
  **/
 
 #include "../MY_EnergyConsumer/MY_StateBasedEpEnergyConsumer.h"

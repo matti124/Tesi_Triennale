@@ -20,4 +20,3 @@ simple MY_StateBasedEpEnergyConsumer extends StateBasedEpEnergyConsumer
         @statistic[sleepTimeVector](title="Total sleep time over time"; source=sleepTime; record=vector; interpolationmode=sample-hold; unit=s);
 }
 
-
