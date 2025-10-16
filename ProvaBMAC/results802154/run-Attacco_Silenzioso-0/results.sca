@@ -1,16 +1,16 @@
 version 3
-run Attacco_Silenzioso-0-20251005-13:20:56-8795
+run Attacco_Silenzioso-0-20251010-20:45:46-32403
 attr configname Attacco_Silenzioso
-attr datetime 20251005-13:20:56
-attr datetimef 20251005-132056
+attr datetime 20251010-20:45:46
+attr datetimef 20251010-204546
 attr experiment Attacco_Silenzioso
-attr inifile omnetpp802.15.4.ini
+attr inifile omnet802.15.4.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkA
-attr processid 8795
+attr processid 32403
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -31,7 +31,6 @@ config network NetworkA
 config sim-time-limit 100s
 config output-vector-file results802154/run-Attacco_Silenzioso-0/results.vec
 config output-scalar-file results802154/run-Attacco_Silenzioso-0/results.sca
-config **.wlan*.radio.initialRadioMode "\"sleep\""
 config **.wlan*.mac.typename Ieee802154Mac
 config **.wlan*.queue.typename DropTailQueue
 config **.wlan*.queue.packetCapacity 50
@@ -61,7 +60,7 @@ config *.visualizer.physicalLinkVisualizer.displayLinks true
 config *.visualizer.energyStorageVisualizer.displayEnergyStorages true
 config *.sensor*.energyStorage.nominalCapacity 0.5J
 config *.sensor*.energyManagement.nodeShutdownCapacity 0.005J
-config *.gateway.energyStorage.nominalCapacity 5J
+config *.gateway.energyStorage.nominalCapacity 0.5J
 config *.gateway.energyManagement.nodeShutdownCapacity 0.005J
 
 par NetworkA.gateway.ethg$o[0].channel typename "\"inet.node.ethernet.Eth100M\""
@@ -1371,7 +1370,7 @@ attr unit W
 par NetworkA.sensor4.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
 scalar NetworkA.sensor4.wlan[0].radio.energyConsumer totalSleepTime 96.405447989897
-scalar NetworkA.sensor4.wlan[0].radio.energyConsumer Sonnellini 975
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer Sonnellini 677
 scalar NetworkA.sensor4.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0029151943462898
 attr recordingmode mean
 attr source txPowerConsumption
@@ -1382,10 +1381,16 @@ attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer powerConsumption:mean 0.016790292500982
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor4.wlan[0].radio typename "\"inet.physicallayer.wireless.ieee802154.packetlevel.Ieee802154NarrowbandScalarRadio\""
 par NetworkA.sensor4.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor4.wlan[0].radio energySourceModule "\"NetworkA.sensor4.energyStorage\""
-par NetworkA.sensor4.wlan[0].radio initialRadioMode "\"sleep\""
+par NetworkA.sensor4.wlan[0].radio initialRadioMode "\"off\""
 attr enum off,sleep,receiver,transmitter,transceiver
 par NetworkA.sensor4.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
 par NetworkA.sensor4.wlan[0].radio sendRawBytes false
@@ -2485,7 +2490,7 @@ attr unit W
 par NetworkA.sensor1.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
 scalar NetworkA.sensor1.wlan[0].radio.energyConsumer totalSleepTime 85.553720584699
-scalar NetworkA.sensor1.wlan[0].radio.energyConsumer Sonnellini 975
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer Sonnellini 677
 scalar NetworkA.sensor1.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0029151943462898
 attr recordingmode mean
 attr source txPowerConsumption
@@ -2496,10 +2501,16 @@ attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer powerConsumption:mean 0.016790292500982
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor1.wlan[0].radio typename "\"inet.physicallayer.wireless.ieee802154.packetlevel.Ieee802154NarrowbandScalarRadio\""
 par NetworkA.sensor1.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor1.wlan[0].radio energySourceModule "\"NetworkA.sensor1.energyStorage\""
-par NetworkA.sensor1.wlan[0].radio initialRadioMode "\"sleep\""
+par NetworkA.sensor1.wlan[0].radio initialRadioMode "\"off\""
 attr enum off,sleep,receiver,transmitter,transceiver
 par NetworkA.sensor1.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
 par NetworkA.sensor1.wlan[0].radio sendRawBytes false
@@ -3573,7 +3584,7 @@ attr unit W
 par NetworkA.sensor2.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
 scalar NetworkA.sensor2.wlan[0].radio.energyConsumer totalSleepTime 81.30159043823
-scalar NetworkA.sensor2.wlan[0].radio.energyConsumer Sonnellini 977
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer Sonnellini 676
 scalar NetworkA.sensor2.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0029331247555729
 attr recordingmode mean
 attr source txPowerConsumption
@@ -3584,10 +3595,16 @@ attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer powerConsumption:mean 0.016740275713727
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor2.wlan[0].radio typename "\"inet.physicallayer.wireless.ieee802154.packetlevel.Ieee802154NarrowbandScalarRadio\""
 par NetworkA.sensor2.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor2.wlan[0].radio energySourceModule "\"NetworkA.sensor2.energyStorage\""
-par NetworkA.sensor2.wlan[0].radio initialRadioMode "\"sleep\""
+par NetworkA.sensor2.wlan[0].radio initialRadioMode "\"off\""
 attr enum off,sleep,receiver,transmitter,transceiver
 par NetworkA.sensor2.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
 par NetworkA.sensor2.wlan[0].radio sendRawBytes false
@@ -4692,7 +4709,7 @@ attr unit W
 par NetworkA.sensor3.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
 scalar NetworkA.sensor3.wlan[0].radio.energyConsumer totalSleepTime 82.552204134749
-scalar NetworkA.sensor3.wlan[0].radio.energyConsumer Sonnellini 977
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer Sonnellini 676
 scalar NetworkA.sensor3.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0029331247555729
 attr recordingmode mean
 attr source txPowerConsumption
@@ -4703,10 +4720,16 @@ attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer powerConsumption:mean 0.016740275713727
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor3.wlan[0].radio typename "\"inet.physicallayer.wireless.ieee802154.packetlevel.Ieee802154NarrowbandScalarRadio\""
 par NetworkA.sensor3.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor3.wlan[0].radio energySourceModule "\"NetworkA.sensor3.energyStorage\""
-par NetworkA.sensor3.wlan[0].radio initialRadioMode "\"sleep\""
+par NetworkA.sensor3.wlan[0].radio initialRadioMode "\"off\""
 attr enum off,sleep,receiver,transmitter,transceiver
 par NetworkA.sensor3.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
 par NetworkA.sensor3.wlan[0].radio sendRawBytes false
@@ -5279,14 +5302,14 @@ par NetworkA.gateway.eth[0].phys$o.channel typename "\"ned.IdealChannel\""
 par NetworkA.gateway.status typename "\"inet.common.lifecycle.NodeStatus\""
 par NetworkA.gateway.status initialStatus "\"UP\""
 par NetworkA.gateway.energyStorage typename "\"inet.power.storage.SimpleEpEnergyStorage\""
-par NetworkA.gateway.energyStorage nominalCapacity 5J
+par NetworkA.gateway.energyStorage nominalCapacity 0.5J
 attr unit J
-par NetworkA.gateway.energyStorage initialCapacity 5J
+par NetworkA.gateway.energyStorage initialCapacity 0.5J
 attr unit J
-par NetworkA.gateway.energyStorage printCapacityStep 0.05J
+par NetworkA.gateway.energyStorage printCapacityStep 0.005J
 attr unit J
 par NetworkA.gateway.energyStorage displayStringTextFormat "\"%c (%p)\""
-scalar NetworkA.gateway.energyStorage residualEnergyCapacity:last 4.9040695664904
+scalar NetworkA.gateway.energyStorage residualEnergyCapacity:last 0.40406956649045
 attr interpolationmode linear
 attr recordingmode last
 attr source residualEnergyCapacityChanged
@@ -5755,7 +5778,7 @@ attr unit W
 par NetworkA.gateway.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
 scalar NetworkA.gateway.wlan[0].radio.energyConsumer totalSleepTime 98.086701922332
-scalar NetworkA.gateway.wlan[0].radio.energyConsumer Sonnellini 777
+scalar NetworkA.gateway.wlan[0].radio.energyConsumer Sonnellini 776
 scalar NetworkA.gateway.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0
 attr recordingmode mean
 attr source txPowerConsumption
@@ -5766,10 +5789,16 @@ attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.gateway.wlan[0].radio.energyConsumer powerConsumption:mean 0.024922212588311
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.gateway.wlan[0].radio typename "\"inet.physicallayer.wireless.ieee802154.packetlevel.Ieee802154NarrowbandScalarRadio\""
 par NetworkA.gateway.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.gateway.wlan[0].radio energySourceModule "\"NetworkA.gateway.energyStorage\""
-par NetworkA.gateway.wlan[0].radio initialRadioMode "\"sleep\""
+par NetworkA.gateway.wlan[0].radio initialRadioMode "\"off\""
 attr enum off,sleep,receiver,transmitter,transceiver
 par NetworkA.gateway.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
 par NetworkA.gateway.wlan[0].radio sendRawBytes false
@@ -7913,7 +7942,7 @@ attr unit dBm
 par NetworkA.maliciousNode.wlan[0].radio typename "\"inet.physicallayer.wireless.ieee802154.packetlevel.Ieee802154NarrowbandScalarRadio\""
 par NetworkA.maliciousNode.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.maliciousNode.wlan[0].radio energySourceModule "\"\""
-par NetworkA.maliciousNode.wlan[0].radio initialRadioMode "\"sleep\""
+par NetworkA.maliciousNode.wlan[0].radio initialRadioMode "\"off\""
 attr enum off,sleep,receiver,transmitter,transceiver
 par NetworkA.maliciousNode.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
 par NetworkA.maliciousNode.wlan[0].radio sendRawBytes false

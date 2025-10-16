@@ -5,9 +5,10 @@
         <input pattern="run-Attacco_Aggressivo-0/results.sca"/>
         <input pattern="results.sca"/>
         <input pattern="results.vec"/>
+        <input pattern="results.sca"/>
     </inputs>
     <charts>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/linechart.png" id="882116850" name="Residual energy capacity Agressive" resultTypes="vector" template="linechart_native" type="LINE">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/linechart.png" id="1139625787" name="Residual energy capacity Agressive" resultTypes="vector" template="linechart_native" type="LINE">
             <script><![CDATA[import math
 from omnetpp.scave import results, chart, utils
 
@@ -777,7 +778,7 @@ utils.export_data_if_needed(df, props)]]></script>
             <property name="Plot.Antialias" value="true"/>
             <property name="include_fields" value="false"/>
         </chart>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="972072687" name="WakeUps Aggressivo" resultTypes="scalar" template="barchart_native" type="BAR">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="427497621" name="WakeUps Aggressivo" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # ---------------------------
@@ -1467,7 +1468,7 @@ utils.export_data_if_needed(df, props)]]></script>
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="752158001" name="SleepTimeBar Aggressive" resultTypes="scalar" template="barchart_native" type="BAR">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="2102310658" name="SleepTimeBar Aggressive" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # ---------------------------
@@ -2153,11 +2154,11 @@ utils.export_data_if_needed(df, props)]]></script>
             <property name="legend_show" value="true"/>
             <property name="include_fields" value="false"/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value="35"/>
+            <property name="yaxis_max" value=""/>
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="770643382" name="TxEnergyConsumption Aggressive" resultTypes="scalar" template="barchart_native" type="BAR">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="823640560" name="TxEnergyConsumption Aggressive" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # ---------------------------
@@ -2847,7 +2848,7 @@ utils.export_data_if_needed(df, props)]]></script>
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="1374138263" name="RxPowerConsumption Aggressive" resultTypes="scalar" template="barchart_native" type="BAR">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="1992061016" name="RxPowerConsumption Aggressive" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # get chart properties
@@ -3516,7 +3517,7 @@ utils.export_data_if_needed(df, props)
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/linechart.png" id="2078255916" name="Total sleep time Aggressive" resultTypes="vector" template="linechart_native" type="LINE">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/linechart.png" id="1852971888" name="Total sleep time Aggressive" resultTypes="vector" template="linechart_native" type="LINE">
             <script><![CDATA[import math
 from omnetpp.scave import results, chart, utils
 
@@ -3533,7 +3534,7 @@ props["fontsize"] = 14           # dimensione testo assi
 props["legendFontsize"] = 12     # dimensione legenda
 props["linewidth"] = 2.0         # spessore linee
 props["dpi"] = 600               # alta risoluzione per esportazione
-props["figsize"] = (10, 6)       # dimensioni figura in pollici (larghezza, altezza)
+props["figsize"] = (10, 8)       # dimensioni figura in pollici (larghezza, altezza)
 props["tight_layout"] = True     # riduce i margini bianchi
 props["grid"] = True             # mostra una griglia leggera
 props["legendLocation"] = "best" # posizione automatica migliore
@@ -4282,11 +4283,11 @@ utils.export_data_if_needed(df, props)]]></script>
             <property name="X.Label.Wrap" value="true"/>
             <property name="secondary_ordering_regex_list" value=""/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value=""/>
+            <property name="yaxis_max" value="100"/>
             <property name="Plot.Antialias" value="true"/>
             <property name="include_fields" value="false"/>
         </chart>
-        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/histogramchart.png" id="1980819855" name="EndtoEnd Delay Aggressive" resultTypes="histogram" template="histogramchart_native" type="HISTOGRAM">
+        <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/histogramchart.png" id="2094964846" name="EndToEndDelayAggressive" resultTypes="histogram" template="histogramchart_native" type="HISTOGRAM">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # ---------------------------
@@ -4301,7 +4302,7 @@ utils.preconfigure_plot(props)
 props["fontsize"] = 14           # Font per etichette assi
 props["legendFontsize"] = 12     # Font per legenda
 props["dpi"] = 600               # Alta risoluzione per esportazione
-props["figsize"] = (8, 7)        # Dimensioni figura (larghezza, altezza)
+props["figsize"] = (10, 9)        # Dimensioni figura (larghezza, altezza)
 props["grid"] = True             # Mostra griglia
 props["linewidth"] = 2           # Spessore linee istogramma
 
@@ -4934,7 +4935,7 @@ Show over_underflow cell?
             <property name="yaxis_title" value=""/>
             <property name="legend_replacements" value=""/>
             <property name="Legend.Border" value="false"/>
-            <property name="title" value="Aggressive"/>
+            <property name="title" value="EndToEndDelayAggressive"/>
             <property name="legend_automatic" value="true"/>
             <property name="Plot.Title.Font" value="Arial-regular-10"/>
             <property name="cycle_seed" value="0"/>
@@ -4950,12 +4951,12 @@ Show over_underflow cell?
             <property name="xaxis_title" value=""/>
             <property name="Plot.BackgroundColor" value="white"/>
             <property name="grid_density" value="Major"/>
-            <property name="yaxis_min" value=""/>
+            <property name="yaxis_min" value="0"/>
             <property name="Legend.Font" value="Arial-regular-8"/>
             <property name="baseline" value="0"/>
             <property name="image_export_filename" value=""/>
             <property name="cumulative" value="false"/>
-            <property name="xaxis_min" value=""/>
+            <property name="xaxis_min" value="0"/>
             <property name="legend_format" value=""/>
             <property name="xaxis_unit" value="ms"/>
             <property name="filter" value="type =~ histogram AND runattr:experiment =~ Attacco_Aggressivo AND runattr:replication =~ &quot;#0&quot; AND module =~ &quot;NetworkA.server.app[0]&quot; AND name =~ endToEndDelay:histogram"/>
@@ -4965,9 +4966,9 @@ Show over_underflow cell?
             <property name="show_overflows" value="true"/>
             <property name="legend_show" value="true"/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value="40"/>
+            <property name="yaxis_max" value="90"/>
             <property name="Plot.Antialias" value="true"/>
-            <property name="xaxis_max" value="0.9"/>
+            <property name="xaxis_max" value="6"/>
             <property name="image_export_width" value="6"/>
             <property name="include_fields" value="false"/>
         </chart>

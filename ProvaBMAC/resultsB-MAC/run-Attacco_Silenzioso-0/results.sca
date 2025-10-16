@@ -1,8 +1,8 @@
 version 3
-run Attacco_Silenzioso-0-20251005-11:51:04-3782
+run Attacco_Silenzioso-0-20251010-14:13:00-14204
 attr configname Attacco_Silenzioso
-attr datetime 20251005-11:51:04
-attr datetimef 20251005-115104
+attr datetime 20251010-14:13:00
+attr datetimef 20251010-141300
 attr experiment Attacco_Silenzioso
 attr inifile omnetppB-MAC.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NetworkA
-attr processid 3782
+attr processid 14204
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -34,10 +34,10 @@ config output-scalar-file resultsB-MAC/run-Attacco_Silenzioso-0/results.sca
 config **.wlan*.radio.initialRadioMode "\"sleep\""
 config **.wlan*.mac.typename BMac
 config **.wlan*.mac.headerLength 1B
-config **.wlan*.mac.slotDuration 0.05s
+config **.wlan*.mac.slotDuration 0.01s
 config **.wlan*.queue.typename DropTailQueue
 config **.wlan*.queue.packetCapacity 50
-config **.wlan*.mac.checkInterval 0.02s
+config **.wlan*.mac.checkInterval 0.1s
 config **.wlan[*].typename WirelessInterface
 config **.wlan[*].radio.typename ApskScalarRadio
 config **.wlan*.mac.animation true
@@ -73,7 +73,7 @@ config *.visualizer.physicalLinkVisualizer.displayLinks true
 config *.visualizer.energyStorageVisualizer.displayEnergyStorages true
 config *.sensor*.energyStorage.nominalCapacity 0.5J
 config *.sensor*.energyManagement.nodeShutdownCapacity 0.005J
-config *.gateway.energyStorage.nominalCapacity 5J
+config *.gateway.energyStorage.nominalCapacity 0.5J
 config *.gateway.energyManagement.nodeShutdownCapacity 0.005J
 
 par NetworkA.gateway.ethg$o[0].channel typename "\"inet.node.ethernet.Eth100M\""
@@ -817,7 +817,7 @@ attr unit mps
 par NetworkA.radioMedium.propagation ignoreMovementDuringTransmission true
 par NetworkA.radioMedium.propagation ignoreMovementDuringPropagation true
 par NetworkA.radioMedium.propagation ignoreMovementDuringReception true
-scalar NetworkA.radioMedium.propagation "Arrival computation count" 23140
+scalar NetworkA.radioMedium.propagation "Arrival computation count" 6110
 par NetworkA.radioMedium.analogModel typename "\"inet.physicallayer.wireless.common.analogmodel.packetlevel.ScalarAnalogModel\""
 par NetworkA.radioMedium.analogModel ignorePartialInterference false
 par NetworkA.radioMedium.backgroundNoise typename "\"inet.physicallayer.wireless.common.backgroundnoise.IsotropicScalarBackgroundNoise\""
@@ -864,13 +864,13 @@ par NetworkA.radioMedium listeningFilter false
 par NetworkA.radioMedium macAddressFilter false
 par NetworkA.radioMedium recordTransmissionLog false
 par NetworkA.radioMedium recordReceptionLog false
-scalar NetworkA.radioMedium "transmission count" 4628
-scalar NetworkA.radioMedium "signal send count" 23140
-scalar NetworkA.radioMedium "reception computation count" 23140
-scalar NetworkA.radioMedium "interference computation count" 46180
-scalar NetworkA.radioMedium "reception decision computation count" 12691
-scalar NetworkA.radioMedium "listening decision computation count" 20586
-scalar NetworkA.radioMedium "reception cache hit" 76.96779073934
+scalar NetworkA.radioMedium "transmission count" 1222
+scalar NetworkA.radioMedium "signal send count" 6110
+scalar NetworkA.radioMedium "reception computation count" 6110
+scalar NetworkA.radioMedium "interference computation count" 20200
+scalar NetworkA.radioMedium "reception decision computation count" 4908
+scalar NetworkA.radioMedium "listening decision computation count" 10016
+scalar NetworkA.radioMedium "reception cache hit" 83.630713175802
 attr unit %
 scalar NetworkA.radioMedium "interference cache hit" 66.666666666667
 attr unit %
@@ -893,7 +893,7 @@ attr unit J
 par NetworkA.sensor4.energyStorage printCapacityStep 0.005J
 attr unit J
 par NetworkA.sensor4.energyStorage displayStringTextFormat "\"%c (%p)\""
-scalar NetworkA.sensor4.energyStorage residualEnergyCapacity:last 0.29622564535552
+scalar NetworkA.sensor4.energyStorage residualEnergyCapacity:last 0.39522700484
 attr interpolationmode linear
 attr recordingmode last
 attr source residualEnergyCapacityChanged
@@ -1018,42 +1018,42 @@ attr unit b
 par NetworkA.sensor4.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
 par NetworkA.sensor4.wlan[0].queue comparatorClass "\"\""
 par NetworkA.sensor4.wlan[0].queue bufferModule "\"\""
-scalar NetworkA.sensor4.wlan[0].queue queueLength:last 0
+scalar NetworkA.sensor4.wlan[0].queue queueLength:last 1
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, last"
 attr unit pk
-scalar NetworkA.sensor4.wlan[0].queue queueLength:max 1
+scalar NetworkA.sensor4.wlan[0].queue queueLength:max 3
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar NetworkA.sensor4.wlan[0].queue queueLength:timeavg 0.12791446898129
+scalar NetworkA.sensor4.wlan[0].queue queueLength:timeavg 0.49310785034426
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, timeavg"
 attr unit pk
-scalar NetworkA.sensor4.wlan[0].queue queueBitLength:last 0
+scalar NetworkA.sensor4.wlan[0].queue queueBitLength:last 304
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar NetworkA.sensor4.wlan[0].queue queueBitLength:max 304
+scalar NetworkA.sensor4.wlan[0].queue queueBitLength:max 912
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar NetworkA.sensor4.wlan[0].queue queueBitLength:timeavg 38.885998570312
+scalar NetworkA.sensor4.wlan[0].queue queueBitLength:timeavg 149.90478650466
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -1061,13 +1061,13 @@ attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetP
 attr title "queue bit length, timeavg"
 attr unit b
 statistic NetworkA.sensor4.wlan[0].queue queueingTime:histogram
-field count 99
-field mean 0.12920653432454
-field stddev 0.059927643565176
-field min 0.05149875196
-field max 0.270640177319
-field sum 12.791446898129
-field sqrsum 2.0046881241045
+field count 98
+field mean 0.50173866578062
+field stddev 0.57510917216733
+field min 0.051481100669
+field max 2.566488042525
+field sum 49.170389246501
+field sqrsum 56.753489807819
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
@@ -1075,91 +1075,89 @@ attr title "queueing times"
 attr unit s
 bin	-inf	0
 bin	0	0
-bin	0.005	0
-bin	0.01	0
-bin	0.015	0
-bin	0.02	0
-bin	0.025	0
-bin	0.03	0
-bin	0.035	0
-bin	0.04	0
-bin	0.045	0
-bin	0.05	5
-bin	0.055	7
-bin	0.06	7
-bin	0.065	4
-bin	0.07	1
-bin	0.075	3
-bin	0.08	6
-bin	0.085	3
-bin	0.09	2
-bin	0.095	2
-bin	0.1	4
-bin	0.105	2
-bin	0.11	2
-bin	0.115	2
-bin	0.12	1
-bin	0.125	2
-bin	0.13	2
-bin	0.135	0
-bin	0.14	2
-bin	0.145	1
-bin	0.15	3
-bin	0.155	5
-bin	0.16	3
-bin	0.165	6
-bin	0.17	3
-bin	0.175	1
-bin	0.18	1
-bin	0.185	1
-bin	0.19	2
-bin	0.195	1
-bin	0.2	3
-bin	0.205	1
-bin	0.21	3
-bin	0.215	1
-bin	0.22	0
-bin	0.225	0
-bin	0.23	1
-bin	0.235	0
-bin	0.24	2
-bin	0.245	1
-bin	0.25	0
-bin	0.255	1
-bin	0.26	0
-bin	0.265	0
-bin	0.27	2
-bin	0.275	0
-bin	0.28	0
-bin	0.285	0
-bin	0.29	0
-bin	0.295	0
-bin	0.3	0
-bin	0.305	0
-bin	0.31	0
-bin	0.315	0
-bin	0.32	0
-bin	0.325	0
-bin	0.33	0
-scalar NetworkA.sensor4.wlan[0].queue outgoingPackets:count 99
+bin	0.05	20
+bin	0.1	22
+bin	0.15	4
+bin	0.2	7
+bin	0.25	4
+bin	0.3	1
+bin	0.35	1
+bin	0.4	2
+bin	0.45	2
+bin	0.5	3
+bin	0.55	6
+bin	0.6	1
+bin	0.65	3
+bin	0.7	0
+bin	0.75	3
+bin	0.8	1
+bin	0.85	0
+bin	0.9	0
+bin	0.95	1
+bin	1	2
+bin	1.05	0
+bin	1.1	2
+bin	1.15	0
+bin	1.2	0
+bin	1.25	1
+bin	1.3	0
+bin	1.35	0
+bin	1.4	1
+bin	1.45	3
+bin	1.5	0
+bin	1.55	1
+bin	1.6	1
+bin	1.65	1
+bin	1.7	0
+bin	1.75	0
+bin	1.8	0
+bin	1.85	0
+bin	1.9	1
+bin	1.95	1
+bin	2	0
+bin	2.05	0
+bin	2.1	1
+bin	2.15	0
+bin	2.2	0
+bin	2.25	1
+bin	2.3	0
+bin	2.35	0
+bin	2.4	0
+bin	2.45	0
+bin	2.5	0
+bin	2.55	1
+bin	2.6	0
+bin	2.65	0
+bin	2.7	0
+bin	2.75	0
+bin	2.8	0
+bin	2.85	0
+bin	2.9	0
+bin	2.95	0
+bin	3	0
+bin	3.05	0
+bin	3.1	0
+bin	3.15	0
+bin	3.2	0
+scalar NetworkA.sensor4.wlan[0].queue outgoingPackets:count 98
 attr recordingmode count
 attr source packetPulled
 attr title "outgoing packets, count"
 attr unit pk
-scalar NetworkA.sensor4.wlan[0].queue outgoingPacketLengths:sum 30096
+scalar NetworkA.sensor4.wlan[0].queue outgoingPacketLengths:sum 29792
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths, sum"
 attr unit b
 statistic NetworkA.sensor4.wlan[0].queue outgoingPacketLengths:histogram
-field count 99
+field count 98
 field mean 304
 field stddev 0
 field min 304
 field max 304
-field sum 30096
-field sqrsum 9149184
+field sum 29792
+field sqrsum 9056768
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPulled)
@@ -1167,7 +1165,7 @@ attr title "outgoing packet lengths"
 attr unit b
 bin	-inf	0
 bin	303	0
-bin	304	99
+bin	304	98
 bin	305	0
 statistic NetworkA.sensor4.wlan[0].queue flowQueueingTime:histogram
 field count 0
@@ -1229,7 +1227,7 @@ par NetworkA.sensor4.wlan[0].mac typename "\"inet.linklayer.bmac.BMac\""
 par NetworkA.sensor4.wlan[0].mac interfaceTableModule "\"NetworkA.sensor4.interfaceTable\""
 par NetworkA.sensor4.wlan[0].mac address "\"auto\""
 attr mutable ""
-par NetworkA.sensor4.wlan[0].mac slotDuration 0.05s
+par NetworkA.sensor4.wlan[0].mac slotDuration 0.01s
 attr unit s
 par NetworkA.sensor4.wlan[0].mac headerLength 8b
 attr unit b
@@ -1237,7 +1235,7 @@ par NetworkA.sensor4.wlan[0].mac ctrlFrameLength 8b
 attr unit b
 par NetworkA.sensor4.wlan[0].mac mtu 0B
 attr unit B
-par NetworkA.sensor4.wlan[0].mac checkInterval 0.02s
+par NetworkA.sensor4.wlan[0].mac checkInterval 0.1s
 attr unit s
 par NetworkA.sensor4.wlan[0].mac animation true
 par NetworkA.sensor4.wlan[0].mac bitrate 19200bps
@@ -1245,30 +1243,30 @@ attr unit bps
 par NetworkA.sensor4.wlan[0].mac useMACAcks false
 par NetworkA.sensor4.wlan[0].mac radioModule "\"^.radio\""
 par NetworkA.sensor4.wlan[0].mac maxTxAttempts 2
-scalar NetworkA.sensor4.wlan[0].mac nbTxDataPackets 99
-scalar NetworkA.sensor4.wlan[0].mac nbTxPreambles 495
-scalar NetworkA.sensor4.wlan[0].mac nbRxDataPackets 737
-scalar NetworkA.sensor4.wlan[0].mac nbRxPreambles 1625
+scalar NetworkA.sensor4.wlan[0].mac nbTxDataPackets 98
+scalar NetworkA.sensor4.wlan[0].mac nbTxPreambles 98
+scalar NetworkA.sensor4.wlan[0].mac nbRxDataPackets 571
+scalar NetworkA.sensor4.wlan[0].mac nbRxPreambles 359
 scalar NetworkA.sensor4.wlan[0].mac nbMissedAcks 0
 scalar NetworkA.sensor4.wlan[0].mac nbRecvdAcks 0
 scalar NetworkA.sensor4.wlan[0].mac nbTxAcks 0
 scalar NetworkA.sensor4.wlan[0].mac nbDroppedDataPackets 0
-scalar NetworkA.sensor4.wlan[0].mac packetDropIncorrectlyReceived:count 1
+scalar NetworkA.sensor4.wlan[0].mac packetDropIncorrectlyReceived:count 2
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, count"
-scalar NetworkA.sensor4.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 39
+scalar NetworkA.sensor4.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 59
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, sum(packetBytes)"
-scalar NetworkA.sensor4.wlan[0].mac packetDropNotAddressedToUs:count 647
+scalar NetworkA.sensor4.wlan[0].mac packetDropNotAddressedToUs:count 465
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drop: not addressed to us, count"
-scalar NetworkA.sensor4.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 25233
+scalar NetworkA.sensor4.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 18135
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -1357,18 +1355,24 @@ par NetworkA.sensor4.wlan[0].radio.energyConsumer transmitterTransmittingHeaderP
 attr unit W
 par NetworkA.sensor4.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
-scalar NetworkA.sensor4.wlan[0].radio.energyConsumer totalSleepTime 30.09394201059
-scalar NetworkA.sensor4.wlan[0].radio.energyConsumer Sonnellini 4330
-scalar NetworkA.sensor4.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0032532495983643
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer totalSleepTime 77.243892841007
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer Sonnellini 1192
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0020736352094795
 attr recordingmode mean
 attr source txPowerConsumption
 attr title "TX Power consumption stats, mean"
 attr unit W
-scalar NetworkA.sensor4.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0083832335329338
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0059669911129919
 attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor4.wlan[0].radio.energyConsumer powerConsumption:mean 0.0083884488644378
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor4.wlan[0].radio typename "\"inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadio\""
 par NetworkA.sensor4.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor4.wlan[0].radio energySourceModule "\"NetworkA.sensor4.energyStorage\""
@@ -1387,29 +1391,29 @@ attr unit Hz
 par NetworkA.sensor4.wlan[0].radio protocol "\"\""
 par NetworkA.sensor4.wlan[0].radio signalAnalogRepresentation "\"scalar\""
 attr enum scalar,dimensional
-scalar NetworkA.sensor4.wlan[0].radio radioMode:count 2615
+scalar NetworkA.sensor4.wlan[0].radio radioMode:count 1766
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
 attr title "Radio mode, count"
-scalar NetworkA.sensor4.wlan[0].radio receptionState:count 7163
+scalar NetworkA.sensor4.wlan[0].radio receptionState:count 3365
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
-scalar NetworkA.sensor4.wlan[0].radio transmissionState:count 1386
+scalar NetworkA.sensor4.wlan[0].radio transmissionState:count 588
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic NetworkA.sensor4.wlan[0].radio minSnir:histogram
-field count 2273
-field mean 1573.4801649663
-field stddev 885.41645487835
+field count 826
+field mean 1696.3516973619
+field stddev 937.02049065359
 field min 0.26508113933302
 field max 3263.8027434007
-field sum 3576520.4149685
-field sqrsum 7408746274.8997
+field sum 1401186.502021
+field sqrsum 3101261205.9452
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
@@ -1431,7 +1435,7 @@ bin	650	0
 bin	700	0
 bin	750	0
 bin	800	0
-bin	850	1221
+bin	850	370
 bin	900	0
 bin	950	0
 bin	1000	0
@@ -1452,11 +1456,11 @@ bin	1700	0
 bin	1750	0
 bin	1800	0
 bin	1850	0
-bin	1900	340
+bin	1900	156
 bin	1950	0
 bin	2000	0
 bin	2050	0
-bin	2100	354
+bin	2100	125
 bin	2150	0
 bin	2200	0
 bin	2250	0
@@ -1479,7 +1483,7 @@ bin	3050	0
 bin	3100	0
 bin	3150	0
 bin	3200	0
-bin	3250	341
+bin	3250	158
 bin	3300	0
 bin	3350	0
 bin	3400	0
@@ -1493,195 +1497,227 @@ bin	3750	0
 bin	3800	0
 bin	3850	0
 bin	3900	0
+bin	3950	0
+bin	4000	0
+bin	4050	0
+bin	4100	0
 statistic NetworkA.sensor4.wlan[0].radio packetErrorRate:histogram
-field count 2273
-field mean 0.00093025389466327
-field stddev 0.017991505846905
+field count 826
+field mean 0.0017639223500945
+field stddev 0.02500847989163
 field min 0
 field max 0.46058856340153
-field sum 2.1144671025696
-field sqrsum 0.73740040141358
+field sum 1.456999861178
+field sqrsum 0.51854488947353
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2256
-bin	0.02	11
-bin	0.04	2
-bin	0.06	0
+bin	0	815
+bin	0.008	2
+bin	0.016	2
+bin	0.024	2
+bin	0.032	0
+bin	0.04	0
+bin	0.048	2
+bin	0.056	0
+bin	0.064	0
+bin	0.072	0
 bin	0.08	0
-bin	0.1	0
+bin	0.088	0
+bin	0.096	0
+bin	0.104	0
+bin	0.112	0
 bin	0.12	0
-bin	0.14	0
+bin	0.128	0
+bin	0.136	0
+bin	0.144	0
+bin	0.152	0
 bin	0.16	0
-bin	0.18	0
+bin	0.168	0
+bin	0.176	0
+bin	0.184	0
+bin	0.192	0
 bin	0.2	0
-bin	0.22	0
+bin	0.208	0
+bin	0.216	0
+bin	0.224	0
+bin	0.232	0
 bin	0.24	0
-bin	0.26	0
-bin	0.28	1
-bin	0.3	0
+bin	0.248	0
+bin	0.256	0
+bin	0.264	0
+bin	0.272	0
+bin	0.28	0
+bin	0.288	1
+bin	0.296	0
+bin	0.304	0
+bin	0.312	0
 bin	0.32	0
-bin	0.34	0
+bin	0.328	0
+bin	0.336	0
+bin	0.344	0
+bin	0.352	0
 bin	0.36	0
-bin	0.38	0
+bin	0.368	0
+bin	0.376	0
+bin	0.384	0
+bin	0.392	0
 bin	0.4	0
-bin	0.42	0
+bin	0.408	0
+bin	0.416	0
+bin	0.424	0
+bin	0.432	0
 bin	0.44	0
-bin	0.46	3
-bin	0.48	0
-bin	0.5	0
+bin	0.448	0
+bin	0.456	2
+bin	0.464	0
 statistic NetworkA.sensor4.wlan[0].radio bitErrorRate:histogram
-field count 2273
-field mean 4.0470420330235e-06
-field stddev 7.605982447468e-05
+field count 826
+field mean 7.6369260246999e-06
+field stddev 0.00010854364966557
 field min 0
 field max 0.0017927999238215
-field sum 0.0091989265410623
-field sqrsum 1.3180968597169e-05
+field sum 0.0063081008964021
+field sqrsum 9.7680967031476e-06
 attr recordingmode histogram
 attr source bitErrorRate(packetSentToUpper)
 attr title "Bit error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2273
-bin	0.02	0
-bin	0.04	0
-bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0	815
+bin	3e-05	0
+bin	6e-05	4
+bin	9e-05	0
+bin	0.00012	0
+bin	0.00015	4
+bin	0.00018	0
+bin	0.00021	0
+bin	0.00024	0
+bin	0.00027	0
+bin	0.0003	0
+bin	0.00033	0
+bin	0.00036	0
+bin	0.00039	0
+bin	0.00042	0
+bin	0.00045	0
+bin	0.00048	0
+bin	0.00051	0
+bin	0.00054	0
+bin	0.00057	0
+bin	0.0006	0
+bin	0.00063	0
+bin	0.00066	0
+bin	0.00069	0
+bin	0.00072	0
+bin	0.00075	0
+bin	0.00078	0
+bin	0.00081	0
+bin	0.00084	0
+bin	0.00087	0
+bin	0.0009	0
+bin	0.00093	0
+bin	0.00096	0
+bin	0.00099	0
+bin	0.00102	0
+bin	0.00105	0
+bin	0.00108	0
+bin	0.00111	0
+bin	0.00114	0
+bin	0.00117	0
+bin	0.0012	0
+bin	0.00123	0
+bin	0.00126	0
+bin	0.00129	0
+bin	0.00132	0
+bin	0.00135	0
+bin	0.00138	0
+bin	0.00141	0
+bin	0.00144	0
+bin	0.00147	0
+bin	0.0015	0
+bin	0.00153	0
+bin	0.00156	0
+bin	0.00159	0
+bin	0.00162	0
+bin	0.00165	0
+bin	0.00168	0
+bin	0.00171	0
+bin	0.00174	0
+bin	0.00177	3
+bin	0.0018	0
 statistic NetworkA.sensor4.wlan[0].radio symbolErrorRate:histogram
-field count 2273
-field mean 4.0470420330235e-06
-field stddev 7.605982447468e-05
+field count 826
+field mean 7.6369260246999e-06
+field stddev 0.00010854364966557
 field min 0
 field max 0.0017927999238215
-field sum 0.0091989265410623
-field sqrsum 1.3180968597169e-05
+field sum 0.0063081008964021
+field sqrsum 9.7680967031476e-06
 attr recordingmode histogram
 attr source symbolErrorRate(packetSentToUpper)
 attr title "Symbol error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2273
-bin	0.02	0
-bin	0.04	0
-bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0	815
+bin	3e-05	0
+bin	6e-05	4
+bin	9e-05	0
+bin	0.00012	0
+bin	0.00015	4
+bin	0.00018	0
+bin	0.00021	0
+bin	0.00024	0
+bin	0.00027	0
+bin	0.0003	0
+bin	0.00033	0
+bin	0.00036	0
+bin	0.00039	0
+bin	0.00042	0
+bin	0.00045	0
+bin	0.00048	0
+bin	0.00051	0
+bin	0.00054	0
+bin	0.00057	0
+bin	0.0006	0
+bin	0.00063	0
+bin	0.00066	0
+bin	0.00069	0
+bin	0.00072	0
+bin	0.00075	0
+bin	0.00078	0
+bin	0.00081	0
+bin	0.00084	0
+bin	0.00087	0
+bin	0.0009	0
+bin	0.00093	0
+bin	0.00096	0
+bin	0.00099	0
+bin	0.00102	0
+bin	0.00105	0
+bin	0.00108	0
+bin	0.00111	0
+bin	0.00114	0
+bin	0.00117	0
+bin	0.0012	0
+bin	0.00123	0
+bin	0.00126	0
+bin	0.00129	0
+bin	0.00132	0
+bin	0.00135	0
+bin	0.00138	0
+bin	0.00141	0
+bin	0.00144	0
+bin	0.00147	0
+bin	0.0015	0
+bin	0.00153	0
+bin	0.00156	0
+bin	0.00159	0
+bin	0.00162	0
+bin	0.00165	0
+bin	0.00168	0
+bin	0.00171	0
+bin	0.00174	0
+bin	0.00177	3
+bin	0.0018	0
 scalar NetworkA.sensor4.wlan[0].radio packetDropped:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -2040,7 +2076,7 @@ attr unit J
 par NetworkA.sensor1.energyStorage printCapacityStep 0.005J
 attr unit J
 par NetworkA.sensor1.energyStorage displayStringTextFormat "\"%c (%p)\""
-scalar NetworkA.sensor1.energyStorage residualEnergyCapacity:last 0.29636209269472
+scalar NetworkA.sensor1.energyStorage residualEnergyCapacity:last 0.3948895605172
 attr interpolationmode linear
 attr recordingmode last
 attr source residualEnergyCapacityChanged
@@ -2172,14 +2208,14 @@ attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, last"
 attr unit pk
-scalar NetworkA.sensor1.wlan[0].queue queueLength:max 1
+scalar NetworkA.sensor1.wlan[0].queue queueLength:max 4
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar NetworkA.sensor1.wlan[0].queue queueLength:timeavg 0.15203312652996
+scalar NetworkA.sensor1.wlan[0].queue queueLength:timeavg 0.63843424311732
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -2193,14 +2229,14 @@ attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar NetworkA.sensor1.wlan[0].queue queueBitLength:max 304
+scalar NetworkA.sensor1.wlan[0].queue queueBitLength:max 1216
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar NetworkA.sensor1.wlan[0].queue queueBitLength:timeavg 46.218070465108
+scalar NetworkA.sensor1.wlan[0].queue queueBitLength:timeavg 194.08400990767
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -2209,12 +2245,12 @@ attr title "queue bit length, timeavg"
 attr unit b
 statistic NetworkA.sensor1.wlan[0].queue queueingTime:histogram
 field count 98
-field mean 0.15390078272652
-field stddev 0.069925485063859
-field min 0.050002370123
-field max 0.393222791776
-field sum 15.082276707199
-field sqrsum 2.7954628162932
+field mean 0.65022845271362
+field stddev 0.78561079490045
+field min 0.05105557139
+field max 3.429412780472
+field sum 63.722388365935
+field sqrsum 101.30098913362
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
@@ -2222,54 +2258,92 @@ attr title "queueing times"
 attr unit s
 bin	-inf	0
 bin	0	0
-bin	0.01	0
-bin	0.02	0
-bin	0.03	0
-bin	0.04	0
-bin	0.05	6
-bin	0.06	4
-bin	0.07	5
-bin	0.08	4
-bin	0.09	1
-bin	0.1	6
-bin	0.11	5
-bin	0.12	9
-bin	0.13	6
-bin	0.14	8
-bin	0.15	5
-bin	0.16	5
-bin	0.17	6
-bin	0.18	2
-bin	0.19	3
+bin	0.05	24
+bin	0.1	16
+bin	0.15	6
 bin	0.2	5
-bin	0.21	5
-bin	0.22	2
-bin	0.23	3
-bin	0.24	2
-bin	0.25	1
-bin	0.26	1
-bin	0.27	0
-bin	0.28	0
-bin	0.29	0
+bin	0.25	2
 bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	1
-bin	0.35	0
-bin	0.36	1
-bin	0.37	1
-bin	0.38	0
-bin	0.39	1
+bin	0.35	5
 bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
+bin	0.45	1
+bin	0.5	1
+bin	0.55	2
+bin	0.6	1
+bin	0.65	3
+bin	0.7	2
+bin	0.75	3
+bin	0.8	1
+bin	0.85	1
+bin	0.9	3
+bin	0.95	1
+bin	1	1
+bin	1.05	0
+bin	1.1	0
+bin	1.15	1
+bin	1.2	1
+bin	1.25	0
+bin	1.3	1
+bin	1.35	0
+bin	1.4	0
+bin	1.45	0
+bin	1.5	1
+bin	1.55	0
+bin	1.6	2
+bin	1.65	1
+bin	1.7	0
+bin	1.75	1
+bin	1.8	0
+bin	1.85	2
+bin	1.9	0
+bin	1.95	1
+bin	2	0
+bin	2.05	1
+bin	2.1	0
+bin	2.15	0
+bin	2.2	1
+bin	2.25	0
+bin	2.3	0
+bin	2.35	1
+bin	2.4	2
+bin	2.45	1
+bin	2.5	0
+bin	2.55	0
+bin	2.6	1
+bin	2.65	1
+bin	2.7	0
+bin	2.75	0
+bin	2.8	0
+bin	2.85	0
+bin	2.9	0
+bin	2.95	0
+bin	3	0
+bin	3.05	0
+bin	3.1	0
+bin	3.15	0
+bin	3.2	0
+bin	3.25	0
+bin	3.3	0
+bin	3.35	0
+bin	3.4	1
+bin	3.45	0
+bin	3.5	0
+bin	3.55	0
+bin	3.6	0
+bin	3.65	0
+bin	3.7	0
+bin	3.75	0
+bin	3.8	0
+bin	3.85	0
+bin	3.9	0
+bin	3.95	0
+bin	4	0
+bin	4.05	0
+bin	4.1	0
+bin	4.15	0
+bin	4.2	0
+bin	4.25	0
+bin	4.3	0
 scalar NetworkA.sensor1.wlan[0].queue outgoingPackets:count 98
 attr recordingmode count
 attr source packetPulled
@@ -2358,7 +2432,7 @@ par NetworkA.sensor1.wlan[0].mac typename "\"inet.linklayer.bmac.BMac\""
 par NetworkA.sensor1.wlan[0].mac interfaceTableModule "\"NetworkA.sensor1.interfaceTable\""
 par NetworkA.sensor1.wlan[0].mac address "\"auto\""
 attr mutable ""
-par NetworkA.sensor1.wlan[0].mac slotDuration 0.05s
+par NetworkA.sensor1.wlan[0].mac slotDuration 0.01s
 attr unit s
 par NetworkA.sensor1.wlan[0].mac headerLength 8b
 attr unit b
@@ -2366,7 +2440,7 @@ par NetworkA.sensor1.wlan[0].mac ctrlFrameLength 8b
 attr unit b
 par NetworkA.sensor1.wlan[0].mac mtu 0B
 attr unit B
-par NetworkA.sensor1.wlan[0].mac checkInterval 0.02s
+par NetworkA.sensor1.wlan[0].mac checkInterval 0.1s
 attr unit s
 par NetworkA.sensor1.wlan[0].mac animation true
 par NetworkA.sensor1.wlan[0].mac bitrate 19200bps
@@ -2375,29 +2449,29 @@ par NetworkA.sensor1.wlan[0].mac useMACAcks false
 par NetworkA.sensor1.wlan[0].mac radioModule "\"^.radio\""
 par NetworkA.sensor1.wlan[0].mac maxTxAttempts 2
 scalar NetworkA.sensor1.wlan[0].mac nbTxDataPackets 98
-scalar NetworkA.sensor1.wlan[0].mac nbTxPreambles 492
-scalar NetworkA.sensor1.wlan[0].mac nbRxDataPackets 722
-scalar NetworkA.sensor1.wlan[0].mac nbRxPreambles 1622
+scalar NetworkA.sensor1.wlan[0].mac nbTxPreambles 98
+scalar NetworkA.sensor1.wlan[0].mac nbRxDataPackets 552
+scalar NetworkA.sensor1.wlan[0].mac nbRxPreambles 370
 scalar NetworkA.sensor1.wlan[0].mac nbMissedAcks 0
 scalar NetworkA.sensor1.wlan[0].mac nbRecvdAcks 0
 scalar NetworkA.sensor1.wlan[0].mac nbTxAcks 0
 scalar NetworkA.sensor1.wlan[0].mac nbDroppedDataPackets 0
-scalar NetworkA.sensor1.wlan[0].mac packetDropIncorrectlyReceived:count 0
+scalar NetworkA.sensor1.wlan[0].mac packetDropIncorrectlyReceived:count 5
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, count"
-scalar NetworkA.sensor1.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+scalar NetworkA.sensor1.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 119
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, sum(packetBytes)"
-scalar NetworkA.sensor1.wlan[0].mac packetDropNotAddressedToUs:count 629
+scalar NetworkA.sensor1.wlan[0].mac packetDropNotAddressedToUs:count 460
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drop: not addressed to us, count"
-scalar NetworkA.sensor1.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 24531
+scalar NetworkA.sensor1.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 17940
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -2486,18 +2560,24 @@ par NetworkA.sensor1.wlan[0].radio.energyConsumer transmitterTransmittingHeaderP
 attr unit W
 par NetworkA.sensor1.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
-scalar NetworkA.sensor1.wlan[0].radio.energyConsumer totalSleepTime 30.511341623494
-scalar NetworkA.sensor1.wlan[0].radio.energyConsumer Sonnellini 4305
-scalar NetworkA.sensor1.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0032512858192506
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer totalSleepTime 75.549628399534
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer Sonnellini 1181
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0020958083832335
 attr recordingmode mean
 attr source txPowerConsumption
 attr title "TX Power consumption stats, mean"
 attr unit W
-scalar NetworkA.sensor1.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0083578251285816
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0060735671514114
 attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor1.wlan[0].radio.energyConsumer powerConsumption:mean 0.0085208086683775
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor1.wlan[0].radio typename "\"inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadio\""
 par NetworkA.sensor1.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor1.wlan[0].radio energySourceModule "\"NetworkA.sensor1.energyStorage\""
@@ -2516,45 +2596,45 @@ attr unit Hz
 par NetworkA.sensor1.wlan[0].radio protocol "\"\""
 par NetworkA.sensor1.wlan[0].radio signalAnalogRepresentation "\"scalar\""
 attr enum scalar,dimensional
-scalar NetworkA.sensor1.wlan[0].radio radioMode:count 2618
+scalar NetworkA.sensor1.wlan[0].radio radioMode:count 1725
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
 attr title "Radio mode, count"
-scalar NetworkA.sensor1.wlan[0].radio receptionState:count 7129
+scalar NetworkA.sensor1.wlan[0].radio receptionState:count 3339
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
-scalar NetworkA.sensor1.wlan[0].radio transmissionState:count 1377
+scalar NetworkA.sensor1.wlan[0].radio transmissionState:count 588
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic NetworkA.sensor1.wlan[0].radio minSnir:histogram
-field count 2251
-field mean 3704.9235154542
-field stddev 2271.1487605781
-field min 2.6543535031424
+field count 835
+field mean 3166.3595808483
+field stddev 2326.5549780836
+field min 0.086816369654496
 field max 5692.9772952237
-field sum 8339782.8332873
-field sqrsum 42504020091.347
+field sum 2643910.2500084
+field sqrsum 12885894178.099
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
 bin	-inf	0
-bin	0	11
+bin	0	20
 bin	100	0
 bin	200	0
 bin	300	0
-bin	400	349
+bin	400	163
 bin	500	0
 bin	600	0
 bin	700	0
 bin	800	0
 bin	900	0
 bin	1000	0
-bin	1100	340
+bin	1100	163
 bin	1200	0
 bin	1300	0
 bin	1400	0
@@ -2564,7 +2644,7 @@ bin	1700	0
 bin	1800	0
 bin	1900	0
 bin	2000	0
-bin	2100	299
+bin	2100	116
 bin	2200	0
 bin	2300	0
 bin	2400	0
@@ -2599,7 +2679,7 @@ bin	5200	0
 bin	5300	0
 bin	5400	0
 bin	5500	0
-bin	5600	1252
+bin	5600	373
 bin	5700	0
 bin	5800	0
 bin	5900	0
@@ -2614,14 +2694,16 @@ bin	6700	0
 bin	6800	0
 bin	6900	0
 bin	7000	0
+bin	7100	0
+bin	7200	0
 statistic NetworkA.sensor1.wlan[0].radio packetErrorRate:histogram
-field count 2251
-field mean 0
-field stddev 0
+field count 835
+field mean 0.0047652076803878
+field stddev 0.06280394918319
 field min 0
-field max 0
-field sum 0
-field sqrsum 0
+field max 1
+field sum 3.9789484131238
+field sqrsum 3.308536767064
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
@@ -2651,7 +2733,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	2251
+bin	0	829
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -2659,11 +2741,11 @@ bin	0.08	0
 bin	0.1	0
 bin	0.12	0
 bin	0.14	0
-bin	0.16	0
+bin	0.16	1
 bin	0.18	0
 bin	0.2	0
 bin	0.22	0
-bin	0.24	0
+bin	0.24	1
 bin	0.26	0
 bin	0.28	0
 bin	0.3	0
@@ -2677,132 +2759,158 @@ bin	0.44	0
 bin	0.46	0
 bin	0.48	0
 bin	0.5	0
+bin	0.52	0
+bin	0.54	0
+bin	0.56	0
+bin	0.58	0
+bin	0.6	0
+bin	0.62	0
+bin	0.64	0
+bin	0.66	0
+bin	0.68	0
+bin	0.7	0
+bin	0.72	0
+bin	0.74	1
+bin	0.76	0
+bin	0.78	0
+bin	0.8	1
+bin	0.82	0
+bin	0.84	0
+bin	0.86	0
+bin	0.88	0
+bin	0.9	0
+bin	0.92	0
+bin	0.94	0
+bin	0.96	0
+bin	0.98	1
+bin	1	1
+bin	1.02	0
 statistic NetworkA.sensor1.wlan[0].radio bitErrorRate:histogram
-field count 2251
-field mean 4.1003751954838e-23
-field stddev 7.9332772761372e-22
+field count 835
+field mean 0.00024584743469297
+field stddev 0.0044732685452265
 field min 0
-field max 1.5383240941723e-20
-field sum 9.2299445650341e-20
-field sqrsum 1.4198646112267e-39
+field max 0.1192817918448
+field sum 0.20528260796863
+field sqrsum 0.016738917854969
 attr recordingmode histogram
 attr source bitErrorRate(packetSentToUpper)
 attr title "Bit error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2251
-bin	0.02	0
-bin	0.04	0
+bin	0	829
+bin	0.0024	2
+bin	0.0048	1
+bin	0.0072	0
+bin	0.0096	0
+bin	0.012	0
+bin	0.0144	0
+bin	0.0168	0
+bin	0.0192	0
+bin	0.0216	0
+bin	0.024	0
+bin	0.0264	0
+bin	0.0288	0
+bin	0.0312	0
+bin	0.0336	2
+bin	0.036	0
+bin	0.0384	0
+bin	0.0408	0
+bin	0.0432	0
+bin	0.0456	0
+bin	0.048	0
+bin	0.0504	0
+bin	0.0528	0
+bin	0.0552	0
+bin	0.0576	0
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
+bin	0.0624	0
+bin	0.0648	0
+bin	0.0672	0
+bin	0.0696	0
+bin	0.072	0
+bin	0.0744	0
+bin	0.0768	0
+bin	0.0792	0
+bin	0.0816	0
+bin	0.084	0
+bin	0.0864	0
+bin	0.0888	0
+bin	0.0912	0
+bin	0.0936	0
+bin	0.096	0
+bin	0.0984	0
+bin	0.1008	0
+bin	0.1032	0
+bin	0.1056	0
+bin	0.108	0
+bin	0.1104	0
+bin	0.1128	0
+bin	0.1152	0
+bin	0.1176	1
 bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
 statistic NetworkA.sensor1.wlan[0].radio symbolErrorRate:histogram
-field count 2251
-field mean 4.1003751954838e-23
-field stddev 7.9332772761372e-22
+field count 835
+field mean 0.00024584743469297
+field stddev 0.0044732685452265
 field min 0
-field max 1.5383240941723e-20
-field sum 9.2299445650341e-20
-field sqrsum 1.4198646112267e-39
+field max 0.1192817918448
+field sum 0.20528260796863
+field sqrsum 0.016738917854969
 attr recordingmode histogram
 attr source symbolErrorRate(packetSentToUpper)
 attr title "Symbol error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2251
-bin	0.02	0
-bin	0.04	0
+bin	0	829
+bin	0.0024	2
+bin	0.0048	1
+bin	0.0072	0
+bin	0.0096	0
+bin	0.012	0
+bin	0.0144	0
+bin	0.0168	0
+bin	0.0192	0
+bin	0.0216	0
+bin	0.024	0
+bin	0.0264	0
+bin	0.0288	0
+bin	0.0312	0
+bin	0.0336	2
+bin	0.036	0
+bin	0.0384	0
+bin	0.0408	0
+bin	0.0432	0
+bin	0.0456	0
+bin	0.048	0
+bin	0.0504	0
+bin	0.0528	0
+bin	0.0552	0
+bin	0.0576	0
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
+bin	0.0624	0
+bin	0.0648	0
+bin	0.0672	0
+bin	0.0696	0
+bin	0.072	0
+bin	0.0744	0
+bin	0.0768	0
+bin	0.0792	0
+bin	0.0816	0
+bin	0.084	0
+bin	0.0864	0
+bin	0.0888	0
+bin	0.0912	0
+bin	0.0936	0
+bin	0.096	0
+bin	0.0984	0
+bin	0.1008	0
+bin	0.1032	0
+bin	0.1056	0
+bin	0.108	0
+bin	0.1104	0
+bin	0.1128	0
+bin	0.1152	0
+bin	0.1176	1
 bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
 scalar NetworkA.sensor1.wlan[0].radio packetDropped:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -3161,7 +3269,7 @@ attr unit J
 par NetworkA.sensor2.energyStorage printCapacityStep 0.005J
 attr unit J
 par NetworkA.sensor2.energyStorage displayStringTextFormat "\"%c (%p)\""
-scalar NetworkA.sensor2.energyStorage residualEnergyCapacity:last 0.29402022489671
+scalar NetworkA.sensor2.energyStorage residualEnergyCapacity:last 0.39394177719603
 attr interpolationmode linear
 attr recordingmode last
 attr source residualEnergyCapacityChanged
@@ -3293,14 +3401,14 @@ attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, last"
 attr unit pk
-scalar NetworkA.sensor2.wlan[0].queue queueLength:max 1
+scalar NetworkA.sensor2.wlan[0].queue queueLength:max 3
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar NetworkA.sensor2.wlan[0].queue queueLength:timeavg 0.11953517267566
+scalar NetworkA.sensor2.wlan[0].queue queueLength:timeavg 0.48493099534327
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -3314,14 +3422,14 @@ attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar NetworkA.sensor2.wlan[0].queue queueBitLength:max 304
+scalar NetworkA.sensor2.wlan[0].queue queueBitLength:max 912
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar NetworkA.sensor2.wlan[0].queue queueBitLength:timeavg 36.338692493401
+scalar NetworkA.sensor2.wlan[0].queue queueBitLength:timeavg 147.41902258435
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -3330,72 +3438,78 @@ attr title "queue bit length, timeavg"
 attr unit b
 statistic NetworkA.sensor2.wlan[0].queue queueingTime:histogram
 field count 100
-field mean 0.11953517267566
-field stddev 0.04615265582735
-field min 0.050590847713
-field max 0.232431485904
-field sum 11.953517267566
-field sqrsum 1.6397424470118
+field mean 0.48493099534327
+field stddev 0.5155715386531
+field min 0.051975124071
+field max 2.356715135359
+field sum 48.493099534327
+field sqrsum 49.831394159905
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
 bin	-inf	0
-bin	0.005	0
-bin	0.01	0
-bin	0.015	0
-bin	0.02	0
-bin	0.025	0
-bin	0.03	0
-bin	0.035	0
-bin	0.04	0
-bin	0.045	0
-bin	0.05	4
-bin	0.055	5
-bin	0.06	5
-bin	0.065	2
-bin	0.07	4
-bin	0.075	5
-bin	0.08	5
-bin	0.085	3
-bin	0.09	3
-bin	0.095	4
-bin	0.1	4
-bin	0.105	4
-bin	0.11	1
-bin	0.115	7
-bin	0.12	1
-bin	0.125	2
-bin	0.13	3
-bin	0.135	3
-bin	0.14	3
-bin	0.145	3
-bin	0.15	2
-bin	0.155	2
-bin	0.16	6
-bin	0.165	8
-bin	0.17	3
-bin	0.175	1
-bin	0.18	0
-bin	0.185	0
-bin	0.19	1
-bin	0.195	0
-bin	0.2	1
-bin	0.205	0
-bin	0.21	0
-bin	0.215	1
-bin	0.22	3
-bin	0.225	0
-bin	0.23	1
-bin	0.235	0
-bin	0.24	0
-bin	0.245	0
-bin	0.25	0
-bin	0.255	0
-bin	0.26	0
-bin	0.265	0
-bin	0.27	0
+bin	0	0
+bin	0.05	17
+bin	0.1	18
+bin	0.15	4
+bin	0.2	11
+bin	0.25	4
+bin	0.3	5
+bin	0.35	5
+bin	0.4	3
+bin	0.45	2
+bin	0.5	0
+bin	0.55	1
+bin	0.6	0
+bin	0.65	2
+bin	0.7	5
+bin	0.75	0
+bin	0.8	3
+bin	0.85	1
+bin	0.9	1
+bin	0.95	2
+bin	1	0
+bin	1.05	2
+bin	1.1	3
+bin	1.15	4
+bin	1.2	0
+bin	1.25	1
+bin	1.3	1
+bin	1.35	0
+bin	1.4	0
+bin	1.45	0
+bin	1.5	0
+bin	1.55	0
+bin	1.6	0
+bin	1.65	0
+bin	1.7	1
+bin	1.75	0
+bin	1.8	0
+bin	1.85	0
+bin	1.9	0
+bin	1.95	2
+bin	2	0
+bin	2.05	0
+bin	2.1	0
+bin	2.15	0
+bin	2.2	0
+bin	2.25	0
+bin	2.3	1
+bin	2.35	1
+bin	2.4	0
+bin	2.45	0
+bin	2.5	0
+bin	2.55	0
+bin	2.6	0
+bin	2.65	0
+bin	2.7	0
+bin	2.75	0
+bin	2.8	0
+bin	2.85	0
+bin	2.9	0
+bin	2.95	0
 scalar NetworkA.sensor2.wlan[0].queue outgoingPackets:count 100
 attr recordingmode count
 attr source packetPulled
@@ -3484,7 +3598,7 @@ par NetworkA.sensor2.wlan[0].mac typename "\"inet.linklayer.bmac.BMac\""
 par NetworkA.sensor2.wlan[0].mac interfaceTableModule "\"NetworkA.sensor2.interfaceTable\""
 par NetworkA.sensor2.wlan[0].mac address "\"auto\""
 attr mutable ""
-par NetworkA.sensor2.wlan[0].mac slotDuration 0.05s
+par NetworkA.sensor2.wlan[0].mac slotDuration 0.01s
 attr unit s
 par NetworkA.sensor2.wlan[0].mac headerLength 8b
 attr unit b
@@ -3492,7 +3606,7 @@ par NetworkA.sensor2.wlan[0].mac ctrlFrameLength 8b
 attr unit b
 par NetworkA.sensor2.wlan[0].mac mtu 0B
 attr unit B
-par NetworkA.sensor2.wlan[0].mac checkInterval 0.02s
+par NetworkA.sensor2.wlan[0].mac checkInterval 0.1s
 attr unit s
 par NetworkA.sensor2.wlan[0].mac animation true
 par NetworkA.sensor2.wlan[0].mac bitrate 19200bps
@@ -3501,29 +3615,29 @@ par NetworkA.sensor2.wlan[0].mac useMACAcks false
 par NetworkA.sensor2.wlan[0].mac radioModule "\"^.radio\""
 par NetworkA.sensor2.wlan[0].mac maxTxAttempts 2
 scalar NetworkA.sensor2.wlan[0].mac nbTxDataPackets 100
-scalar NetworkA.sensor2.wlan[0].mac nbTxPreambles 500
-scalar NetworkA.sensor2.wlan[0].mac nbRxDataPackets 747
-scalar NetworkA.sensor2.wlan[0].mac nbRxPreambles 1571
+scalar NetworkA.sensor2.wlan[0].mac nbTxPreambles 100
+scalar NetworkA.sensor2.wlan[0].mac nbRxDataPackets 562
+scalar NetworkA.sensor2.wlan[0].mac nbRxPreambles 361
 scalar NetworkA.sensor2.wlan[0].mac nbMissedAcks 0
 scalar NetworkA.sensor2.wlan[0].mac nbRecvdAcks 0
 scalar NetworkA.sensor2.wlan[0].mac nbTxAcks 0
 scalar NetworkA.sensor2.wlan[0].mac nbDroppedDataPackets 0
-scalar NetworkA.sensor2.wlan[0].mac packetDropIncorrectlyReceived:count 0
+scalar NetworkA.sensor2.wlan[0].mac packetDropIncorrectlyReceived:count 6
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, count"
-scalar NetworkA.sensor2.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+scalar NetworkA.sensor2.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 234
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, sum(packetBytes)"
-scalar NetworkA.sensor2.wlan[0].mac packetDropNotAddressedToUs:count 652
+scalar NetworkA.sensor2.wlan[0].mac packetDropNotAddressedToUs:count 459
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drop: not addressed to us, count"
-scalar NetworkA.sensor2.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 25428
+scalar NetworkA.sensor2.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 17901
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -3612,18 +3726,24 @@ par NetworkA.sensor2.wlan[0].radio.energyConsumer transmitterTransmittingHeaderP
 attr unit W
 par NetworkA.sensor2.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
-scalar NetworkA.sensor2.wlan[0].radio.energyConsumer totalSleepTime 28.759615056996
-scalar NetworkA.sensor2.wlan[0].radio.energyConsumer Sonnellini 4269
-scalar NetworkA.sensor2.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0033149171270718
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer totalSleepTime 75.7161134246
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer Sonnellini 1176
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0021043771043771
 attr recordingmode mean
 attr source txPowerConsumption
 attr title "TX Power consumption stats, mean"
 attr unit W
-scalar NetworkA.sensor2.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0082615101289131
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0058852413019079
 attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor2.wlan[0].radio.energyConsumer powerConsumption:mean 0.0083429292929292
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor2.wlan[0].radio typename "\"inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadio\""
 par NetworkA.sensor2.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor2.wlan[0].radio energySourceModule "\"NetworkA.sensor2.energyStorage\""
@@ -3642,43 +3762,43 @@ attr unit Hz
 par NetworkA.sensor2.wlan[0].radio protocol "\"\""
 par NetworkA.sensor2.wlan[0].radio signalAnalogRepresentation "\"scalar\""
 attr enum scalar,dimensional
-scalar NetworkA.sensor2.wlan[0].radio radioMode:count 2580
+scalar NetworkA.sensor2.wlan[0].radio radioMode:count 1767
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
 attr title "Radio mode, count"
-scalar NetworkA.sensor2.wlan[0].radio receptionState:count 7033
+scalar NetworkA.sensor2.wlan[0].radio receptionState:count 3369
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
-scalar NetworkA.sensor2.wlan[0].radio transmissionState:count 1400
+scalar NetworkA.sensor2.wlan[0].radio transmissionState:count 600
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic NetworkA.sensor2.wlan[0].radio minSnir:histogram
-field count 2223
-field mean 4068.8896707077
-field stddev 2129.505363894
-field min 0.52175947087202
+field count 826
+field mean 3925.6441799521
+field stddev 2510.8704899504
+field min 0.44807266192068
 field max 8148.8701423519
-field sum 9045141.7379833
-field sqrsum 46879994044.532
+field sum 3242582.0926404
+field sqrsum 17930411779.266
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
 bin	-inf	0
-bin	0	24
+bin	0	65
 bin	200	0
 bin	400	0
 bin	600	0
 bin	800	0
-bin	1000	312
+bin	1000	116
 bin	1200	0
 bin	1400	0
 bin	1600	0
-bin	1800	287
+bin	1800	109
 bin	2000	0
 bin	2200	0
 bin	2400	0
@@ -3690,7 +3810,7 @@ bin	3400	0
 bin	3600	0
 bin	3800	0
 bin	4000	0
-bin	4200	1259
+bin	4200	377
 bin	4400	0
 bin	4600	0
 bin	4800	0
@@ -3709,7 +3829,7 @@ bin	7200	0
 bin	7400	0
 bin	7600	0
 bin	7800	0
-bin	8000	341
+bin	8000	159
 bin	8200	0
 bin	8400	0
 bin	8600	0
@@ -3720,195 +3840,189 @@ bin	9400	0
 bin	9600	0
 bin	9800	0
 bin	10000	0
+bin	10200	0
 statistic NetworkA.sensor2.wlan[0].radio packetErrorRate:histogram
-field count 2223
-field mean 0.00031706654871818
-field stddev 0.0078112884064989
+field count 826
+field mean 0.0070320052632908
+field stddev 0.045122740819104
 field min 0
-field max 0.25490916603437
-field sum 0.70483893780051
-field sqrsum 0.13580153628685
+field max 0.72142007895654
+field sum 5.8084363474782
+field sqrsum 1.7205958896651
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2216
-bin	0.02	5
-bin	0.04	0
+bin	0	796
+bin	0.015	0
+bin	0.03	10
+bin	0.045	0
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
+bin	0.075	0
+bin	0.09	0
+bin	0.105	0
 bin	0.12	0
-bin	0.14	0
-bin	0.16	0
+bin	0.135	1
+bin	0.15	0
+bin	0.165	0
 bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	2
-bin	0.26	0
-bin	0.28	0
+bin	0.195	0
+bin	0.21	0
+bin	0.225	0
+bin	0.24	18
+bin	0.255	0
+bin	0.27	0
+bin	0.285	0
 bin	0.3	0
-bin	0.32	0
-bin	0.34	0
+bin	0.315	0
+bin	0.33	0
+bin	0.345	0
 bin	0.36	0
-bin	0.38	0
-bin	0.4	0
+bin	0.375	0
+bin	0.39	0
+bin	0.405	0
 bin	0.42	0
-bin	0.44	0
-bin	0.46	0
+bin	0.435	0
+bin	0.45	0
+bin	0.465	0
 bin	0.48	0
-bin	0.5	0
+bin	0.495	0
+bin	0.51	0
+bin	0.525	0
+bin	0.54	0
+bin	0.555	0
+bin	0.57	0
+bin	0.585	0
+bin	0.6	0
+bin	0.615	0
+bin	0.63	0
+bin	0.645	0
+bin	0.66	0
+bin	0.675	0
+bin	0.69	0
+bin	0.705	0
+bin	0.72	1
+bin	0.735	0
 statistic NetworkA.sensor2.wlan[0].radio bitErrorRate:histogram
-field count 2223
-field mean 2.7321906154637e-06
-field stddev 4.7920862645195e-05
+field count 826
+field mean 3.8072288370852e-05
+field stddev 0.00023811840673671
 field min 0
-field max 0.00085500968715523
-field sum 0.0060736597381758
-field sqrsum 5.119215364476e-06
+field max 0.0037083694257762
+field sum 0.031447710194324
+field sqrsum 4.7975096183257e-05
 attr recordingmode histogram
 attr source bitErrorRate(packetSentToUpper)
 attr title "Bit error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2223
-bin	0.02	0
-bin	0.04	0
-bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0	796
+bin	8e-05	0
+bin	0.00016	0
+bin	0.00024	0
+bin	0.00032	0
+bin	0.0004	0
+bin	0.00048	0
+bin	0.00056	0
+bin	0.00064	0
+bin	0.00072	0
+bin	0.0008	28
+bin	0.00088	0
+bin	0.00096	0
+bin	0.00104	0
+bin	0.00112	0
+bin	0.0012	0
+bin	0.00128	0
+bin	0.00136	0
+bin	0.00144	0
+bin	0.00152	0
+bin	0.0016	0
+bin	0.00168	0
+bin	0.00176	0
+bin	0.00184	0
+bin	0.00192	0
+bin	0.002	0
+bin	0.00208	0
+bin	0.00216	0
+bin	0.00224	0
+bin	0.00232	0
+bin	0.0024	0
+bin	0.00248	0
+bin	0.00256	0
+bin	0.00264	0
+bin	0.00272	0
+bin	0.0028	0
+bin	0.00288	0
+bin	0.00296	0
+bin	0.00304	0
+bin	0.00312	0
+bin	0.0032	0
+bin	0.00328	0
+bin	0.00336	0
+bin	0.00344	0
+bin	0.00352	0
+bin	0.0036	0
+bin	0.00368	2
+bin	0.00376	0
 statistic NetworkA.sensor2.wlan[0].radio symbolErrorRate:histogram
-field count 2223
-field mean 2.7321906154637e-06
-field stddev 4.7920862645195e-05
+field count 826
+field mean 3.8072288370852e-05
+field stddev 0.00023811840673671
 field min 0
-field max 0.00085500968715523
-field sum 0.0060736597381758
-field sqrsum 5.119215364476e-06
+field max 0.0037083694257762
+field sum 0.031447710194324
+field sqrsum 4.7975096183257e-05
 attr recordingmode histogram
 attr source symbolErrorRate(packetSentToUpper)
 attr title "Symbol error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2223
-bin	0.02	0
-bin	0.04	0
-bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0	796
+bin	8e-05	0
+bin	0.00016	0
+bin	0.00024	0
+bin	0.00032	0
+bin	0.0004	0
+bin	0.00048	0
+bin	0.00056	0
+bin	0.00064	0
+bin	0.00072	0
+bin	0.0008	28
+bin	0.00088	0
+bin	0.00096	0
+bin	0.00104	0
+bin	0.00112	0
+bin	0.0012	0
+bin	0.00128	0
+bin	0.00136	0
+bin	0.00144	0
+bin	0.00152	0
+bin	0.0016	0
+bin	0.00168	0
+bin	0.00176	0
+bin	0.00184	0
+bin	0.00192	0
+bin	0.002	0
+bin	0.00208	0
+bin	0.00216	0
+bin	0.00224	0
+bin	0.00232	0
+bin	0.0024	0
+bin	0.00248	0
+bin	0.00256	0
+bin	0.00264	0
+bin	0.00272	0
+bin	0.0028	0
+bin	0.00288	0
+bin	0.00296	0
+bin	0.00304	0
+bin	0.00312	0
+bin	0.0032	0
+bin	0.00328	0
+bin	0.00336	0
+bin	0.00344	0
+bin	0.00352	0
+bin	0.0036	0
+bin	0.00368	2
+bin	0.00376	0
 scalar NetworkA.sensor2.wlan[0].radio packetDropped:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -4267,7 +4381,7 @@ attr unit J
 par NetworkA.sensor3.energyStorage printCapacityStep 0.005J
 attr unit J
 par NetworkA.sensor3.energyStorage displayStringTextFormat "\"%c (%p)\""
-scalar NetworkA.sensor3.energyStorage residualEnergyCapacity:last 0.30073772919427
+scalar NetworkA.sensor3.energyStorage residualEnergyCapacity:last 0.39475124406134
 attr interpolationmode linear
 attr recordingmode last
 attr source residualEnergyCapacityChanged
@@ -4399,14 +4513,14 @@ attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, last"
 attr unit pk
-scalar NetworkA.sensor3.wlan[0].queue queueLength:max 1
+scalar NetworkA.sensor3.wlan[0].queue queueLength:max 4
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar NetworkA.sensor3.wlan[0].queue queueLength:timeavg 0.13078583968398
+scalar NetworkA.sensor3.wlan[0].queue queueLength:timeavg 0.52111786649281
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -4420,14 +4534,14 @@ attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar NetworkA.sensor3.wlan[0].queue queueBitLength:max 304
+scalar NetworkA.sensor3.wlan[0].queue queueBitLength:max 1216
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar NetworkA.sensor3.wlan[0].queue queueBitLength:timeavg 39.75889526393
+scalar NetworkA.sensor3.wlan[0].queue queueBitLength:timeavg 158.41983141381
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -4436,81 +4550,96 @@ attr title "queue bit length, timeavg"
 attr unit b
 statistic NetworkA.sensor3.wlan[0].queue queueingTime:histogram
 field count 100
-field mean 0.13078583968398
-field stddev 0.04139027188767
-field min 0.057600344335
-field max 0.26303067409
-field sum 13.078583968398
-field sqrsum 1.880095892271
+field mean 0.52111786649281
+field stddev 0.61887438790172
+field min 0.051176050942
+field max 3.055536380668
+field sum 52.111786649281
+field sqrsum 65.073928369873
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
 bin	-inf	0
-bin	0.005	0
-bin	0.01	0
-bin	0.015	0
-bin	0.02	0
-bin	0.025	0
-bin	0.03	0
-bin	0.035	0
-bin	0.04	0
-bin	0.045	0
-bin	0.05	0
-bin	0.055	2
-bin	0.06	1
-bin	0.065	4
-bin	0.07	1
-bin	0.075	4
-bin	0.08	2
-bin	0.085	1
-bin	0.09	5
-bin	0.095	4
-bin	0.1	3
-bin	0.105	8
-bin	0.11	5
-bin	0.115	1
-bin	0.12	7
-bin	0.125	3
-bin	0.13	3
-bin	0.135	3
-bin	0.14	7
-bin	0.145	6
-bin	0.15	4
-bin	0.155	3
-bin	0.16	3
-bin	0.165	9
-bin	0.17	1
-bin	0.175	1
-bin	0.18	1
-bin	0.185	1
-bin	0.19	1
-bin	0.195	1
-bin	0.2	0
-bin	0.205	0
-bin	0.21	0
-bin	0.215	2
-bin	0.22	0
-bin	0.225	0
-bin	0.23	0
-bin	0.235	2
-bin	0.24	0
-bin	0.245	0
-bin	0.25	0
-bin	0.255	0
-bin	0.26	1
-bin	0.265	0
-bin	0.27	0
-bin	0.275	0
-bin	0.28	0
-bin	0.285	0
-bin	0.29	0
-bin	0.295	0
-bin	0.3	0
-bin	0.305	0
-bin	0.31	0
-bin	0.315	0
+bin	0	0
+bin	0.05	17
+bin	0.1	12
+bin	0.15	7
+bin	0.2	12
+bin	0.25	8
+bin	0.3	2
+bin	0.35	5
+bin	0.4	4
+bin	0.45	3
+bin	0.5	1
+bin	0.55	1
+bin	0.6	1
+bin	0.65	3
+bin	0.7	5
+bin	0.75	0
+bin	0.8	0
+bin	0.85	1
+bin	0.9	0
+bin	0.95	1
+bin	1	1
+bin	1.05	3
+bin	1.1	0
+bin	1.15	1
+bin	1.2	0
+bin	1.25	2
+bin	1.3	1
+bin	1.35	0
+bin	1.4	1
+bin	1.45	0
+bin	1.5	1
+bin	1.55	1
+bin	1.6	0
+bin	1.65	0
+bin	1.7	0
+bin	1.75	0
+bin	1.8	0
+bin	1.85	1
+bin	1.9	1
+bin	1.95	0
+bin	2	0
+bin	2.05	0
+bin	2.1	0
+bin	2.15	0
+bin	2.2	1
+bin	2.25	0
+bin	2.3	0
+bin	2.35	0
+bin	2.4	0
+bin	2.45	0
+bin	2.5	0
+bin	2.55	0
+bin	2.6	0
+bin	2.65	1
+bin	2.7	0
+bin	2.75	0
+bin	2.8	1
+bin	2.85	0
+bin	2.9	0
+bin	2.95	0
+bin	3	0
+bin	3.05	1
+bin	3.1	0
+bin	3.15	0
+bin	3.2	0
+bin	3.25	0
+bin	3.3	0
+bin	3.35	0
+bin	3.4	0
+bin	3.45	0
+bin	3.5	0
+bin	3.55	0
+bin	3.6	0
+bin	3.65	0
+bin	3.7	0
+bin	3.75	0
+bin	3.8	0
+bin	3.85	0
 scalar NetworkA.sensor3.wlan[0].queue outgoingPackets:count 100
 attr recordingmode count
 attr source packetPulled
@@ -4599,7 +4728,7 @@ par NetworkA.sensor3.wlan[0].mac typename "\"inet.linklayer.bmac.BMac\""
 par NetworkA.sensor3.wlan[0].mac interfaceTableModule "\"NetworkA.sensor3.interfaceTable\""
 par NetworkA.sensor3.wlan[0].mac address "\"auto\""
 attr mutable ""
-par NetworkA.sensor3.wlan[0].mac slotDuration 0.05s
+par NetworkA.sensor3.wlan[0].mac slotDuration 0.01s
 attr unit s
 par NetworkA.sensor3.wlan[0].mac headerLength 8b
 attr unit b
@@ -4607,7 +4736,7 @@ par NetworkA.sensor3.wlan[0].mac ctrlFrameLength 8b
 attr unit b
 par NetworkA.sensor3.wlan[0].mac mtu 0B
 attr unit B
-par NetworkA.sensor3.wlan[0].mac checkInterval 0.02s
+par NetworkA.sensor3.wlan[0].mac checkInterval 0.1s
 attr unit s
 par NetworkA.sensor3.wlan[0].mac animation true
 par NetworkA.sensor3.wlan[0].mac bitrate 19200bps
@@ -4616,29 +4745,29 @@ par NetworkA.sensor3.wlan[0].mac useMACAcks false
 par NetworkA.sensor3.wlan[0].mac radioModule "\"^.radio\""
 par NetworkA.sensor3.wlan[0].mac maxTxAttempts 2
 scalar NetworkA.sensor3.wlan[0].mac nbTxDataPackets 100
-scalar NetworkA.sensor3.wlan[0].mac nbTxPreambles 500
-scalar NetworkA.sensor3.wlan[0].mac nbRxDataPackets 749
-scalar NetworkA.sensor3.wlan[0].mac nbRxPreambles 1503
+scalar NetworkA.sensor3.wlan[0].mac nbTxPreambles 100
+scalar NetworkA.sensor3.wlan[0].mac nbRxDataPackets 566
+scalar NetworkA.sensor3.wlan[0].mac nbRxPreambles 340
 scalar NetworkA.sensor3.wlan[0].mac nbMissedAcks 0
 scalar NetworkA.sensor3.wlan[0].mac nbRecvdAcks 0
 scalar NetworkA.sensor3.wlan[0].mac nbTxAcks 0
 scalar NetworkA.sensor3.wlan[0].mac nbDroppedDataPackets 0
-scalar NetworkA.sensor3.wlan[0].mac packetDropIncorrectlyReceived:count 4
+scalar NetworkA.sensor3.wlan[0].mac packetDropIncorrectlyReceived:count 15
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, count"
-scalar NetworkA.sensor3.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 80
+scalar NetworkA.sensor3.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 471
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, sum(packetBytes)"
-scalar NetworkA.sensor3.wlan[0].mac packetDropNotAddressedToUs:count 627
+scalar NetworkA.sensor3.wlan[0].mac packetDropNotAddressedToUs:count 452
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drop: not addressed to us, count"
-scalar NetworkA.sensor3.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 24453
+scalar NetworkA.sensor3.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 17628
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -4727,18 +4856,24 @@ par NetworkA.sensor3.wlan[0].radio.energyConsumer transmitterTransmittingHeaderP
 attr unit W
 par NetworkA.sensor3.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
-scalar NetworkA.sensor3.wlan[0].radio.energyConsumer totalSleepTime 29.131242993918
-scalar NetworkA.sensor3.wlan[0].radio.energyConsumer Sonnellini 4206
-scalar NetworkA.sensor3.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0033449788151342
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer totalSleepTime 75.571243373778
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer Sonnellini 1177
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0.0021153574954167
 attr recordingmode mean
 attr source txPowerConsumption
 attr title "TX Power consumption stats, mean"
 attr unit W
-scalar NetworkA.sensor3.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0080205158700659
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.005817233112396
 attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.sensor3.wlan[0].radio.energyConsumer powerConsumption:mean 0.008287741503314
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.sensor3.wlan[0].radio typename "\"inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadio\""
 par NetworkA.sensor3.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.sensor3.wlan[0].radio energySourceModule "\"NetworkA.sensor3.energyStorage\""
@@ -4757,37 +4892,37 @@ attr unit Hz
 par NetworkA.sensor3.wlan[0].radio protocol "\"\""
 par NetworkA.sensor3.wlan[0].radio signalAnalogRepresentation "\"scalar\""
 attr enum scalar,dimensional
-scalar NetworkA.sensor3.wlan[0].radio radioMode:count 2630
+scalar NetworkA.sensor3.wlan[0].radio radioMode:count 1773
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
 attr title "Radio mode, count"
-scalar NetworkA.sensor3.wlan[0].radio receptionState:count 6907
+scalar NetworkA.sensor3.wlan[0].radio receptionState:count 3338
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
-scalar NetworkA.sensor3.wlan[0].radio transmissionState:count 1400
+scalar NetworkA.sensor3.wlan[0].radio transmissionState:count 600
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic NetworkA.sensor3.wlan[0].radio minSnir:histogram
-field count 2134
-field mean 2164.991470873
-field stddev 2746.7341977515
+field count 807
+field mean 2449.8724884269
+field stddev 3001.0581517303
 field min 0.082517760970626
 field max 8148.8701423519
-field sum 4620091.798843
-field sqrsum 26094981829.503
+field sum 1977047.0981605
+field sqrsum 12102631418.341
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
 bin	-inf	0
-bin	0	12
+bin	0	55
 bin	200	0
-bin	400	302
-bin	600	1208
+bin	400	112
+bin	600	370
 bin	800	0
 bin	1000	0
 bin	1200	0
@@ -4800,7 +4935,7 @@ bin	2400	0
 bin	2600	0
 bin	2800	0
 bin	3000	0
-bin	3200	272
+bin	3200	108
 bin	3400	0
 bin	3600	0
 bin	3800	0
@@ -4824,7 +4959,7 @@ bin	7200	0
 bin	7400	0
 bin	7600	0
 bin	7800	0
-bin	8000	340
+bin	8000	162
 bin	8200	0
 bin	8400	0
 bin	8600	0
@@ -4837,13 +4972,13 @@ bin	9800	0
 bin	10000	0
 bin	10200	0
 statistic NetworkA.sensor3.wlan[0].radio packetErrorRate:histogram
-field count 2134
-field mean 0.001485049021445
-field stddev 0.035040400658501
+field count 807
+field mean 0.01763046189169
+field stddev 0.12562508785729
 field min 0
-field max 0.99999998979141
-field sum 3.1690946117636
-field sqrsum 2.6236669646837
+field max 0.99999999938622
+field sum 14.227782746594
+field sqrsum 12.970862517033
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
@@ -4873,7 +5008,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	2130
+bin	0	791
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -4904,7 +5039,7 @@ bin	0.54	0
 bin	0.56	0
 bin	0.58	0
 bin	0.6	0
-bin	0.62	2
+bin	0.62	3
 bin	0.64	0
 bin	0.66	0
 bin	0.68	0
@@ -4914,142 +5049,192 @@ bin	0.74	0
 bin	0.76	0
 bin	0.78	0
 bin	0.8	0
-bin	0.82	0
+bin	0.82	3
 bin	0.84	0
 bin	0.86	0
 bin	0.88	0
 bin	0.9	1
 bin	0.92	0
-bin	0.94	0
+bin	0.94	1
 bin	0.96	0
-bin	0.98	1
+bin	0.98	8
 bin	1	0
 statistic NetworkA.sensor3.wlan[0].radio bitErrorRate:histogram
-field count 2134
-field mean 5.7229446042475e-05
-field stddev 0.0017232322761383
+field count 807
+field mean 0.00067710825830004
+field stddev 0.0059555113375617
 field min 0
 field max 0.059798424051385
-field sum 0.12212763785464
-field sqrsum 0.0063409956726211
+field sum 0.54642636444813
+field sqrsum 0.028957290729132
 attr recordingmode histogram
 attr source bitErrorRate(packetSentToUpper)
 attr title "Bit error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2132
+bin	0	791
+bin	0.001	0
+bin	0.002	0
+bin	0.003	0
+bin	0.004	0
+bin	0.005	6
+bin	0.006	0
+bin	0.007	0
+bin	0.008	1
+bin	0.009	0
+bin	0.01	0
+bin	0.011	0
+bin	0.012	0
+bin	0.013	0
+bin	0.014	0
+bin	0.015	0
+bin	0.016	0
+bin	0.017	0
+bin	0.018	0
+bin	0.019	0
 bin	0.02	0
-bin	0.04	2
+bin	0.021	0
+bin	0.022	0
+bin	0.023	0
+bin	0.024	0
+bin	0.025	0
+bin	0.026	0
+bin	0.027	0
+bin	0.028	0
+bin	0.029	0
+bin	0.03	0
+bin	0.031	0
+bin	0.032	0
+bin	0.033	0
+bin	0.034	0
+bin	0.035	0
+bin	0.036	0
+bin	0.037	0
+bin	0.038	0
+bin	0.039	0
+bin	0.04	0
+bin	0.041	0
+bin	0.042	0
+bin	0.043	0
+bin	0.044	0
+bin	0.045	0
+bin	0.046	0
+bin	0.047	0
+bin	0.048	0
+bin	0.049	0
+bin	0.05	0
+bin	0.051	0
+bin	0.052	4
+bin	0.053	0
+bin	0.054	0
+bin	0.055	0
+bin	0.056	0
+bin	0.057	0
+bin	0.058	0
+bin	0.059	5
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0.061	0
+bin	0.062	0
+bin	0.063	0
+bin	0.064	0
+bin	0.065	0
+bin	0.066	0
+bin	0.067	0
+bin	0.068	0
+bin	0.069	0
+bin	0.07	0
+bin	0.071	0
+bin	0.072	0
+bin	0.073	0
+bin	0.074	0
+bin	0.075	0
 statistic NetworkA.sensor3.wlan[0].radio symbolErrorRate:histogram
-field count 2134
-field mean 5.7229446042475e-05
-field stddev 0.0017232322761383
+field count 807
+field mean 0.00067710825830004
+field stddev 0.0059555113375617
 field min 0
 field max 0.059798424051385
-field sum 0.12212763785464
-field sqrsum 0.0063409956726211
+field sum 0.54642636444813
+field sqrsum 0.028957290729132
 attr recordingmode histogram
 attr source symbolErrorRate(packetSentToUpper)
 attr title "Symbol error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2132
+bin	0	791
+bin	0.001	0
+bin	0.002	0
+bin	0.003	0
+bin	0.004	0
+bin	0.005	6
+bin	0.006	0
+bin	0.007	0
+bin	0.008	1
+bin	0.009	0
+bin	0.01	0
+bin	0.011	0
+bin	0.012	0
+bin	0.013	0
+bin	0.014	0
+bin	0.015	0
+bin	0.016	0
+bin	0.017	0
+bin	0.018	0
+bin	0.019	0
 bin	0.02	0
-bin	0.04	2
+bin	0.021	0
+bin	0.022	0
+bin	0.023	0
+bin	0.024	0
+bin	0.025	0
+bin	0.026	0
+bin	0.027	0
+bin	0.028	0
+bin	0.029	0
+bin	0.03	0
+bin	0.031	0
+bin	0.032	0
+bin	0.033	0
+bin	0.034	0
+bin	0.035	0
+bin	0.036	0
+bin	0.037	0
+bin	0.038	0
+bin	0.039	0
+bin	0.04	0
+bin	0.041	0
+bin	0.042	0
+bin	0.043	0
+bin	0.044	0
+bin	0.045	0
+bin	0.046	0
+bin	0.047	0
+bin	0.048	0
+bin	0.049	0
+bin	0.05	0
+bin	0.051	0
+bin	0.052	4
+bin	0.053	0
+bin	0.054	0
+bin	0.055	0
+bin	0.056	0
+bin	0.057	0
+bin	0.058	0
+bin	0.059	5
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0.061	0
+bin	0.062	0
+bin	0.063	0
+bin	0.064	0
+bin	0.065	0
+bin	0.066	0
+bin	0.067	0
+bin	0.068	0
+bin	0.069	0
+bin	0.07	0
+bin	0.071	0
+bin	0.072	0
+bin	0.073	0
+bin	0.074	0
+bin	0.075	0
 scalar NetworkA.sensor3.wlan[0].radio packetDropped:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -5403,14 +5588,14 @@ par NetworkA.gateway.eth[0].phys$o.channel typename "\"ned.IdealChannel\""
 par NetworkA.gateway.status typename "\"inet.common.lifecycle.NodeStatus\""
 par NetworkA.gateway.status initialStatus "\"UP\""
 par NetworkA.gateway.energyStorage typename "\"inet.power.storage.SimpleEpEnergyStorage\""
-par NetworkA.gateway.energyStorage nominalCapacity 5J
+par NetworkA.gateway.energyStorage nominalCapacity 0.5J
 attr unit J
-par NetworkA.gateway.energyStorage initialCapacity 5J
+par NetworkA.gateway.energyStorage initialCapacity 0.5J
 attr unit J
-par NetworkA.gateway.energyStorage printCapacityStep 0.05J
+par NetworkA.gateway.energyStorage printCapacityStep 0.005J
 attr unit J
 par NetworkA.gateway.energyStorage displayStringTextFormat "\"%c (%p)\""
-scalar NetworkA.gateway.energyStorage residualEnergyCapacity:last 4.831215130568
+scalar NetworkA.gateway.energyStorage residualEnergyCapacity:last 0.42491387807475
 attr interpolationmode linear
 attr recordingmode last
 attr source residualEnergyCapacityChanged
@@ -5494,12 +5679,12 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source decapPk
 attr title "packets decapsulated, sum(packetBytes)"
-scalar NetworkA.gateway.ethernet encapPk:count 385
+scalar NetworkA.gateway.ethernet encapPk:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source encapPk
 attr title "packets encapsulated, count"
-scalar NetworkA.gateway.ethernet encapPk:sum(packetBytes) 14630
+scalar NetworkA.gateway.ethernet encapPk:sum(packetBytes) 12730
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source encapPk
@@ -5714,7 +5899,7 @@ par NetworkA.gateway.wlan[0].mac typename "\"inet.linklayer.bmac.BMac\""
 par NetworkA.gateway.wlan[0].mac interfaceTableModule "\"NetworkA.gateway.interfaceTable\""
 par NetworkA.gateway.wlan[0].mac address "\"auto\""
 attr mutable ""
-par NetworkA.gateway.wlan[0].mac slotDuration 0.05s
+par NetworkA.gateway.wlan[0].mac slotDuration 0.01s
 attr unit s
 par NetworkA.gateway.wlan[0].mac headerLength 8b
 attr unit b
@@ -5722,7 +5907,7 @@ par NetworkA.gateway.wlan[0].mac ctrlFrameLength 8b
 attr unit b
 par NetworkA.gateway.wlan[0].mac mtu 0B
 attr unit B
-par NetworkA.gateway.wlan[0].mac checkInterval 0.02s
+par NetworkA.gateway.wlan[0].mac checkInterval 0.1s
 attr unit s
 par NetworkA.gateway.wlan[0].mac animation true
 par NetworkA.gateway.wlan[0].mac bitrate 19200bps
@@ -5732,18 +5917,18 @@ par NetworkA.gateway.wlan[0].mac radioModule "\"^.radio\""
 par NetworkA.gateway.wlan[0].mac maxTxAttempts 2
 scalar NetworkA.gateway.wlan[0].mac nbTxDataPackets 0
 scalar NetworkA.gateway.wlan[0].mac nbTxPreambles 0
-scalar NetworkA.gateway.wlan[0].mac nbRxDataPackets 879
-scalar NetworkA.gateway.wlan[0].mac nbRxPreambles 1778
+scalar NetworkA.gateway.wlan[0].mac nbRxDataPackets 719
+scalar NetworkA.gateway.wlan[0].mac nbRxPreambles 368
 scalar NetworkA.gateway.wlan[0].mac nbMissedAcks 0
 scalar NetworkA.gateway.wlan[0].mac nbRecvdAcks 0
 scalar NetworkA.gateway.wlan[0].mac nbTxAcks 0
 scalar NetworkA.gateway.wlan[0].mac nbDroppedDataPackets 0
-scalar NetworkA.gateway.wlan[0].mac packetDropIncorrectlyReceived:count 3
+scalar NetworkA.gateway.wlan[0].mac packetDropIncorrectlyReceived:count 25
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, count"
-scalar NetworkA.gateway.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 79
+scalar NetworkA.gateway.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 937
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
@@ -5842,18 +6027,24 @@ par NetworkA.gateway.wlan[0].radio.energyConsumer transmitterTransmittingHeaderP
 attr unit W
 par NetworkA.gateway.wlan[0].radio.energyConsumer transmitterTransmittingDataPowerConsumption 0.075W
 attr unit W
-scalar NetworkA.gateway.wlan[0].radio.energyConsumer totalSleepTime 30.817390512427
-scalar NetworkA.gateway.wlan[0].radio.energyConsumer Sonnellini 3856
+scalar NetworkA.gateway.wlan[0].radio.energyConsumer totalSleepTime 87.150564602953
+scalar NetworkA.gateway.wlan[0].radio.energyConsumer Sonnellini 1383
 scalar NetworkA.gateway.wlan[0].radio.energyConsumer txPowerConsumptionScalar:mean 0
 attr recordingmode mean
 attr source txPowerConsumption
 attr title "TX Power consumption stats, mean"
 attr unit W
-scalar NetworkA.gateway.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.010649112573952
+scalar NetworkA.gateway.wlan[0].radio.energyConsumer rxPowerConsumptionScalar:mean 0.0066731680133741
 attr recordingmode mean
 attr source rxPowerConsumption
 attr title "RX Power consumption stats, mean"
 attr unit W
+scalar NetworkA.gateway.wlan[0].radio.energyConsumer powerConsumption:mean 0.0066761273335191
+attr interpolationmode sample-hold
+attr recordingmode mean
+attr source powerConsumptionChanged
+attr title "Power consumption total, mean"
+attr unit J
 par NetworkA.gateway.wlan[0].radio typename "\"inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadio\""
 par NetworkA.gateway.wlan[0].radio radioMediumModule "\"radioMedium\""
 par NetworkA.gateway.wlan[0].radio energySourceModule "\"NetworkA.gateway.energyStorage\""
@@ -5872,12 +6063,12 @@ attr unit Hz
 par NetworkA.gateway.wlan[0].radio protocol "\"\""
 par NetworkA.gateway.wlan[0].radio signalAnalogRepresentation "\"scalar\""
 attr enum scalar,dimensional
-scalar NetworkA.gateway.wlan[0].radio radioMode:count 2630
+scalar NetworkA.gateway.wlan[0].radio radioMode:count 2027
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
 attr title "Radio mode, count"
-scalar NetworkA.gateway.wlan[0].radio receptionState:count 7807
+scalar NetworkA.gateway.wlan[0].radio receptionState:count 3967
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
@@ -5888,24 +6079,24 @@ attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic NetworkA.gateway.wlan[0].radio minSnir:histogram
-field count 2533
-field mean 8365.2077574423
-field stddev 8438.2175722206
+field count 935
+field mean 8955.1355671376
+field stddev 9019.9504679561
 field min 0.12308635631446
 field max 28429.404831434
-field sum 21189071.249601
-field sqrsum 357538285185.97
+field sum 8373051.7552737
+field sqrsum 150971592598.19
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
 bin	-inf	0
-bin	0	20
+bin	0	55
 bin	500	0
 bin	1000	0
 bin	1500	0
 bin	2000	0
-bin	2500	312
-bin	3000	1236
+bin	2500	110
+bin	3000	366
 bin	3500	0
 bin	4000	0
 bin	4500	0
@@ -5919,7 +6110,7 @@ bin	8000	0
 bin	8500	0
 bin	9000	0
 bin	9500	0
-bin	10000	625
+bin	10000	257
 bin	10500	0
 bin	11000	0
 bin	11500	0
@@ -5955,7 +6146,7 @@ bin	26000	0
 bin	26500	0
 bin	27000	0
 bin	27500	0
-bin	28000	340
+bin	28000	147
 bin	28500	0
 bin	29000	0
 bin	29500	0
@@ -5970,51 +6161,28 @@ bin	33500	0
 bin	34000	0
 bin	34500	0
 bin	35000	0
+bin	35500	0
+bin	36000	0
 statistic NetworkA.gateway.wlan[0].radio packetErrorRate:histogram
-field count 2533
-field mean 0.001470837800575
-field stddev 0.031389098545736
+field count 935
+field mean 0.026122054616744
+field stddev 0.15523035524029
 field min 0
 field max 0.9997289395311
-field sum 3.7256321488565
-field sqrsum 2.5001973856208
+field sum 24.424121066656
+field sqrsum 23.144104842087
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2520
+bin	0	902
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
-bin	0.08	6
+bin	0.08	4
 bin	0.1	0
 bin	0.12	0
-bin	0.14	4
+bin	0.14	5
 bin	0.16	0
 bin	0.18	0
 bin	0.2	0
@@ -6027,7 +6195,7 @@ bin	0.32	0
 bin	0.34	0
 bin	0.36	0
 bin	0.38	0
-bin	0.4	0
+bin	0.4	1
 bin	0.42	0
 bin	0.44	0
 bin	0.46	0
@@ -6037,7 +6205,7 @@ bin	0.52	0
 bin	0.54	0
 bin	0.56	0
 bin	0.58	0
-bin	0.6	1
+bin	0.6	0
 bin	0.62	0
 bin	0.64	0
 bin	0.66	0
@@ -6054,136 +6222,165 @@ bin	0.86	0
 bin	0.88	0
 bin	0.9	0
 bin	0.92	0
-bin	0.94	0
+bin	0.94	1
 bin	0.96	0
-bin	0.98	2
+bin	0.98	22
 bin	1	0
+bin	1.02	0
+bin	1.04	0
+bin	1.06	0
+bin	1.08	0
+bin	1.1	0
+bin	1.12	0
+bin	1.14	0
+bin	1.16	0
+bin	1.18	0
+bin	1.2	0
+bin	1.22	0
+bin	1.24	0
+bin	1.26	0
 statistic NetworkA.gateway.wlan[0].radio bitErrorRate:histogram
-field count 2533
-field mean 2.9306919913397e-05
-field stddev 0.00079759249925454
+field count 935
+field mean 0.00055783753092854
+field stddev 0.0035079233128615
 field min 0
 field max 0.023592725537802
-field sum 0.074234428140635
-field sqrsum 0.0016129169910438
+field sum 0.52157809141819
+field sqrsum 0.011784317089672
 attr recordingmode histogram
 attr source bitErrorRate(packetSentToUpper)
 attr title "Bit error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2530
-bin	0.02	3
-bin	0.04	0
-bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0	911
+bin	0.0005	0
+bin	0.001	0
+bin	0.0015	1
+bin	0.002	0
+bin	0.0025	0
+bin	0.003	0
+bin	0.0035	0
+bin	0.004	0
+bin	0.0045	0
+bin	0.005	0
+bin	0.0055	0
+bin	0.006	0
+bin	0.0065	0
+bin	0.007	0
+bin	0.0075	0
+bin	0.008	1
+bin	0.0085	0
+bin	0.009	0
+bin	0.0095	0
+bin	0.01	0
+bin	0.0105	0
+bin	0.011	0
+bin	0.0115	0
+bin	0.012	0
+bin	0.0125	0
+bin	0.013	0
+bin	0.0135	0
+bin	0.014	0
+bin	0.0145	0
+bin	0.015	0
+bin	0.0155	0
+bin	0.016	0
+bin	0.0165	0
+bin	0.017	0
+bin	0.0175	0
+bin	0.018	0
+bin	0.0185	0
+bin	0.019	0
+bin	0.0195	0
+bin	0.02	0
+bin	0.0205	0
+bin	0.021	0
+bin	0.0215	0
+bin	0.022	0
+bin	0.0225	18
+bin	0.023	0
+bin	0.0235	4
+bin	0.024	0
+bin	0.0245	0
+bin	0.025	0
+bin	0.0255	0
+bin	0.026	0
+bin	0.0265	0
+bin	0.027	0
+bin	0.0275	0
+bin	0.028	0
+bin	0.0285	0
+bin	0.029	0
 statistic NetworkA.gateway.wlan[0].radio symbolErrorRate:histogram
-field count 2533
-field mean 2.9306919913397e-05
-field stddev 0.00079759249925454
+field count 935
+field mean 0.00055783753092854
+field stddev 0.0035079233128615
 field min 0
 field max 0.023592725537802
-field sum 0.074234428140635
-field sqrsum 0.0016129169910438
+field sum 0.52157809141819
+field sqrsum 0.011784317089672
 attr recordingmode histogram
 attr source symbolErrorRate(packetSentToUpper)
 attr title "Symbol error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	2530
-bin	0.02	3
-bin	0.04	0
-bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0	911
+bin	0.0005	0
+bin	0.001	0
+bin	0.0015	1
+bin	0.002	0
+bin	0.0025	0
+bin	0.003	0
+bin	0.0035	0
+bin	0.004	0
+bin	0.0045	0
+bin	0.005	0
+bin	0.0055	0
+bin	0.006	0
+bin	0.0065	0
+bin	0.007	0
+bin	0.0075	0
+bin	0.008	1
+bin	0.0085	0
+bin	0.009	0
+bin	0.0095	0
+bin	0.01	0
+bin	0.0105	0
+bin	0.011	0
+bin	0.0115	0
+bin	0.012	0
+bin	0.0125	0
+bin	0.013	0
+bin	0.0135	0
+bin	0.014	0
+bin	0.0145	0
+bin	0.015	0
+bin	0.0155	0
+bin	0.016	0
+bin	0.0165	0
+bin	0.017	0
+bin	0.0175	0
+bin	0.018	0
+bin	0.0185	0
+bin	0.019	0
+bin	0.0195	0
+bin	0.02	0
+bin	0.0205	0
+bin	0.021	0
+bin	0.0215	0
+bin	0.022	0
+bin	0.0225	18
+bin	0.023	0
+bin	0.0235	4
+bin	0.024	0
+bin	0.0245	0
+bin	0.025	0
+bin	0.0255	0
+bin	0.026	0
+bin	0.0265	0
+bin	0.027	0
+bin	0.0275	0
+bin	0.028	0
+bin	0.0285	0
+bin	0.029	0
 scalar NetworkA.gateway.wlan[0].radio packetDropped:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -6274,7 +6471,7 @@ attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetP
 attr title "queue bit length, timeavg"
 attr unit b
 statistic NetworkA.gateway.eth[0].queue queueingTime:histogram
-field count 385
+field count 335
 field mean 0
 field stddev 0
 field min 0
@@ -6312,7 +6509,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	385
+bin	0	335
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -6338,25 +6535,25 @@ bin	0.44	0
 bin	0.46	0
 bin	0.48	0
 bin	0.5	0
-scalar NetworkA.gateway.eth[0].queue outgoingPackets:count 385
+scalar NetworkA.gateway.eth[0].queue outgoingPackets:count 335
 attr recordingmode count
 attr source packetPulled
 attr title "outgoing packets, count"
 attr unit pk
-scalar NetworkA.gateway.eth[0].queue outgoingPacketLengths:sum 172480
+scalar NetworkA.gateway.eth[0].queue outgoingPacketLengths:sum 150080
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths, sum"
 attr unit b
 statistic NetworkA.gateway.eth[0].queue outgoingPacketLengths:histogram
-field count 385
+field count 335
 field mean 448
 field stddev 0
 field min 448
 field max 448
-field sum 172480
-field sqrsum 77271040
+field sum 150080
+field sqrsum 67235840
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPulled)
@@ -6364,7 +6561,7 @@ attr title "outgoing packet lengths"
 attr unit b
 bin	-inf	0
 bin	447	0
-bin	448	385
+bin	448	335
 bin	449	0
 statistic NetworkA.gateway.eth[0].queue flowQueueingTime:histogram
 field count 0
@@ -6382,25 +6579,25 @@ attr unit s
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar NetworkA.gateway.eth[0].queue incomingPackets:count 385
+scalar NetworkA.gateway.eth[0].queue incomingPackets:count 335
 attr recordingmode count
 attr source packetPushStarted
 attr title "incoming packets, count"
 attr unit pk
-scalar NetworkA.gateway.eth[0].queue incomingPacketLengths:sum 172480
+scalar NetworkA.gateway.eth[0].queue incomingPacketLengths:sum 150080
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPushStarted)
 attr title "incoming packet lengths, sum"
 attr unit b
 statistic NetworkA.gateway.eth[0].queue incomingPacketLengths:histogram
-field count 385
+field count 335
 field mean 448
 field stddev 0
 field min 448
 field max 448
-field sum 172480
-field sqrsum 77271040
+field sum 150080
+field sqrsum 67235840
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPushStarted)
@@ -6408,7 +6605,7 @@ attr title "incoming packet lengths"
 attr unit b
 bin	-inf	0
 bin	447	0
-bin	448	385
+bin	448	335
 bin	449	0
 scalar NetworkA.gateway.eth[0].queue droppedPacketsQueueOverflow:count 0
 attr interpolationmode none
@@ -6438,9 +6635,9 @@ par NetworkA.gateway.eth[0].mac stopOperationTimeout 2s
 attr unit s
 scalar NetworkA.gateway.eth[0].mac "simulated time" 100
 scalar NetworkA.gateway.eth[0].mac full-duplex 1
-scalar NetworkA.gateway.eth[0].mac "frames/sec sent" 3.85
+scalar NetworkA.gateway.eth[0].mac "frames/sec sent" 3.35
 scalar NetworkA.gateway.eth[0].mac "frames/sec rcvd" 0
-scalar NetworkA.gateway.eth[0].mac "bits/sec sent" 1971.2
+scalar NetworkA.gateway.eth[0].mac "bits/sec sent" 1715.2
 scalar NetworkA.gateway.eth[0].mac "bits/sec rcvd" 0
 scalar NetworkA.gateway.eth[0].mac "rx channel idle (%)" 100
 scalar NetworkA.gateway.eth[0].mac "rx channel utilization (%)" 0
@@ -6470,22 +6667,22 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source rxPkOk
 attr title "packets received OK, sum(packetBytes)"
-scalar NetworkA.gateway.eth[0].mac txPk:count 385
+scalar NetworkA.gateway.eth[0].mac txPk:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToLower
 attr title "packets transmitted, count"
-scalar NetworkA.gateway.eth[0].mac txPk:sum(packetBytes) 24640
+scalar NetworkA.gateway.eth[0].mac txPk:sum(packetBytes) 21440
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSentToLower
 attr title "packets transmitted, sum(packetBytes)"
-scalar NetworkA.gateway.eth[0].mac packetReceivedFromUpper:count 385
+scalar NetworkA.gateway.eth[0].mac packetReceivedFromUpper:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceivedFromUpper
 attr title "packet bytes from higher layer, count"
-scalar NetworkA.gateway.eth[0].mac packetReceivedFromUpper:sum(packetBytes) 21560
+scalar NetworkA.gateway.eth[0].mac packetReceivedFromUpper:sum(packetBytes) 18760
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceivedFromUpper
@@ -6721,12 +6918,12 @@ par NetworkA.gateway.udp icmpv6Module "\"^.ipv6.icmpv6\""
 par NetworkA.gateway.udp crcMode "\"declared\""
 attr enum disabled,declared,computed
 par NetworkA.gateway.udp defaultMulticastLoop true
-scalar NetworkA.gateway.udp packetReceived:count 367
+scalar NetworkA.gateway.udp packetReceived:count 207
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar NetworkA.gateway.udp packetReceived:sum(packetBytes) 6606
+scalar NetworkA.gateway.udp packetReceived:sum(packetBytes) 3726
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
@@ -6741,7 +6938,7 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
-scalar NetworkA.gateway.udp passedUpPk:count 367
+scalar NetworkA.gateway.udp passedUpPk:count 207
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToUpper
@@ -6799,113 +6996,97 @@ par NetworkA.gateway.app[0] stopOperationExtraTime -1s
 attr unit s
 par NetworkA.gateway.app[0] stopOperationTimeout 2s
 attr unit s
-scalar NetworkA.gateway.app[0] packetReceived:count 367
+scalar NetworkA.gateway.app[0] packetReceived:count 207
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar NetworkA.gateway.app[0] packetReceived:sum(packetBytes) 3670
+scalar NetworkA.gateway.app[0] packetReceived:sum(packetBytes) 2070
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic NetworkA.gateway.app[0] endToEndDelay:histogram
-field count 367
-field mean 0.13475417730884
-field stddev 0.051631906077154
-field min 0.052919604106
-field max 0.407512636937
-field sum 49.454783072345
-field sqrsum 7.6399410703097
+field count 207
+field mean 16.400315699257
+field stddev 8.2978734947513
+field min 0.068285865851
+field max 26.021456458223
+field sum 3394.8653497461
+field sqrsum 69860.932626492
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
 attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
-bin	0	0
-bin	0.005	0
-bin	0.01	0
-bin	0.015	0
-bin	0.02	0
-bin	0.025	0
-bin	0.03	0
-bin	0.035	0
-bin	0.04	0
-bin	0.045	0
-bin	0.05	4
-bin	0.055	10
-bin	0.06	9
-bin	0.065	7
-bin	0.07	12
-bin	0.075	8
-bin	0.08	14
-bin	0.085	9
-bin	0.09	6
-bin	0.095	18
-bin	0.1	10
-bin	0.105	13
-bin	0.11	14
-bin	0.115	15
-bin	0.12	17
-bin	0.125	14
-bin	0.13	19
-bin	0.135	14
-bin	0.14	15
-bin	0.145	17
-bin	0.15	14
-bin	0.155	10
-bin	0.16	13
-bin	0.165	13
-bin	0.17	18
-bin	0.175	7
-bin	0.18	5
-bin	0.185	0
-bin	0.19	3
-bin	0.195	5
-bin	0.2	3
-bin	0.205	4
-bin	0.21	4
-bin	0.215	2
-bin	0.22	4
-bin	0.225	2
-bin	0.23	3
-bin	0.235	0
-bin	0.24	2
-bin	0.245	0
-bin	0.25	0
-bin	0.255	0
-bin	0.26	0
-bin	0.265	1
-bin	0.27	1
-bin	0.275	1
-bin	0.28	2
-bin	0.285	1
-bin	0.29	0
-bin	0.295	0
-bin	0.3	0
-bin	0.305	0
-bin	0.31	0
-bin	0.315	0
-bin	0.32	2
-bin	0.325	0
-bin	0.33	0
-bin	0.335	0
-bin	0.34	0
-bin	0.345	0
-bin	0.35	0
-bin	0.355	1
-bin	0.36	0
-bin	0.365	0
-bin	0.37	0
-bin	0.375	0
-bin	0.38	0
-bin	0.385	0
-bin	0.39	0
-bin	0.395	0
-bin	0.4	0
-bin	0.405	1
-bin	0.41	0
+bin	0	5
+bin	0.5	0
+bin	1	4
+bin	1.5	1
+bin	2	3
+bin	2.5	2
+bin	3	5
+bin	3.5	6
+bin	4	3
+bin	4.5	6
+bin	5	0
+bin	5.5	2
+bin	6	2
+bin	6.5	0
+bin	7	4
+bin	7.5	2
+bin	8	4
+bin	8.5	3
+bin	9	1
+bin	9.5	2
+bin	10	3
+bin	10.5	0
+bin	11	3
+bin	11.5	5
+bin	12	5
+bin	12.5	6
+bin	13	5
+bin	13.5	1
+bin	14	3
+bin	14.5	1
+bin	15	0
+bin	15.5	0
+bin	16	2
+bin	16.5	1
+bin	17	3
+bin	17.5	2
+bin	18	0
+bin	18.5	6
+bin	19	1
+bin	19.5	3
+bin	20	2
+bin	20.5	1
+bin	21	2
+bin	21.5	8
+bin	22	11
+bin	22.5	12
+bin	23	13
+bin	23.5	7
+bin	24	8
+bin	24.5	18
+bin	25	15
+bin	25.5	3
+bin	26	2
+bin	26.5	0
+bin	27	0
+bin	27.5	0
+bin	28	0
+bin	28.5	0
+bin	29	0
+bin	29.5	0
+bin	30	0
+bin	30.5	0
+bin	31	0
+bin	31.5	0
+bin	32	0
+bin	32.5	0
+bin	33	0
 par NetworkA.gateway.at typename "\"inet.common.MessageDispatcher\""
 par NetworkA.gateway.at displayStringTextFormat "\"processed %p pk (%l)\""
 par NetworkA.gateway.at forwardServiceRegistration true
@@ -6962,12 +7143,12 @@ attr title "pause sent, count"
 scalar NetworkA.server.ethernet pauseSent:sum 0
 attr recordingmode sum
 attr title "pause sent, sum"
-scalar NetworkA.server.ethernet decapPk:count 385
+scalar NetworkA.server.ethernet decapPk:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source decapPk
 attr title "packets decapsulated, count"
-scalar NetworkA.server.ethernet decapPk:sum(packetBytes) 17710
+scalar NetworkA.server.ethernet decapPk:sum(packetBytes) 15410
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source decapPk
@@ -7206,11 +7387,11 @@ attr unit s
 scalar NetworkA.server.eth[0].mac "simulated time" 100
 scalar NetworkA.server.eth[0].mac full-duplex 1
 scalar NetworkA.server.eth[0].mac "frames/sec sent" 0
-scalar NetworkA.server.eth[0].mac "frames/sec rcvd" 3.85
+scalar NetworkA.server.eth[0].mac "frames/sec rcvd" 3.35
 scalar NetworkA.server.eth[0].mac "bits/sec sent" 0
-scalar NetworkA.server.eth[0].mac "bits/sec rcvd" 1971.2
-scalar NetworkA.server.eth[0].mac "rx channel idle (%)" 99.9977824
-scalar NetworkA.server.eth[0].mac "rx channel utilization (%)" 0.0022176
+scalar NetworkA.server.eth[0].mac "bits/sec rcvd" 1715.2
+scalar NetworkA.server.eth[0].mac "rx channel idle (%)" 99.9980704
+scalar NetworkA.server.eth[0].mac "rx channel utilization (%)" 0.0019296
 scalar NetworkA.server.eth[0].mac rxPausePkUnits:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -7227,12 +7408,12 @@ scalar NetworkA.server.eth[0].mac txPausePkUnits:sum 0
 attr interpolationmode none
 attr recordingmode sum
 attr title "pause units sent, sum"
-scalar NetworkA.server.eth[0].mac rxPkOk:count 385
+scalar NetworkA.server.eth[0].mac rxPkOk:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source rxPkOk
 attr title "packets received OK, count"
-scalar NetworkA.server.eth[0].mac rxPkOk:sum(packetBytes) 24640
+scalar NetworkA.server.eth[0].mac rxPkOk:sum(packetBytes) 21440
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source rxPkOk
@@ -7257,12 +7438,12 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceivedFromUpper
 attr title "packet bytes from higher layer, sum(packetBytes)"
-scalar NetworkA.server.eth[0].mac passedUpPk:count 385
+scalar NetworkA.server.eth[0].mac passedUpPk:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToUpper
 attr title "packets passed to higher layer, count"
-scalar NetworkA.server.eth[0].mac passedUpPk:sum(packetBytes) 24640
+scalar NetworkA.server.eth[0].mac passedUpPk:sum(packetBytes) 21440
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSentToUpper
@@ -7488,12 +7669,12 @@ par NetworkA.server.udp icmpv6Module "\"^.ipv6.icmpv6\""
 par NetworkA.server.udp crcMode "\"declared\""
 attr enum disabled,declared,computed
 par NetworkA.server.udp defaultMulticastLoop true
-scalar NetworkA.server.udp packetReceived:count 385
+scalar NetworkA.server.udp packetReceived:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar NetworkA.server.udp packetReceived:sum(packetBytes) 6930
+scalar NetworkA.server.udp packetReceived:sum(packetBytes) 6030
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
@@ -7508,7 +7689,7 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
-scalar NetworkA.server.udp passedUpPk:count 385
+scalar NetworkA.server.udp passedUpPk:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToUpper
@@ -7566,24 +7747,24 @@ par NetworkA.server.app[0] stopOperationExtraTime -1s
 attr unit s
 par NetworkA.server.app[0] stopOperationTimeout 2s
 attr unit s
-scalar NetworkA.server.app[0] packetReceived:count 385
+scalar NetworkA.server.app[0] packetReceived:count 335
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar NetworkA.server.app[0] packetReceived:sum(packetBytes) 3850
+scalar NetworkA.server.app[0] packetReceived:sum(packetBytes) 3350
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic NetworkA.server.app[0] endToEndDelay:histogram
-field count 385
-field mean 0.13624317947373
-field stddev 0.056566982828604
-field min 0.052100678418
-field max 0.3947326485
-field sum 52.453624097386
-field sqrsum 8.375180763739
+field count 335
+field mean 0.58959132239039
+field stddev 0.64000268088957
+field min 0.052685891605
+field max 3.430922637196
+field sum 197.51309300078
+field sqrsum 253.25955182805
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
@@ -7591,55 +7772,75 @@ attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
 bin	0	0
-bin	0.01	0
-bin	0.02	0
-bin	0.03	0
-bin	0.04	0
-bin	0.05	20
-bin	0.06	28
-bin	0.07	20
-bin	0.08	24
-bin	0.09	21
-bin	0.1	26
-bin	0.11	26
-bin	0.12	25
-bin	0.13	23
-bin	0.14	25
-bin	0.15	23
-bin	0.16	35
-bin	0.17	24
-bin	0.18	6
-bin	0.19	9
-bin	0.2	9
-bin	0.21	12
-bin	0.22	7
-bin	0.23	6
-bin	0.24	5
-bin	0.25	3
-bin	0.26	2
-bin	0.27	2
-bin	0.28	0
-bin	0.29	0
-bin	0.3	0
-bin	0.31	0
-bin	0.32	0
-bin	0.33	0
-bin	0.34	1
-bin	0.35	0
-bin	0.36	1
-bin	0.37	1
-bin	0.38	0
-bin	0.39	1
-bin	0.4	0
-bin	0.41	0
-bin	0.42	0
-bin	0.43	0
-bin	0.44	0
-bin	0.45	0
-bin	0.46	0
-bin	0.47	0
-bin	0.48	0
-bin	0.49	0
+bin	0.05	48
+bin	0.1	46
+bin	0.15	21
+bin	0.2	35
+bin	0.25	17
+bin	0.3	9
+bin	0.35	16
+bin	0.4	8
+bin	0.45	9
+bin	0.5	4
+bin	0.55	10
+bin	0.6	2
+bin	0.65	7
+bin	0.7	13
+bin	0.75	6
+bin	0.8	5
+bin	0.85	3
+bin	0.9	4
+bin	0.95	5
+bin	1	4
+bin	1.05	5
+bin	1.1	4
+bin	1.15	7
+bin	1.2	1
+bin	1.25	4
+bin	1.3	3
+bin	1.35	0
+bin	1.4	2
+bin	1.45	3
+bin	1.5	0
+bin	1.55	3
+bin	1.6	3
+bin	1.65	2
+bin	1.7	1
+bin	1.75	1
+bin	1.8	0
+bin	1.85	3
+bin	1.9	2
+bin	1.95	3
+bin	2	0
+bin	2.05	1
+bin	2.1	0
+bin	2.15	0
+bin	2.2	2
+bin	2.25	1
+bin	2.3	1
+bin	2.35	2
+bin	2.4	2
+bin	2.45	1
+bin	2.5	0
+bin	2.55	1
+bin	2.6	0
+bin	2.65	2
+bin	2.7	0
+bin	2.75	0
+bin	2.8	1
+bin	2.85	0
+bin	2.9	0
+bin	2.95	0
+bin	3	0
+bin	3.05	1
+bin	3.1	0
+bin	3.15	0
+bin	3.2	0
+bin	3.25	0
+bin	3.3	0
+bin	3.35	0
+bin	3.4	1
+bin	3.45	0
 par NetworkA.server.at typename "\"inet.common.MessageDispatcher\""
 par NetworkA.server.at displayStringTextFormat "\"processed %p pk (%l)\""
 par NetworkA.server.at forwardServiceRegistration true
@@ -7784,42 +7985,42 @@ attr unit b
 par NetworkA.maliciousNode.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
 par NetworkA.maliciousNode.wlan[0].queue comparatorClass "\"\""
 par NetworkA.maliciousNode.wlan[0].queue bufferModule "\"\""
-scalar NetworkA.maliciousNode.wlan[0].queue queueLength:last 0
+scalar NetworkA.maliciousNode.wlan[0].queue queueLength:last 49
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, last"
 attr unit pk
-scalar NetworkA.maliciousNode.wlan[0].queue queueLength:max 3
+scalar NetworkA.maliciousNode.wlan[0].queue queueLength:max 50
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar NetworkA.maliciousNode.wlan[0].queue queueLength:timeavg 0.49059342483113
+scalar NetworkA.maliciousNode.wlan[0].queue queueLength:timeavg 41.156237262713
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, timeavg"
 attr unit pk
-scalar NetworkA.maliciousNode.wlan[0].queue queueBitLength:last 0
+scalar NetworkA.maliciousNode.wlan[0].queue queueBitLength:last 14896
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode last
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, last"
 attr unit b
-scalar NetworkA.maliciousNode.wlan[0].queue queueBitLength:max 912
+scalar NetworkA.maliciousNode.wlan[0].queue queueBitLength:max 15200
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar NetworkA.maliciousNode.wlan[0].queue queueBitLength:timeavg 149.14040114866
+scalar NetworkA.maliciousNode.wlan[0].queue queueBitLength:timeavg 12511.496127865
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -7827,120 +8028,105 @@ attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetP
 attr title "queue bit length, timeavg"
 attr unit b
 statistic NetworkA.maliciousNode.wlan[0].queue queueingTime:histogram
-field count 374
-field mean 0.13117471252169
-field stddev 0.051536173098068
-field min 0.050039561649
-field max 0.40463259448
-field sum 49.059342483113
-field sqrsum 7.4260246190482
+field count 215
+field mean 16.344960531159
+field stddev 8.3422061659912
+field min 0.065405823394
+field max 26.018576415766
+field sum 3514.1665141992
+field sqrsum 72331.68736971
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
 bin	-inf	0
-bin	0	0
-bin	0.005	0
-bin	0.01	0
-bin	0.015	0
-bin	0.02	0
-bin	0.025	0
-bin	0.03	0
-bin	0.035	0
-bin	0.04	0
-bin	0.045	0
-bin	0.05	13
-bin	0.055	5
-bin	0.06	11
-bin	0.065	8
-bin	0.07	10
-bin	0.075	12
-bin	0.08	16
-bin	0.085	5
-bin	0.09	14
-bin	0.095	13
-bin	0.1	12
-bin	0.105	12
-bin	0.11	18
-bin	0.115	15
-bin	0.12	14
-bin	0.125	17
-bin	0.13	20
-bin	0.135	15
-bin	0.14	17
-bin	0.145	10
-bin	0.15	16
-bin	0.155	9
-bin	0.16	13
-bin	0.165	20
-bin	0.17	8
-bin	0.175	6
-bin	0.18	3
-bin	0.185	0
-bin	0.19	6
-bin	0.195	5
-bin	0.2	1
-bin	0.205	6
-bin	0.21	1
-bin	0.215	6
-bin	0.22	1
-bin	0.225	3
-bin	0.23	1
-bin	0.235	1
-bin	0.24	1
-bin	0.245	0
-bin	0.25	0
-bin	0.255	0
-bin	0.26	1
-bin	0.265	0
-bin	0.27	2
-bin	0.275	2
-bin	0.28	1
-bin	0.285	0
-bin	0.29	0
-bin	0.295	0
-bin	0.3	0
-bin	0.305	0
-bin	0.31	0
-bin	0.315	0
-bin	0.32	2
-bin	0.325	0
-bin	0.33	0
-bin	0.335	0
-bin	0.34	0
-bin	0.345	0
-bin	0.35	0
-bin	0.355	1
-bin	0.36	0
-bin	0.365	0
-bin	0.37	0
-bin	0.375	0
-bin	0.38	0
-bin	0.385	0
-bin	0.39	0
-bin	0.395	0
-bin	0.4	1
-bin	0.405	0
-scalar NetworkA.maliciousNode.wlan[0].queue outgoingPackets:count 374
+bin	0	6
+bin	0.5	0
+bin	1	4
+bin	1.5	1
+bin	2	3
+bin	2.5	2
+bin	3	5
+bin	3.5	7
+bin	4	3
+bin	4.5	6
+bin	5	0
+bin	5.5	2
+bin	6	2
+bin	6.5	0
+bin	7	4
+bin	7.5	3
+bin	8	3
+bin	8.5	4
+bin	9	1
+bin	9.5	2
+bin	10	3
+bin	10.5	1
+bin	11	2
+bin	11.5	5
+bin	12	5
+bin	12.5	7
+bin	13	5
+bin	13.5	1
+bin	14	3
+bin	14.5	1
+bin	15	0
+bin	15.5	0
+bin	16	2
+bin	16.5	1
+bin	17	3
+bin	17.5	2
+bin	18	0
+bin	18.5	6
+bin	19	1
+bin	19.5	3
+bin	20	2
+bin	20.5	1
+bin	21	2
+bin	21.5	9
+bin	22	11
+bin	22.5	13
+bin	23	13
+bin	23.5	7
+bin	24	8
+bin	24.5	19
+bin	25	16
+bin	25.5	3
+bin	26	2
+bin	26.5	0
+bin	27	0
+bin	27.5	0
+bin	28	0
+bin	28.5	0
+bin	29	0
+bin	29.5	0
+bin	30	0
+bin	30.5	0
+bin	31	0
+bin	31.5	0
+bin	32	0
+bin	32.5	0
+bin	33	0
+scalar NetworkA.maliciousNode.wlan[0].queue outgoingPackets:count 215
 attr recordingmode count
 attr source packetPulled
 attr title "outgoing packets, count"
 attr unit pk
-scalar NetworkA.maliciousNode.wlan[0].queue outgoingPacketLengths:sum 113696
+scalar NetworkA.maliciousNode.wlan[0].queue outgoingPacketLengths:sum 65360
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths, sum"
 attr unit b
 statistic NetworkA.maliciousNode.wlan[0].queue outgoingPacketLengths:histogram
-field count 374
+field count 215
 field mean 304
 field stddev 0
 field min 304
 field max 304
-field sum 113696
-field sqrsum 34563584
+field sum 65360
+field sqrsum 19869440
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPulled)
@@ -7948,7 +8134,7 @@ attr title "outgoing packet lengths"
 attr unit b
 bin	-inf	0
 bin	303	0
-bin	304	374
+bin	304	215
 bin	305	0
 statistic NetworkA.maliciousNode.wlan[0].queue flowQueueingTime:histogram
 field count 0
@@ -7966,25 +8152,25 @@ attr unit s
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar NetworkA.maliciousNode.wlan[0].queue incomingPackets:count 374
+scalar NetworkA.maliciousNode.wlan[0].queue incomingPackets:count 371
 attr recordingmode count
 attr source packetPushStarted
 attr title "incoming packets, count"
 attr unit pk
-scalar NetworkA.maliciousNode.wlan[0].queue incomingPacketLengths:sum 113696
+scalar NetworkA.maliciousNode.wlan[0].queue incomingPacketLengths:sum 112784
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPushStarted)
 attr title "incoming packet lengths, sum"
 attr unit b
 statistic NetworkA.maliciousNode.wlan[0].queue incomingPacketLengths:histogram
-field count 374
+field count 371
 field mean 304
 field stddev 0
 field min 304
 field max 304
-field sum 113696
-field sqrsum 34563584
+field sum 112784
+field sqrsum 34286336
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPushStarted)
@@ -7992,15 +8178,15 @@ attr title "incoming packet lengths"
 attr unit b
 bin	-inf	0
 bin	303	0
-bin	304	374
+bin	304	371
 bin	305	0
-scalar NetworkA.maliciousNode.wlan[0].queue droppedPacketsQueueOverflow:count 0
+scalar NetworkA.maliciousNode.wlan[0].queue droppedPacketsQueueOverflow:count 107
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsQueueOverflow(packetDropped)
 attr title "dropped packets: queue overflow, count"
 attr unit pk
-scalar NetworkA.maliciousNode.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 0
+scalar NetworkA.maliciousNode.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 32528
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
@@ -8010,7 +8196,7 @@ par NetworkA.maliciousNode.wlan[0].mac typename "\"inet.linklayer.bmac.BMac\""
 par NetworkA.maliciousNode.wlan[0].mac interfaceTableModule "\"NetworkA.maliciousNode.interfaceTable\""
 par NetworkA.maliciousNode.wlan[0].mac address "\"auto\""
 attr mutable ""
-par NetworkA.maliciousNode.wlan[0].mac slotDuration 0.05s
+par NetworkA.maliciousNode.wlan[0].mac slotDuration 0.01s
 attr unit s
 par NetworkA.maliciousNode.wlan[0].mac headerLength 8b
 attr unit b
@@ -8018,7 +8204,7 @@ par NetworkA.maliciousNode.wlan[0].mac ctrlFrameLength 160b
 attr unit b
 par NetworkA.maliciousNode.wlan[0].mac mtu 0B
 attr unit B
-par NetworkA.maliciousNode.wlan[0].mac checkInterval 0.02s
+par NetworkA.maliciousNode.wlan[0].mac checkInterval 0.1s
 attr unit s
 par NetworkA.maliciousNode.wlan[0].mac animation true
 par NetworkA.maliciousNode.wlan[0].mac bitrate 19200bps
@@ -8026,30 +8212,30 @@ attr unit bps
 par NetworkA.maliciousNode.wlan[0].mac useMACAcks false
 par NetworkA.maliciousNode.wlan[0].mac radioModule "\"^.radio\""
 par NetworkA.maliciousNode.wlan[0].mac maxTxAttempts 2
-scalar NetworkA.maliciousNode.wlan[0].mac nbTxDataPackets 374
-scalar NetworkA.maliciousNode.wlan[0].mac nbTxPreambles 1870
-scalar NetworkA.maliciousNode.wlan[0].mac nbRxDataPackets 400
-scalar NetworkA.maliciousNode.wlan[0].mac nbRxPreambles 926
+scalar NetworkA.maliciousNode.wlan[0].mac nbTxDataPackets 215
+scalar NetworkA.maliciousNode.wlan[0].mac nbTxPreambles 215
+scalar NetworkA.maliciousNode.wlan[0].mac nbRxDataPackets 355
+scalar NetworkA.maliciousNode.wlan[0].mac nbRxPreambles 329
 scalar NetworkA.maliciousNode.wlan[0].mac nbMissedAcks 0
 scalar NetworkA.maliciousNode.wlan[0].mac nbRecvdAcks 0
 scalar NetworkA.maliciousNode.wlan[0].mac nbTxAcks 0
 scalar NetworkA.maliciousNode.wlan[0].mac nbDroppedDataPackets 0
-scalar NetworkA.maliciousNode.wlan[0].mac packetDropIncorrectlyReceived:count 2
+scalar NetworkA.maliciousNode.wlan[0].mac packetDropIncorrectlyReceived:count 8
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, count"
-scalar NetworkA.maliciousNode.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 2
+scalar NetworkA.maliciousNode.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 160
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drop: incorrectly received, sum(packetBytes)"
-scalar NetworkA.maliciousNode.wlan[0].mac packetDropNotAddressedToUs:count 349
+scalar NetworkA.maliciousNode.wlan[0].mac packetDropNotAddressedToUs:count 342
 attr interpolationmode none
 attr recordingmode count
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drop: not addressed to us, count"
-scalar NetworkA.maliciousNode.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 13611
+scalar NetworkA.maliciousNode.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 13338
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
@@ -8126,42 +8312,42 @@ attr unit Hz
 par NetworkA.maliciousNode.wlan[0].radio protocol "\"\""
 par NetworkA.maliciousNode.wlan[0].radio signalAnalogRepresentation "\"scalar\""
 attr enum scalar,dimensional
-scalar NetworkA.maliciousNode.wlan[0].radio radioMode:count 2592
+scalar NetworkA.maliciousNode.wlan[0].radio radioMode:count 1337
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
 attr title "Radio mode, count"
-scalar NetworkA.maliciousNode.wlan[0].radio receptionState:count 4787
+scalar NetworkA.maliciousNode.wlan[0].radio receptionState:count 2518
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
-scalar NetworkA.maliciousNode.wlan[0].radio transmissionState:count 5236
+scalar NetworkA.maliciousNode.wlan[0].radio transmissionState:count 1290
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic NetworkA.maliciousNode.wlan[0].radio minSnir:histogram
-field count 1277
-field mean 2809.4180356756
-field stddev 2163.9501901311
+field count 679
+field mean 2542.2712863368
+field stddev 2156.5730986979
 field min 0.15199176007326
 field max 5692.9772952237
-field sum 3587626.8315577
-field sqrsum 16054243748.622
+field sum 1726202.2034227
+field sqrsum 7541721801.5316
 attr recordingmode histogram
 attr source minimumSnir(packetSentToUpper)
 attr title "Min SNIR"
 bin	-inf	0
-bin	0	14
+bin	0	59
 bin	100	0
 bin	200	0
 bin	300	0
 bin	400	0
 bin	500	0
-bin	600	350
+bin	600	186
 bin	700	0
-bin	800	285
+bin	800	125
 bin	900	0
 bin	1000	0
 bin	1100	0
@@ -8195,7 +8381,7 @@ bin	3800	0
 bin	3900	0
 bin	4000	0
 bin	4100	0
-bin	4200	326
+bin	4200	185
 bin	4300	0
 bin	4400	0
 bin	4500	0
@@ -8209,7 +8395,7 @@ bin	5200	0
 bin	5300	0
 bin	5400	0
 bin	5500	0
-bin	5600	302
+bin	5600	124
 bin	5700	0
 bin	5800	0
 bin	5900	0
@@ -8224,14 +8410,16 @@ bin	6700	0
 bin	6800	0
 bin	6900	0
 bin	7000	0
+bin	7100	0
+bin	7200	0
 statistic NetworkA.maliciousNode.wlan[0].radio packetErrorRate:histogram
-field count 1277
-field mean 0.0014312133803165
-field stddev 0.036150523750903
+field count 679
+field mean 0.011253510729463
+field stddev 0.10325545507109
 field min 0
-field max 0.9138297433321
-field sum 1.8276594866642
-field sqrsum 1.6701695995968
+field max 0.99999999930165
+field sum 7.6411337853054
+field sqrsum 7.3146147243523
 attr recordingmode histogram
 attr source packetErrorRate(packetSentToUpper)
 attr title "Packet error rate"
@@ -8261,7 +8449,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	1275
+bin	0	671
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -8305,135 +8493,189 @@ bin	0.8	0
 bin	0.82	0
 bin	0.84	0
 bin	0.86	0
-bin	0.88	0
-bin	0.9	2
+bin	0.88	1
+bin	0.9	3
 bin	0.92	0
+bin	0.94	0
+bin	0.96	0
+bin	0.98	4
+bin	1	0
 statistic NetworkA.maliciousNode.wlan[0].radio bitErrorRate:histogram
-field count 1277
-field mean 9.3101906064106e-05
-field stddev 0.0023516288435485
+field count 679
+field mean 0.00068981467025186
+field stddev 0.0063244621771032
 field min 0
 field max 0.059445567021932
-field sum 0.11889113404386
-field sqrsum 0.007067550877118
+field sum 0.46838416110101
+field sqrsum 0.027442299466116
 attr recordingmode histogram
 attr source bitErrorRate(packetSentToUpper)
 attr title "Bit error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	1275
+bin	0	671
+bin	0.001	0
+bin	0.002	0
+bin	0.003	0
+bin	0.004	0
+bin	0.005	0
+bin	0.006	0
+bin	0.007	0
+bin	0.008	0
+bin	0.009	0
+bin	0.01	0
+bin	0.011	0
+bin	0.012	0
+bin	0.013	0
+bin	0.014	0
+bin	0.015	0
+bin	0.016	0
+bin	0.017	0
+bin	0.018	0
+bin	0.019	0
 bin	0.02	0
-bin	0.04	2
+bin	0.021	0
+bin	0.022	0
+bin	0.023	0
+bin	0.024	0
+bin	0.025	0
+bin	0.026	0
+bin	0.027	0
+bin	0.028	0
+bin	0.029	0
+bin	0.03	0
+bin	0.031	0
+bin	0.032	0
+bin	0.033	0
+bin	0.034	0
+bin	0.035	0
+bin	0.036	0
+bin	0.037	0
+bin	0.038	0
+bin	0.039	0
+bin	0.04	0
+bin	0.041	0
+bin	0.042	0
+bin	0.043	0
+bin	0.044	0
+bin	0.045	0
+bin	0.046	0
+bin	0.047	0
+bin	0.048	0
+bin	0.049	0
+bin	0.05	0
+bin	0.051	0
+bin	0.052	0
+bin	0.053	0
+bin	0.054	0
+bin	0.055	2
+bin	0.056	0
+bin	0.057	0
+bin	0.058	0
+bin	0.059	6
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0.061	0
+bin	0.062	0
+bin	0.063	0
+bin	0.064	0
+bin	0.065	0
+bin	0.066	0
+bin	0.067	0
+bin	0.068	0
+bin	0.069	0
+bin	0.07	0
+bin	0.071	0
+bin	0.072	0
+bin	0.073	0
+bin	0.074	0
+bin	0.075	0
 statistic NetworkA.maliciousNode.wlan[0].radio symbolErrorRate:histogram
-field count 1277
-field mean 9.3101906064106e-05
-field stddev 0.0023516288435485
+field count 679
+field mean 0.00068981467025186
+field stddev 0.0063244621771032
 field min 0
 field max 0.059445567021932
-field sum 0.11889113404386
-field sqrsum 0.007067550877118
+field sum 0.46838416110101
+field sqrsum 0.027442299466116
 attr recordingmode histogram
 attr source symbolErrorRate(packetSentToUpper)
 attr title "Symbol error rate"
 bin	-inf	0
-bin	-0.5	0
-bin	-0.48	0
-bin	-0.46	0
-bin	-0.44	0
-bin	-0.42	0
-bin	-0.4	0
-bin	-0.38	0
-bin	-0.36	0
-bin	-0.34	0
-bin	-0.32	0
-bin	-0.3	0
-bin	-0.28	0
-bin	-0.26	0
-bin	-0.24	0
-bin	-0.22	0
-bin	-0.2	0
-bin	-0.18	0
-bin	-0.16	0
-bin	-0.14	0
-bin	-0.12	0
-bin	-0.1	0
-bin	-0.08	0
-bin	-0.06	0
-bin	-0.04	0
-bin	-0.02	0
-bin	0	1275
+bin	0	671
+bin	0.001	0
+bin	0.002	0
+bin	0.003	0
+bin	0.004	0
+bin	0.005	0
+bin	0.006	0
+bin	0.007	0
+bin	0.008	0
+bin	0.009	0
+bin	0.01	0
+bin	0.011	0
+bin	0.012	0
+bin	0.013	0
+bin	0.014	0
+bin	0.015	0
+bin	0.016	0
+bin	0.017	0
+bin	0.018	0
+bin	0.019	0
 bin	0.02	0
-bin	0.04	2
+bin	0.021	0
+bin	0.022	0
+bin	0.023	0
+bin	0.024	0
+bin	0.025	0
+bin	0.026	0
+bin	0.027	0
+bin	0.028	0
+bin	0.029	0
+bin	0.03	0
+bin	0.031	0
+bin	0.032	0
+bin	0.033	0
+bin	0.034	0
+bin	0.035	0
+bin	0.036	0
+bin	0.037	0
+bin	0.038	0
+bin	0.039	0
+bin	0.04	0
+bin	0.041	0
+bin	0.042	0
+bin	0.043	0
+bin	0.044	0
+bin	0.045	0
+bin	0.046	0
+bin	0.047	0
+bin	0.048	0
+bin	0.049	0
+bin	0.05	0
+bin	0.051	0
+bin	0.052	0
+bin	0.053	0
+bin	0.054	0
+bin	0.055	2
+bin	0.056	0
+bin	0.057	0
+bin	0.058	0
+bin	0.059	6
 bin	0.06	0
-bin	0.08	0
-bin	0.1	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
+bin	0.061	0
+bin	0.062	0
+bin	0.063	0
+bin	0.064	0
+bin	0.065	0
+bin	0.066	0
+bin	0.067	0
+bin	0.068	0
+bin	0.069	0
+bin	0.07	0
+bin	0.071	0
+bin	0.072	0
+bin	0.073	0
+bin	0.074	0
+bin	0.075	0
 scalar NetworkA.maliciousNode.wlan[0].radio packetDropped:count 0
 attr interpolationmode none
 attr recordingmode count
@@ -8636,12 +8878,12 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
-scalar NetworkA.maliciousNode.udp packetSent:count 374
+scalar NetworkA.maliciousNode.udp packetSent:count 371
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar NetworkA.maliciousNode.udp packetSent:sum(packetBytes) 6732
+scalar NetworkA.maliciousNode.udp packetSent:sum(packetBytes) 6678
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -8717,7 +8959,7 @@ par NetworkA.maliciousNode.app[0] stopOperationExtraTime -1s
 attr unit s
 par NetworkA.maliciousNode.app[0] stopOperationTimeout 2s
 attr unit s
-scalar NetworkA.maliciousNode.app[0] "packets sent" 374
+scalar NetworkA.maliciousNode.app[0] "packets sent" 371
 scalar NetworkA.maliciousNode.app[0] "packets received" 0
 scalar NetworkA.maliciousNode.app[0] packetReceived:count 0
 attr interpolationmode none
@@ -8742,12 +8984,12 @@ attr recordingmode stats
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-scalar NetworkA.maliciousNode.app[0] packetSent:count 374
+scalar NetworkA.maliciousNode.app[0] packetSent:count 371
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar NetworkA.maliciousNode.app[0] packetSent:sum(packetBytes) 3740
+scalar NetworkA.maliciousNode.app[0] packetSent:sum(packetBytes) 3710
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent

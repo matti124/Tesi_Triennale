@@ -2864,7 +2864,7 @@ props["fontsize"] = 14           # dimensione testo assi
 props["legendFontsize"] = 12     # dimensione legenda
 props["linewidth"] = 2.0         # spessore linee
 props["dpi"] = 600               # alta risoluzione per esportazione
-props["figsize"] = (10, 6)       # dimensioni figura in pollici (larghezza, altezza)
+props["figsize"] = (10, 8)       # dimensioni figura in pollici (larghezza, altezza)
 props["tight_layout"] = True     # riduce i margini bianchi
 props["grid"] = True             # mostra una griglia leggera
 props["legendLocation"] = "best" # posizione automatica migliore
@@ -3613,7 +3613,7 @@ utils.export_data_if_needed(df, props)]]></script>
             <property name="X.Label.Wrap" value="true"/>
             <property name="secondary_ordering_regex_list" value=""/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value=""/>
+            <property name="yaxis_max" value="100"/>
             <property name="Plot.Antialias" value="true"/>
             <property name="include_fields" value="false"/>
         </chart>
@@ -4314,6 +4314,8 @@ utils.export_data_if_needed(df, props)]]></script>
 # Caricamento proprietà del grafico
 # ---------------------------
 props = chart.get_properties()
+props["plot"] = "matplotlib"
+
 utils.preconfigure_plot(props)
 
 # ---------------------------
@@ -4322,7 +4324,7 @@ utils.preconfigure_plot(props)
 props["fontsize"] = 14           # Font per etichette assi
 props["legendFontsize"] = 12     # Font per legenda
 props["dpi"] = 600               # Alta risoluzione per esportazione
-props["figsize"] = (8, 6)        # Dimensioni figura (larghezza, altezza)
+props["figsize"] = (7, 5)        # Dimensioni figura (larghezza, altezza)
 props["grid"] = True             # Mostra griglia
 props["linewidth"] = 2           # Spessore linee istogramma
 
@@ -4976,7 +4978,7 @@ Show over_underflow cell?
             <property name="baseline" value="0"/>
             <property name="image_export_filename" value=""/>
             <property name="cumulative" value="false"/>
-            <property name="xaxis_min" value=""/>
+            <property name="xaxis_min" value="0"/>
             <property name="legend_format" value=""/>
             <property name="xaxis_unit" value="ms"/>
             <property name="filter" value="type =~ histogram AND runattr:experiment =~ Attacco_Burst AND runattr:replication =~ &quot;#0&quot; AND module =~ &quot;NetworkA.server.app[0]&quot; AND name =~ endToEndDelay:histogram"/>
@@ -4986,9 +4988,9 @@ Show over_underflow cell?
             <property name="show_overflows" value="true"/>
             <property name="legend_show" value="true"/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value="40"/>
+            <property name="yaxis_max" value=""/>
             <property name="Plot.Antialias" value="true"/>
-            <property name="xaxis_max" value="0.9"/>
+            <property name="xaxis_max" value="6"/>
             <property name="image_export_width" value="6"/>
             <property name="include_fields" value="false"/>
         </chart>

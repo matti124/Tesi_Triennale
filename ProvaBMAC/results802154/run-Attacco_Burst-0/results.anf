@@ -11,38 +11,66 @@
             <script><![CDATA[import math
 from omnetpp.scave import results, chart, utils
 
-# get chart properties
+# ---------------------------
+# Caricamento proprietà del grafico
+# ---------------------------
 props = chart.get_properties()
 utils.preconfigure_plot(props)
 
-# collect parameters for query
+# ---------------------------
+# Impostazioni per leggibilità e qualità
+# ---------------------------
+props["fontsize"] = 14           # dimensione testo assi
+props["legendFontsize"] = 12     # dimensione legenda
+props["linewidth"] = 2.0         # spessore linee
+props["dpi"] = 800               # alta risoluzione per esportazione
+props["figsize"] = (10, 8)       # dimensioni figura in pollici (larghezza, altezza)
+props["tight_layout"] = True     # riduce i margini bianchi
+props["grid"] = True             # mostra una griglia leggera
+props["legendLocation"] = "best" # posizione automatica migliore
+
+# ---------------------------
+# Query dei dati vettoriali
+# ---------------------------
 filter_expression = props["filter"]
 start_time = float(props["vector_start_time"] or -math.inf)
 end_time = float(props["vector_end_time"] or math.inf)
 omit_empty_vectors = props["omit_empty_vectors"] == "true"
 
-# query vector data into a data frame
 try:
-    df = results.get_vectors(filter_expression, include_attrs=True, include_runattrs=True, include_itervars=True, start_time=start_time, end_time=end_time, omit_empty_vectors=omit_empty_vectors)
+    df = results.get_vectors(
+        filter_expression,
+        include_attrs=True,
+        include_runattrs=True,
+        include_itervars=True,
+        start_time=start_time,
+        end_time=end_time,
+        omit_empty_vectors=omit_empty_vectors
+    )
 except results.ResultQueryError as e:
     raise chart.ChartScriptError("Error while querying results: " + str(e))
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
 
-# apply vector operations
+# ---------------------------
+# Operazioni sui vettori (media, derivata, ecc.)
+# ---------------------------
 df = utils.perform_vector_ops(df, props["vector_operations"])
 
-# plot
+# ---------------------------
+# Plot delle curve
+# ---------------------------
 utils.add_legend_labels(df, props)
 utils.sort_rows_by_legend(df, props)
 utils.plot_vectors(df, props, sort=False)
 
+# ---------------------------
+# Configurazioni finali e esportazione
+# ---------------------------
 utils.postconfigure_plot(props)
-
 utils.export_image_if_needed(props)
-utils.export_data_if_needed(df, props)
-]]></script>
+utils.export_data_if_needed(df, props)]]></script>
             <dialogPage id="INPUT" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -752,39 +780,66 @@ utils.export_data_if_needed(df, props)
         <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="1597181346" name="TxPowerConsumption Burst" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
-# get chart properties
+# ---------------------------
+# Caricamento proprietà grafico
+# ---------------------------
 props = chart.get_properties()
 utils.preconfigure_plot(props)
 
-# collect parameters for query
+# Impostazioni per leggibilità
+props["fontsize"] = 14           # font assi
+props["legendFontsize"] = 12     # font legenda
+props["xtickrotation"] = 45      # ruota etichette asse X se troppo lunghe
+props["dpi"] = 800               # alta risoluzione per esportazione
+props["figsize"] = (10, 8)       # dimensione figura in pollici (larghezza, altezza)
+
+# ---------------------------
+# Query dati scalari
+# ---------------------------
 filter_expression = props["filter"]
 include_fields = props["include_fields"] == "true"
 
-# query scalar data into dataframe
 try:
-    df = results.get_scalars(filter_expression, include_fields=include_fields, include_attrs=True, include_runattrs=True, include_itervars=True)
+    df = results.get_scalars(
+        filter_expression,
+        include_fields=include_fields,
+        include_attrs=True,
+        include_runattrs=True,
+        include_itervars=True
+    )
 except results.ResultQueryError as e:
     raise chart.ChartScriptError("Error while querying results: " + str(e))
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
 
+# ---------------------------
+# Preparazione gruppi e serie
+# ---------------------------
 groups, series = utils.select_groups_series(df, props)
-
 utils.add_legend_labels(df, props, groups + series)
 utils.sort_rows_by_legend(df, props)
 del df["legend"]
 
+# ---------------------------
+# Pivot per il barchart
+# ---------------------------
 confidence_level = utils.get_confidence_level(props)
-valuedf, errorsdf, metadf = utils.pivot_for_barchart(df, groups, series, confidence_level, sort=False)
+valuedf, errorsdf, metadf = utils.pivot_for_barchart(
+    df, groups, series, confidence_level, sort=False
+)
 
+# ---------------------------
+# Plot a barre
+# ---------------------------
 utils.plot_bars(valuedf, errorsdf, metadf, props, sort=False)
 
+# ---------------------------
+# Post-configurazione ed esportazione
+# ---------------------------
 utils.postconfigure_plot(props)
-
 utils.export_image_if_needed(props)
-utils.export_data_if_needed(df, props)
-]]></script>
+utils.export_data_if_needed(df, props)]]></script>
             <dialogPage id="INPUT" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -1408,46 +1463,73 @@ utils.export_data_if_needed(df, props)
             <property name="legend_show" value="true"/>
             <property name="include_fields" value="false"/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value=""/>
+            <property name="yaxis_max" value="0.0045"/>
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
         <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="1146398004" name="RxPowerConsumption Burst" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
-# get chart properties
+# ---------------------------
+# Caricamento proprietà grafico
+# ---------------------------
 props = chart.get_properties()
 utils.preconfigure_plot(props)
 
-# collect parameters for query
+# Impostazioni per leggibilità
+props["fontsize"] = 14           # font assi
+props["legendFontsize"] = 12     # font legenda
+props["xtickrotation"] = 45      # ruota etichette asse X se troppo lunghe
+props["dpi"] = 800               # alta risoluzione per esportazione
+props["figsize"] = (10, 8)       # dimensione figura in pollici (larghezza, altezza)
+
+# ---------------------------
+# Query dati scalari
+# ---------------------------
 filter_expression = props["filter"]
 include_fields = props["include_fields"] == "true"
 
-# query scalar data into dataframe
 try:
-    df = results.get_scalars(filter_expression, include_fields=include_fields, include_attrs=True, include_runattrs=True, include_itervars=True)
+    df = results.get_scalars(
+        filter_expression,
+        include_fields=include_fields,
+        include_attrs=True,
+        include_runattrs=True,
+        include_itervars=True
+    )
 except results.ResultQueryError as e:
     raise chart.ChartScriptError("Error while querying results: " + str(e))
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
 
+# ---------------------------
+# Preparazione gruppi e serie
+# ---------------------------
 groups, series = utils.select_groups_series(df, props)
-
 utils.add_legend_labels(df, props, groups + series)
 utils.sort_rows_by_legend(df, props)
 del df["legend"]
 
+# ---------------------------
+# Pivot per il barchart
+# ---------------------------
 confidence_level = utils.get_confidence_level(props)
-valuedf, errorsdf, metadf = utils.pivot_for_barchart(df, groups, series, confidence_level, sort=False)
+valuedf, errorsdf, metadf = utils.pivot_for_barchart(
+    df, groups, series, confidence_level, sort=False
+)
 
+# ---------------------------
+# Plot a barre
+# ---------------------------
 utils.plot_bars(valuedf, errorsdf, metadf, props, sort=False)
 
+# ---------------------------
+# Post-configurazione ed esportazione
+# ---------------------------
 utils.postconfigure_plot(props)
-
 utils.export_image_if_needed(props)
-utils.export_data_if_needed(df, props)
-]]></script>
+utils.export_data_if_needed(df, props)]]></script>
             <dialogPage id="INPUT" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -2071,7 +2153,7 @@ utils.export_data_if_needed(df, props)
             <property name="legend_show" value="true"/>
             <property name="include_fields" value="false"/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value=""/>
+            <property name="yaxis_max" value="0.02"/>
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
@@ -2079,38 +2161,66 @@ utils.export_data_if_needed(df, props)
             <script><![CDATA[import math
 from omnetpp.scave import results, chart, utils
 
-# get chart properties
+# ---------------------------
+# Caricamento proprietà del grafico
+# ---------------------------
 props = chart.get_properties()
 utils.preconfigure_plot(props)
 
-# collect parameters for query
+# ---------------------------
+# Impostazioni per leggibilità e qualità
+# ---------------------------
+props["fontsize"] = 14           # dimensione testo assi
+props["legendFontsize"] = 12     # dimensione legenda
+props["linewidth"] = 2.0         # spessore linee
+props["dpi"] = 800               # alta risoluzione per esportazione
+props["figsize"] = (10, 8)       # dimensioni figura in pollici (larghezza, altezza)
+props["tight_layout"] = True     # riduce i margini bianchi
+props["grid"] = True             # mostra una griglia leggera
+props["legendLocation"] = "best" # posizione automatica migliore
+
+# ---------------------------
+# Query dei dati vettoriali
+# ---------------------------
 filter_expression = props["filter"]
 start_time = float(props["vector_start_time"] or -math.inf)
 end_time = float(props["vector_end_time"] or math.inf)
 omit_empty_vectors = props["omit_empty_vectors"] == "true"
 
-# query vector data into a data frame
 try:
-    df = results.get_vectors(filter_expression, include_attrs=True, include_runattrs=True, include_itervars=True, start_time=start_time, end_time=end_time, omit_empty_vectors=omit_empty_vectors)
+    df = results.get_vectors(
+        filter_expression,
+        include_attrs=True,
+        include_runattrs=True,
+        include_itervars=True,
+        start_time=start_time,
+        end_time=end_time,
+        omit_empty_vectors=omit_empty_vectors
+    )
 except results.ResultQueryError as e:
     raise chart.ChartScriptError("Error while querying results: " + str(e))
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
 
-# apply vector operations
+# ---------------------------
+# Operazioni sui vettori (media, derivata, ecc.)
+# ---------------------------
 df = utils.perform_vector_ops(df, props["vector_operations"])
 
-# plot
+# ---------------------------
+# Plot delle curve
+# ---------------------------
 utils.add_legend_labels(df, props)
 utils.sort_rows_by_legend(df, props)
 utils.plot_vectors(df, props, sort=False)
 
+# ---------------------------
+# Configurazioni finali e esportazione
+# ---------------------------
 utils.postconfigure_plot(props)
-
 utils.export_image_if_needed(props)
-utils.export_data_if_needed(df, props)
-]]></script>
+utils.export_data_if_needed(df, props)]]></script>
             <dialogPage id="INPUT" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -2800,7 +2910,7 @@ utils.export_data_if_needed(df, props)
             <property name="sorting" value="true"/>
             <property name="yaxis_log" value="false"/>
             <property name="image_export_height" value="4"/>
-            <property name="legend_placement" value="upper right"/>
+            <property name="legend_placement" value="lower right"/>
             <property name="data_export_filename" value=""/>
             <property name="Plot.BackgroundColor" value="white"/>
             <property name="yaxis_min" value=""/>
@@ -2813,46 +2923,73 @@ utils.export_data_if_needed(df, props)
             <property name="X.Label.Wrap" value="true"/>
             <property name="secondary_ordering_regex_list" value=""/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value=""/>
+            <property name="yaxis_max" value="100"/>
             <property name="Plot.Antialias" value="true"/>
             <property name="include_fields" value="false"/>
         </chart>
         <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="411887342" name="SleepTime Bar Burst" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
-# get chart properties
+# ---------------------------
+# Caricamento proprietà grafico
+# ---------------------------
 props = chart.get_properties()
 utils.preconfigure_plot(props)
 
-# collect parameters for query
+# Impostazioni per leggibilità
+props["fontsize"] = 14           # font assi
+props["legendFontsize"] = 12     # font legenda
+props["xtickrotation"] = 45      # ruota etichette asse X se troppo lunghe
+props["dpi"] = 800               # alta risoluzione per esportazione
+props["figsize"] = (10, 8)       # dimensione figura in pollici (larghezza, altezza)
+
+# ---------------------------
+# Query dati scalari
+# ---------------------------
 filter_expression = props["filter"]
 include_fields = props["include_fields"] == "true"
 
-# query scalar data into dataframe
 try:
-    df = results.get_scalars(filter_expression, include_fields=include_fields, include_attrs=True, include_runattrs=True, include_itervars=True)
+    df = results.get_scalars(
+        filter_expression,
+        include_fields=include_fields,
+        include_attrs=True,
+        include_runattrs=True,
+        include_itervars=True
+    )
 except results.ResultQueryError as e:
     raise chart.ChartScriptError("Error while querying results: " + str(e))
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
 
+# ---------------------------
+# Preparazione gruppi e serie
+# ---------------------------
 groups, series = utils.select_groups_series(df, props)
-
 utils.add_legend_labels(df, props, groups + series)
 utils.sort_rows_by_legend(df, props)
 del df["legend"]
 
+# ---------------------------
+# Pivot per il barchart
+# ---------------------------
 confidence_level = utils.get_confidence_level(props)
-valuedf, errorsdf, metadf = utils.pivot_for_barchart(df, groups, series, confidence_level, sort=False)
+valuedf, errorsdf, metadf = utils.pivot_for_barchart(
+    df, groups, series, confidence_level, sort=False
+)
 
+# ---------------------------
+# Plot a barre
+# ---------------------------
 utils.plot_bars(valuedf, errorsdf, metadf, props, sort=False)
 
+# ---------------------------
+# Post-configurazione ed esportazione
+# ---------------------------
 utils.postconfigure_plot(props)
-
 utils.export_image_if_needed(props)
-utils.export_data_if_needed(df, props)
-]]></script>
+utils.export_data_if_needed(df, props)]]></script>
             <dialogPage id="INPUT" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -3483,39 +3620,66 @@ utils.export_data_if_needed(df, props)
         <chart createdWith="OMNeT++ 6.2.0.250714-83e173e93a" icon="icons/full/obj/barchart.png" id="1653913545" name="WakeUp Burst" resultTypes="scalar" template="barchart_native" type="BAR">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
-# get chart properties
+# ---------------------------
+# Caricamento proprietà grafico
+# ---------------------------
 props = chart.get_properties()
 utils.preconfigure_plot(props)
 
-# collect parameters for query
+# Impostazioni per leggibilità
+props["fontsize"] = 14           # font assi
+props["legendFontsize"] = 12     # font legenda
+props["xtickrotation"] = 45      # ruota etichette asse X se troppo lunghe
+props["dpi"] = 800               # alta risoluzione per esportazione
+props["figsize"] = (10, 8)       # dimensione figura in pollici (larghezza, altezza)
+
+# ---------------------------
+# Query dati scalari
+# ---------------------------
 filter_expression = props["filter"]
 include_fields = props["include_fields"] == "true"
 
-# query scalar data into dataframe
 try:
-    df = results.get_scalars(filter_expression, include_fields=include_fields, include_attrs=True, include_runattrs=True, include_itervars=True)
+    df = results.get_scalars(
+        filter_expression,
+        include_fields=include_fields,
+        include_attrs=True,
+        include_runattrs=True,
+        include_itervars=True
+    )
 except results.ResultQueryError as e:
     raise chart.ChartScriptError("Error while querying results: " + str(e))
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
 
+# ---------------------------
+# Preparazione gruppi e serie
+# ---------------------------
 groups, series = utils.select_groups_series(df, props)
-
 utils.add_legend_labels(df, props, groups + series)
 utils.sort_rows_by_legend(df, props)
 del df["legend"]
 
+# ---------------------------
+# Pivot per il barchart
+# ---------------------------
 confidence_level = utils.get_confidence_level(props)
-valuedf, errorsdf, metadf = utils.pivot_for_barchart(df, groups, series, confidence_level, sort=False)
+valuedf, errorsdf, metadf = utils.pivot_for_barchart(
+    df, groups, series, confidence_level, sort=False
+)
 
+# ---------------------------
+# Plot a barre
+# ---------------------------
 utils.plot_bars(valuedf, errorsdf, metadf, props, sort=False)
 
+# ---------------------------
+# Post-configurazione ed esportazione
+# ---------------------------
 utils.postconfigure_plot(props)
-
 utils.export_image_if_needed(props)
-utils.export_data_if_needed(df, props)
-]]></script>
+utils.export_data_if_needed(df, props)]]></script>
             <dialogPage id="INPUT" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -4139,7 +4303,7 @@ utils.export_data_if_needed(df, props)
             <property name="legend_show" value="true"/>
             <property name="include_fields" value="false"/>
             <property name="simplify" value="false"/>
-            <property name="yaxis_max" value=""/>
+            <property name="yaxis_max" value="2000"/>
             <property name="Plot.Antialias" value="true"/>
             <property name="image_export_width" value="6"/>
         </chart>
